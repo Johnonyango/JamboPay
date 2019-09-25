@@ -81,9 +81,9 @@ WSGI_APPLICATION = 'Jambopay.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'neighbourhood',
-        'USER': 'mannuh',
-        'PASSWORD':'Emmah@7127'
+        'NAME': 'jambopay',
+        'USER': 'moringa',
+        'PASSWORD':'sijuinigani'
     }
 }
 
