@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'tinymce',
     'registration',
     'rest_framework',
+    'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,6 +54,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+#the authentication token
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
+
 
 ROOT_URLCONF = 'Jambopay.urls'
 
@@ -82,8 +91,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'jambopay',
+<<<<<<< HEAD
         'USER': 'moringa',
         'PASSWORD':'crazy'
+=======
+        'USER': 'mannuh',
+        'PASSWORD':'Emmah@7127'
+>>>>>>> 4c61bc3a6e7da1d10df8984a41b7af94bffb5981
     }
 }
 
