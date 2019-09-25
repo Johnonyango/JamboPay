@@ -23,7 +23,7 @@ class Merchant(models.Model):
     Industry = models.ManyToManyField(Industry)
     JP_paybill = models.CharField(max_length=20,blank=False)
     Revstreams = models.ManyToManyField(Revstreams)
-    # Category = models.ManyToManyField(Category)
+    Category = models.ManyToManyField(Category)
     
 
 
