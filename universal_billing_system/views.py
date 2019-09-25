@@ -13,17 +13,16 @@ import requests
 
 def index(request):
         url = 'http://127.0.0.1:8000/api/Merchants/'
-        response = requests.get(url.format(merchant)).json
+        # response = requests.get(url.format(merchant)).json
         merchant = {
-          "id": 
-        "Business_name": 
-        "Email": 
-        "Phone_number":
-        "Physical_address": 
-        "Post_code": 
-        "Town":
-        "JP_paybill":
-        "Industry": 
+        # "Business_name": 
+        # "Email": 
+        # "Phone_number":
+        # "Physical_address": 
+        # "Post_code": 
+        # "Town":
+        # "JP_paybill":
+        # "Industry": 
         }
         return render(request,'index.html')
 
