@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'',include('universal_billing_system.urls')),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
 ]
