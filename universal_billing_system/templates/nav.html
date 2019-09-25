@@ -1,1 +1,27 @@
-
+<nav class="navbar navbar-expand-lg navbar-dark " id='mySidenav'>
+    <img width="15%" class="navbar-brand" src="media/images/jambopay.png">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="col-sm-6 col-md-6">
+            {% if user.is_authenticated %}
+            <ul>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
+                  aria-expanded="false">Account
+                  <span class="caret"></span>
+                </a>
+                  <li>
+                    <a href="/logout">Logout</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            {% else %}
+            <p>
+              <a class='btn btn-default' href="/accounts/login">Login</a>
+            </p>
+            {% endif %}
+          </div>
+</nav>
