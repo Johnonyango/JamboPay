@@ -5,13 +5,13 @@ class Industry(models.Model):
     name = models.CharField( blank=False,max_length= 40,default='JamboPay')
     def __str__(self):
         return self.name 
-class Category(models.Model):
-    name = models.CharField( blank=False,max_length= 40,default='JamboPay')
-    def __str__(self):
-        return self.name                    
+# class Category(models.Model):
+#     name = models.CharField( blank=False,max_length= 40,default='JamboPay')
+#     def __str__(self):
+#         return self.name                    
 class Revstreams(models.Model):
     name = models.CharField( blank=False,max_length= 40,default='JamboPay')
-    Category = models.ManyToManyField(Category)
+    # Category = models.ManyToManyField(Category)
     def __str__(self):
         return self.name
 class Merchant(models.Model):
@@ -25,12 +25,6 @@ class Merchant(models.Model):
     Industry = models.ManyToManyField(Industry)
     Revstreams = models.ManyToManyField(Revstreams)
     
-    
-
-
-class Town(models.Model):
-    # Town_id = models.PrimaryKey(Id,null=True,blank=False)
-    Merchant = models.ForeignKey(Merchant,null=False,blank=False)
 
 
 
