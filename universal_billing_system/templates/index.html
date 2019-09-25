@@ -9,5 +9,34 @@
 <body>
     {% include "nav.html" %}
 
+    {% extends 'base.html' %}
+
+{% block content %}
+    <h1>JAMBO PAY</h1>
+    <div class="row">
+        <!-- {% for product in products%} -->
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h2 class="card-title">{{ merchant.Business_name }}</h2>
+                  <p class="card-text">{{ merchant.Phone_number }}</p>
+                  <p class="card-text">{{ merchant.Physical_address }}</p>
+                  <p class="card-text">{{ merchant.Post_code }}</p>
+                  <p class="card-text">{{ merchant.Town }}</p>
+                  <p class="card-text">{{ merchant.Town }}</p>
+                  <p class="card-text">{{ merchant.JP_paybill }}</p>
+                  <p class="card-text">{{ merchant. }}</p>
+                  <p class="card-text">{{ merchant.Industry }}</p>
+                  <p class="card-text">{{ merchant.Email }}</p>
+                  <a href="#" class="btn btn-primary">Add User</a>
+                </div>
+              </div>
+        </div>
+        <!-- {% endfor  %} -->
+    </div>
+    <ul>
+    </ul> 
+<!-- {% endblock %} -->
+
 </body>
 </html>
