@@ -19,6 +19,6 @@ class Town(models.Model):
 
 
 class Industry(models.Model):
-#     Merchant = models.ForeignKey(Merchant,null=False,blank=False)
+    Merchant = models.ForeignKey(Merchant,null=False,blank=False)
 
 
