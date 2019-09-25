@@ -20,8 +20,8 @@ class Merchant(models.Model):
     Physical_address = models.CharField(max_length=60,blank=False)
     Post_code = models.CharField(max_length=20,blank=False)
     Town = models.CharField(max_length=20,blank=False)
-    Industry = models.ManyToManyField(Industry)
     JP_paybill = models.CharField(max_length=20,blank=False)
+    Industry = models.ManyToManyField(Industry)
     Revstreams = models.ManyToManyField(Revstreams)
     Category = models.ManyToManyField(Category)
     
