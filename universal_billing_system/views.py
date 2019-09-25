@@ -17,5 +17,5 @@ class MerchantList(APIView):
     def get(self, request, format=None):
         permission_classes = (IsAdminOrReadOnly,)
         all_merchants = Merchant.objects.all()
-        serializers = MerchantSerializer(all_merch, many=True)
+        serializers = MerchantSerializer(all_merchants, many=True)
         return Response(serializers.data)
