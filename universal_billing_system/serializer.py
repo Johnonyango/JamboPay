@@ -5,4 +5,8 @@ class MerchantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Merchant
         fields='__all__'
-        # fields = ('name', 'description', 'price')
+
+class RevenueStreamsSerializer(serializers.ModelSerializer):
+    class Meta:
+        # model = Merchant
+        fields='__all__'
