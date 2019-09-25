@@ -3,6 +3,6 @@ from .models import *
 
 class MerchantSerializer(serializers.ModelSerializer):
     class Meta:
-        # model = Merchants
+        model = Merchant
         fields='__all__'
         # fields = ('name', 'description', 'price')
