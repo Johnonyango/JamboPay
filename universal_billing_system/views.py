@@ -12,9 +12,17 @@ import requests
 # Create your views here.
 
 def index(request):
-    
-    return render(request,'index.html')
-
+    # if request.method == "GET":
+    #         form = SubmitEmbed(request.POST)
+    #         if form.is_valid():
+    #             url = form.cleaned_data['url']
+    #             r = requests.get('http://api.embed.ly/1/oembed?key=' + settings.EMBEDLY_KEY + '&url=' + url)
+    #             json = r.json()
+    #             serializer = EmbedSerializer(data=json)
+    #             if serializer.is_valid():
+    #                 embed = serializer.save()
+    #                 return render(request, 'embeds.html', {'embed': embed})    return render(request,'index.html')
+    pass
 
 class MerchantList(APIView):
     def get(self, request, format=None):
