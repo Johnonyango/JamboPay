@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'tinymce',
     'registration',
     'rest_framework',
+    'authtools',
     'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
