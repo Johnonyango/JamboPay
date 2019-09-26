@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'universal_billing_system',
     'bootstrap4',
-    'bootstrap3',
     'tinymce',
     'registration',
     'rest_framework',
