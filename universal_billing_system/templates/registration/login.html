@@ -1,0 +1,48 @@
+{%extends "registration/base.html"%}
+
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container" style="margin-top:160px; color:  rgba(231, 163, 99, 0.637);">
+    <div class="row sign-up top-margin">
+      <div class="col-md-1">
+        <!-- Empty div -->
+      </div>
+      <div class="col-md-4">
+
+        <div class="logoname" style="display:inline">
+           <img src="/static/photos/matuzo.png"  class="img-responsive" style="width:200px;height:200px;">
+         </div>
+
+      </div>
+        <div class="col-md-4">
+            {% if form.errors %}
+            <p class="small">Password or Username is incorrect</p>
+            {% endif %}
+            <div class="section">
+                <!-- <h1>Instagram</h1> -->
+                <div class="mylogo">
+                    <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2000px-Instagram_logo.svg.png"  class="mylogo"> -->
+                </div>
+                <div class="form-section" id="login" style="background-color: black" >
+                    <form action="/accounts/login/" method="POST" style="color: white">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-sm" value="Log in">
+                        </div>
+                        <input type="hidden" name="next" value="/">
+                    </form>
+                </div>
+
+                <p class="forgot" style="color: black">Forgot Password?</p>
+            </div>
+           
+
+
+                <!-- <p class="forgot">Don't have an account? <a href="/signup/">Sign-Up</a></p> -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
