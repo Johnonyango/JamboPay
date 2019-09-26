@@ -1,16 +1,16 @@
-# from django import forms
-# from django import forms
-# from django.contrib.auth.models import User
-# from django.contrib.auth.forms import AuthenticationForm
+from django import forms
+from models import *
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import MerchantLoginForm
 
-# class LoginForm(AuthenticationForm):
-#    '''
-#    User login form.
-#    '''
+class LoginForm(MerchantLoginForm):
+   '''
+   User login form.
+   '''
    
-#    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
-#    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+   username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+   password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
 
-#    class Meta:
-#       model = User
-#       fields = ['username','password']
+   class Meta:
+      model = User
+      fields = ['username','password']
