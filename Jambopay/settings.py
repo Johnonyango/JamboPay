@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'universal_billing_system',
     'bootstrap4',
+    'bootstrap3',
     'tinymce',
     'registration',
     'rest_framework',
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'Jambopay.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

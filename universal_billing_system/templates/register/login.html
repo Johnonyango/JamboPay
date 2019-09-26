@@ -1,19 +1,14 @@
-{% load bootstrap3 %}
 {% block content %}
+{% load bootstrap4 %}
+
 <div class="container">
 
-          <form  action="/accounts/login/" method="post">
-            
-            {% csrf_token %}
-            {% bootstrap_form form%}
-
-            <div class="form-group">
-              <input type="submit" class="btn btn-primary btn-sm" value="Login">
-            </div>
-
-            <input type="hidden" name="next" value="{{next}}">
-
-          </form>
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
 
         </div>
 

@@ -4,7 +4,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns=[
-    url(r'^$',views.index,name='Index')
+    url(r'^$',views.index,name='Index'),
+    url(r'login/',views.login,name='login'),
+
 ] 
 
 if settings.DEBUG:
