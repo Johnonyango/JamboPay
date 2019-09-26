@@ -1,9 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-dark " id='mySidenav'>
+<nav  class="navbar navbar-expand-lg navbar-dark " id='mySidenav'>
     <img width="15%" class="navbar-brand" src="media/images/jambopay.png">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
-        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+      <a class="dropdown-item" href="#">Generate Bill</a>
+      <a class="dropdown-item" href="#">Upload Bill</a>
+      <a class="dropdown-item" href="#">Bill Details</a>
+    </div>
     <div class="col-sm-6 col-md-6">
             {% if user.is_authenticated %}
             <ul>
