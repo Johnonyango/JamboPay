@@ -5,11 +5,11 @@ from .models import  *
 from .serializer import *
 from .permissions import IsAdminOrReadOnly
 from rest_framework import status
-import requests
 
 
 
 # Create your views here.
+
 
 def index(request):
         url = 'http://127.0.0.1:8000/api/Merchants/'

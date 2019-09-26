@@ -8,18 +8,4 @@ class LoginForm(MerchantLoginForm):
     class Meta:
         model = Merchant
         fields = ('email', 'password1', 'password2')
-        # profile forms
-# class ProfileForm(forms.ModelForm):
-#     class Meta:
-#         model = Profile
-#         exclude = ['user','timestamp']
-
-# class ProjectForm(forms.ModelForm):
-#     class Meta:
-#         model = Project
-#         exclude = ['user','profile','timestamp']
-# # review
-# class ReviewForm(forms.ModelForm):
-#     class Meta:
-#         model = Review
-#         exclude = ['user','project','average']
+       
