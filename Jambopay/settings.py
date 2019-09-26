@@ -92,11 +92,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'jambopay',
         'USER': 'moringa',
-<<<<<<< HEAD
         'PASSWORD':'12345'
-=======
-        'PASSWORD':'sijuinigani'
->>>>>>> 0a308a8e2f2057c9ab446bf35339a996e1e15f84
     }
 }
 

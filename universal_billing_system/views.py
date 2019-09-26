@@ -15,9 +15,11 @@ from . models import Merchant
 # Create your views here.
 
 def index(request):
-        # url = 'http://127.0.0.1:8000/api/Merchants/'
+    pass
+        # url = 'https://mannu-awards.herokuapp.com/api/projects/'
         # r = requests.get(url.format()).json()
-        # print(r.text)
+        # projects = r['all_merchants']
+        # print(r.all_merchants)
         # merchant_details = []
         # for merchant_item in merchant:
         #     id = merchant_item.get('id')
@@ -38,9 +40,9 @@ def index(request):
         # return render(request, "index.html", {"details": merchant_details})
         # url = 'http://127.0.0.1:8000/api/Merchants/'
         # Business_name = 'Vinka'
-        # response = requests.get(url.format(Business_name)).json()
-        # merchant = {
-        # "Business_name":'', 
+        # r = requests.get(url.format(Business_name)).json()
+        # merchant_details = {
+        # "Business_name":'r.main', 
         # "Email": '',
         # "Phone_number":'',
         # "Physical_address":'',
@@ -51,7 +53,7 @@ def index(request):
         # } 
         # context = {
         #     'merchant' :merchant}
-        return render(request,'index.html')
+        # return render(request,'index.html')
 
 class MerchantList(APIView):
     def get(self, request, format=None):
