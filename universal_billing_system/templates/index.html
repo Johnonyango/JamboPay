@@ -12,14 +12,38 @@
 <body>
   {% block content %}
   <h2>DETAILS</h2>
-    {% for detail in details%}
-    <ul>
+    <!-- <ul>
       <li>
         <strong>{{ detail.Business_name }}</strong></p>
         <p>{{ detail.Phone_number }}</p>
   </li>
-  </ul>
-  {% endfor %}
+  </ul> -->
+  <table>
+    <tr>
+      <th>Business_name</th> 
+      <th>Phone_number</th> 
+      <th>Email</th>
+      <th>Address</th>
+      <th>Code</th>
+      <th>Town</th>
+      <th>Paybill</th>
+      <th>Industry</th>   
+    </tr>
+
+    {% for detail in details%}
+    <tr>
+        <td>{{detail.Business_name}}</td>
+        <td>{{detail.Phone_number}}</td>
+        <td>{{detail.Email}}</td>
+        <td>{{detail.Physical_address}}</td>
+        <td>{{detail.Post_code}}</td>
+        <td>{{detail.Town}}</td>
+        <td>{{detail.JP_paybill}}</td>
+        <td>{{detail.Industry}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
   {% endblock %}
 </body>
 
