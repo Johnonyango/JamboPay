@@ -25,7 +25,17 @@ class Merchant(models.Model):
     Industry = models.ManyToManyField(Industry)
     Revstreams = models.ManyToManyField(Revstreams)
     
-    
+    def __str__(self):
+        return self.name
+
+class Bills(models.Model):
+    customer_name = models.CharField(max_length=255,blank=False)
+    customer_phone = models.CharField(max_length=255,blank=False)
+    customer_email = models.EmailField(max_length=255,blank=False)
+    Revstreams = models.CharField(max_length=255,blank=False)
+    narration = models.CharField(max_length=255,blank=False)
+    amount = models.FloatField(blank=False)
+    quantity = models.FloatField(blank=True)
 
 
 
