@@ -6,8 +6,10 @@ from django.contrib import admin
 
 urlpatterns=[
     url(r'^$',views.index,name='Index'),
-    url(r'login/',views.login,name='login'),
 
+    #API Endpoints
+    url(r'^api/GetMerchants/$', views.MerchantList.as_view()),
+    url(r'^api/GetRevenueStreams/$', views.RevenueStreamsList.as_view()),
 ] 
 
 if settings.DEBUG:
