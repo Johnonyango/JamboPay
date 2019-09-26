@@ -1,19 +1,26 @@
+{% load bootstrap4 %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
 </head>
+
 <body>
-
-    <p>{{Merchant.Business_name}}</p>
-    <!-- <p>{{ Merchant.email }}</p>
-    <p>{{ Merchant.Phone_number }}</p>
-    <p>{{ Merchant.address }}</p>
-    <p>{{ Merchant.code }}</p>
-    <p>{{ Merchant.Town }}</p>
-    <p>{{ Merchant.paybill }}</p>
-    <p>{{ Merchant.Industry }}</p> -->
-
-    <h1>Sorry, Nothing here yet!</h1>
+  {% block content %}
+  <h2>DETAILS</h2>
+    {% for detail in details%}
+    <ul>
+      <li>
+        <strong>{{ detail.Business_name }}</strong></p>
+        <p>{{ detail.Phone_number }}</p>
+  </li>
+  </ul>
+  {% endfor %}
+  {% endblock %}
 </body>
+
 </html>
