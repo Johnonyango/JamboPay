@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns=[
-    url(r'^$',views.index,name='Index'),
+    url(r'^$',views.index,name='home'),
     
     #API Endpoints
     url(r'^api/GetMerchants/$', views.MerchantList.as_view()),
