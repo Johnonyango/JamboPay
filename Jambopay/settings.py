@@ -88,17 +88,6 @@ WSGI_APPLICATION = 'Jambopay.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-<<<<<<< HEAD
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'jambopay',
-        'USER': 'moringa',
-        'PASSWORD':'12345'
-    }
-}
-=======
 if config('MODE')=="dev":
    DATABASES = {
        'default': {
@@ -119,8 +108,8 @@ else:
        )
    }
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -129,7 +118,6 @@ DATABASES['default'].update(db_from_env)
 #         'PASSWORD':'Emmah@7127'
 #     }
 # }
->>>>>>> bf621a909233d23a6c7d95334fbb43fac14d3c7c
 
 
 # Password validation
