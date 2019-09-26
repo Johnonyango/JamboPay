@@ -5,6 +5,7 @@ from .models import  *
 from .serializer import *
 from .permissions import IsAdminOrReadOnly
 from rest_framework import status
+from rest_framework.decorators import api_view
 
 from django.core.mail import send_mail
 from django.conf import settings
@@ -39,5 +40,14 @@ def email(request):
     recipient_list = ['receiver@gmail.com',]    
     send_mail( subject, message, email_from, recipient_list )   
     return redirect('redirect to a new page')
+
+
+@api_view()
+def null_view(request):
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view()
+def complete_view(request):
+    return Response("Email account is activated")
 
 
