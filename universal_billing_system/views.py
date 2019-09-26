@@ -6,6 +6,9 @@ from .serializer import *
 from .permissions import IsAdminOrReadOnly
 from rest_framework import status
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 # Create your views here.
 
@@ -27,3 +30,14 @@ class RevenueStreamsList(APIView):
         all_revenue_streams = Revstreams.objects.all()
         serializers = RevenueStreamsSerializer(all_revenue_streams, many=True)
         return Response(serializers.data)
+    
+
+def email(request):    
+    subject = 'Merchant Creation JP'
+    message = 'Welcome to JP'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ['receiver@gmail.com',]    
+    send_mail( subject, message, email_from, recipient_list )   
+    return redirect('redirect to a new page')
+
+
