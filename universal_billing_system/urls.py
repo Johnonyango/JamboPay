@@ -9,6 +9,7 @@ urlpatterns=[
     #API Endpoints
     url(r'^api/GetMerchants/$', views.MerchantList.as_view()),
     url(r'^api/GetRevenueStreams/$', views.RevenueStreamsList.as_view()),
+    url(r'^api/GenerateBill/$', views.GenerateBill.as_view()),
 ] 
 
 if settings.DEBUG:
