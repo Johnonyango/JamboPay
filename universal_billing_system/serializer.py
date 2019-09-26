@@ -14,5 +14,5 @@ class RevenueStreamsSerializer(serializers.ModelSerializer):
 
 class GenerateBillSerializer(serializers.ModelSerializer):
     class Meta:
-        # model = Revstreams
+        model = Bills
         fields='__all__'

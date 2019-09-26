@@ -13,10 +13,10 @@ from . models import Merchant
 
 
 # Create your views here.
-def index(request):
-    url = ('jpaye.herokuap.com/api/GetMerchants/')
-    response = requests.get(url)
-    print(response)
+# def index(request):
+#     url = ('jpaye.herokuap.com/api/GetMerchants/')
+#     response = requests.get(url)
+#     print(response)
    
 def index(request):
     return render(request, 'index.html')
@@ -79,11 +79,11 @@ class RevenueStreamsList(APIView):
 
 class GenerateBill(APIView):
     # def get(self, request, format=None):
-    #     all_merch = MoringaMerch.objects.all()
-    #     serializers = MerchSerializer(all_merch, many=True)
+    #     all_bills = Bills.objects.all()
+    #     serializers = GenerateBillSerializer(all_bills, many=True)
     #     return Response(serializers.data)
     def post(self, request, format=None):
-        # serializers = MerchSerializer(data=request.data)
+        serializers = GenerateBillSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
