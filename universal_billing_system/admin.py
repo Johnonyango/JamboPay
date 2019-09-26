@@ -9,4 +9,4 @@ from .models import *
 admin.site.register(Merchant);
 admin.site.register(Industry);
 admin.site.register(Revstreams);
-# admin.site.register(Category);
+admin.site.register(Bills);

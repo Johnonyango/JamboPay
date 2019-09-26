@@ -75,3 +75,9 @@ class RevenueStreamsList(APIView):
         all_revenue_streams = Revstreams.objects.all()
         serializers = RevenueStreamsSerializer(all_revenue_streams, many=True)
         return Response(serializers.data)
+class BillsDetails(APIView):
+    def get(self, request, format=None):
+        permission_classes = (IsAdminOrReadOnly,)
+        all_bills = Bills.objects.all()
+        serializers = BillSerializer(all_bills, many=True)
+        return Response(serializers.data)        
