@@ -33,21 +33,5 @@ class RevenueStreamsList(APIView):
         return Response(serializers.data)
     
 
-def email(request):    
-    subject = 'Merchant Creation JP'
-    message = 'Welcome to JP'
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['receiver@gmail.com',]    
-    send_mail( subject, message, email_from, recipient_list )   
-    return redirect('redirect to a new page')
-
-
-@api_view()
-def null_view(request):
-    return Response(status=status.HTTP_400_BAD_REQUEST)
-
-@api_view()
-def complete_view(request):
-    return Response("Email account is activated")
 
 
