@@ -9,6 +9,18 @@ from . models import Merchant
 # from .forms import *
 
 
+# login
+def login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            auth_login(request, user)
+            return redirect('index')
+    else:
+        form = LoginForm()
+
+    return render(request, 'registration/login.html', {'form': form})
 
 
 
