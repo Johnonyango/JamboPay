@@ -9,4 +9,7 @@ class LoginForm(MerchantLoginForm):	class LoginForm(MerchantLoginForm):
    User login form.	    class Meta:
    '''	        model = Merchant
 
-        fields = ('email', 'password1', 'password2')
+
+
+
+

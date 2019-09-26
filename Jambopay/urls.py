@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'',include('universal_billing_system.urls')),
     url(r'^logout/$', views.logout, {"next_page": '/'}),
     url(r'^api-token-auth/', obtain_auth_token),
+
     url(r'^accounts/', include('registration.backends.simple.urls')),
 
 ]
