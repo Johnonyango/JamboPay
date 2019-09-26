@@ -5,10 +5,10 @@ class Industry(models.Model):
     name = models.CharField( blank=False,max_length= 40,default='JamboPay')
     def __str__(self):
         return self.name 
-class Category(models.Model):
-    name = models.CharField( blank=False,max_length= 40,default='JamboPay')
-    def __str__(self):
-        return self.name                    
+# class Category(models.Model):
+#     name = models.CharField( blank=False,max_length= 40,default='JamboPay')
+#     def __str__(self):
+#         return self.name                    
 class Revstreams(models.Model):
     name = models.CharField( blank=False,max_length= 40,default='JamboPay')
     # Category = models.ManyToManyField(Category)

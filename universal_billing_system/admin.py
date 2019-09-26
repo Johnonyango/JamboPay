@@ -6,6 +6,7 @@ from .forms     import *
 # from django.utils.crypto import get_random_string
 # from authtools.admin import NamedUserAdmin
 
+<<<<<<< HEAD
 
 # User = get_user_model()
 
@@ -37,3 +38,9 @@ admin.site.register(Merchant)
 admin.site.register(Industry)
 # admin.site.unregister(User)
 # admin.site.register(User, UserAdmin)
+=======
+admin.site.register(Merchant);
+admin.site.register(Industry);
+admin.site.register(Revstreams);
+# admin.site.register(Category);
+>>>>>>> bf621a909233d23a6c7d95334fbb43fac14d3c7c
