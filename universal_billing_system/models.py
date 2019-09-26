@@ -29,13 +29,13 @@ class Merchant(models.Model):
         return self.name
 
 class Bills(models.Model):
-    customer_name = models.CharField(max_length=255)
-    customer_phone = models.CharField(max_length=255)
-    customer_email = models.EmailField(max_length=255)
-    revenue_category = models.CharField(max_length=255)
-    narration = models.CharField(max_length=255)
-    amount = models.FloatField()
-    quantity = models.FloatField()
+    customer_name = models.CharField(max_length=255,blank=False)
+    customer_phone = models.CharField(max_length=255,blank=False)
+    customer_email = models.EmailField(max_length=255,blank=False)
+    Revstreams = models.CharField(max_length=255,blank=False)
+    narration = models.CharField(max_length=255,blank=False)
+    amount = models.FloatField(blank=False)
+    quantity = models.FloatField(blank=True)
 
 
 
