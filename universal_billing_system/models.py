@@ -25,6 +25,9 @@ class Merchant(models.Model):
     Industry = models.ManyToManyField(Industry)
     Revstreams = models.ManyToManyField(Revstreams)
     
+    
+
+
 
 
 
