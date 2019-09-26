@@ -83,7 +83,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Jambopay.wsgi.application'
 
-
+# AUTH_USER_MODEL = 'authtools.User'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
