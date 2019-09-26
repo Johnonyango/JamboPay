@@ -1,7 +1,6 @@
 from django import forms
 from .models import *
-from django import forms
-from django.contrib.auth.forms import MerchanLoginForm
+from django.contrib.auth.forms import MerchantLoginForm
 from django.contrib.auth.models import Merchant
 # sign up forms
 class LoginForm(MerchantLoginForm):
@@ -9,6 +8,13 @@ class LoginForm(MerchantLoginForm):
     class Meta:
         model = Merchant
         fields = ('email', 'password1', 'password2')
+
+class BillsForm(forms.BillsForm):
+   
+
+    class Meta:
+        model = Bills
+        fields = '__all__'
 
 
 
