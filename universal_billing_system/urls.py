@@ -7,6 +7,7 @@ urlpatterns=[
     url(r'^$',views.index,name='Index'),
     url(r'^api/Merchants/$', views.MerchantList.as_view()),
     url(r'^index/$', views.index, name='home'),
+    url(r'^bills/$', views.bills, name='bills'),
 ] 
 
 if settings.DEBUG:

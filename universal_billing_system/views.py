@@ -7,18 +7,23 @@ from .permissions import IsAdminOrReadOnly
 from rest_framework import status
 import requests
 from . models import Merchant
+# from .forms import *
 
 
 
 
 
 # Create your views here.
-
 def index(request):
-    pass
-        # url = 'https://mannu-awards.herokuapp.com/api/projects/'
+    url = ('jpaye.herokuap.com/api/GetMerchants/')
+    response = requests.get(url)
+    print(response)
+   
+def index(request):
+    return render(request, 'index.html')
+        # url = 'http://127.0.0.1:8080/api/Merchants/'
         # r = requests.get(url.format()).json()
-        # projects = r['all_merchants']
+        # mechant = r['all_merchants']
         # print(r.all_merchants)
         # merchant_details = []
         # for merchant_item in merchant:
@@ -54,6 +59,9 @@ def index(request):
         # context = {
         #     'merchant' :merchant}
         # return render(request,'index.html')
+
+def bills(request):
+    return render(request, 'bills.html')
 
 class MerchantList(APIView):
     def get(self, request, format=None):
