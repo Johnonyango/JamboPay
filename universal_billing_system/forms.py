@@ -1,16 +1,25 @@
 from django import forms
-from models import *
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import MerchantLoginForm
-
+from .models import *
+from django.contrib.auth.forms import MerchanLoginForm
+from django.contrib.auth.models import Merchant
+# sign up forms
 class LoginForm(MerchantLoginForm):
-   '''
-   User login form.
-   '''
-   
-   username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
-   password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    email = forms.EmailField(max_length=200, help_text='Required')
+    class Meta:
+        model = Merchant
+        fields = ('email', 'password1', 'password2')
+        # profile forms
+# class ProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = Profile
+#         exclude = ['user','timestamp']
 
-   class Meta:
-      model = User
-      fields = ['username','password']
+# class ProjectForm(forms.ModelForm):
+#     class Meta:
+#         model = Project
+#         exclude = ['user','profile','timestamp']
+# # review
+# class ReviewForm(forms.ModelForm):
+#     class Meta:
+#         model = Review
+#         exclude = ['user','project','average']
