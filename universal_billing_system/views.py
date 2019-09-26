@@ -5,14 +5,26 @@ from .models import  *
 from .serializer import *
 from .permissions import IsAdminOrReadOnly
 from rest_framework import status
+import requests
+
 
 
 # Create your views here.
 
 def index(request):
-    
-    return render(request,'index.html')
-
+        url = 'http://127.0.0.1:8000/api/Merchants/'
+        # response = requests.get(url.format(merchant)).json
+        merchant = {
+        # "Business_name": 
+        # "Email": 
+        # "Phone_number":
+        # "Physical_address": 
+        # "Post_code": 
+        # "Town":
+        # "JP_paybill":
+        # "Industry": 
+        }
+        return render(request,'index.html')
 
 class MerchantList(APIView):
     def get(self, request, format=None):
