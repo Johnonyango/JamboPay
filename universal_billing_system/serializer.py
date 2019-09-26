@@ -8,5 +8,5 @@ class MerchantSerializer(serializers.ModelSerializer):
 
 class RevenueStreamsSerializer(serializers.ModelSerializer):
     class Meta:
-        # model = Merchant
+        model = Revstreams
         fields='__all__'

@@ -24,6 +24,6 @@ class MerchantList(APIView):
 class RevenueStreamsList(APIView):
     def get(self, request, format=None):
         permission_classes = (IsAdminOrReadOnly,)
-        # all_merchants = Merchant.objects.all()
-        # serializers = MerchantSerializer(all_merchants, many=True)
+        all_revenue_streams = Revstreams.objects.all()
+        serializers = RevenueStreamsSerializer(all_revenue_streams, many=True)
         return Response(serializers.data)
