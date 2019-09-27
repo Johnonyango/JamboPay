@@ -10,3 +10,9 @@ class RevenueStreamsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Revstreams
         fields='__all__'
+
+
+class GenerateBillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bills
+        fields='__all__'
