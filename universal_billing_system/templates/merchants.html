@@ -14,10 +14,17 @@
     
   {% block content %}
   {% include 'nav.html' %}
+  <br>
 
+  
   <h2>BILL DETAILS</h2>
+  <br>
+  <div class="row">
+  
+  <div class="col-md-1"></div>
 
-<table class="table table-striped table-dark">
+<div class="col-md-10">
+<table class="table table-striped table-primary">
   <thead>
     <tr>
 <<<<<<< HEAD
@@ -55,7 +62,28 @@
   {% endfor %}
   </tbody>
 </table>
+<div class="col-md-1"></div>
+</div>
+</div>
+
+<style>
+  h2{
+    text-align: center;
+  }
+    body{
+      background-image: url('https://wallpapercave.com/wp/wp2164078.jpg');
+      
+      overflow-x: hidden;
+    }
+    .container {
+      background-color: #0073b659;
+    }
+  </style>
   {% endblock %}
+
+  
 </body>
+
+
 
 </html>
