@@ -9,6 +9,18 @@ from . models import Merchant
 # from .forms import *
 
 
+# login
+def login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            auth_login(request, user)
+            return redirect('index')
+    else:
+        form = LoginForm()
+
+    return render(request, 'registration/login.html', {'form': form})
 
 
 
@@ -75,8 +87,6 @@ class RevenueStreamsList(APIView):
         all_revenue_streams = Revstreams.objects.all()
         serializers = RevenueStreamsSerializer(all_revenue_streams, many=True)
         return Response(serializers.data)
-
-
 class GenerateBill(APIView):
     # def get(self, request, format=None):
     #     all_bills = Bills.objects.all()
@@ -89,3 +99,9 @@ class GenerateBill(APIView):
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
         permission_classes = (IsAdminOrReadOnly,)
+class BillsDetails(APIView):
+    def get(self, request, format=None):
+        permission_classes = (IsAdminOrReadOnly,)
+        all_bills = Bills.objects.all()
+        serializers = BillSerializer(all_bills, many=True)
+        return Response(serializers.data)

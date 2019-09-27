@@ -16,12 +16,7 @@ class BillsForm(forms.BillsForm):
         model = Bills
         fields = '__all__'
 
-# class ProjectForm(forms.ModelForm):
-#     class Meta:
-#         model = Project
-#         exclude = ['user','profile','timestamp']
-# # review
-# class ReviewForm(forms.ModelForm):
-#     class Meta:
-#         model = Review
-#         exclude = ['user','project','average']
+
+
+
+

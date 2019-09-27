@@ -37,6 +37,8 @@ class Bills(models.Model):
     amount = models.FloatField(blank=False)
     quantity = models.FloatField(blank=True)
 
+    
+
 
 
 
