@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns=[
+    # url(r'^$',views.index,name='home'),
     url(r'^$',views.merchants,name='merchants'),
     #API Endpoints
     url(r'^api/GetMerchants/$', views.MerchantList.as_view()),
