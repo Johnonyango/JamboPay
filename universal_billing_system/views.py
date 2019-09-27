@@ -7,6 +7,7 @@ from .serializer import *
 from .permissions import IsAdminOrReadOnly
 from rest_framework import status
 from . models import Merchant
+import requests
 # from .forms import *
 
 
@@ -73,3 +74,19 @@ class BillsDetails(APIView):
         all_bills = Bills.objects.all()
         serializers = BillSerializer(all_bills, many=True)
         return Response(serializers.data)
+
+@login_required(login_url='/accounts/login/')
+def merchants(request):
+    url = ('https://jpaye.herokuapp.com/api/GetMerchants')
+    response = requests.get(url)
+    details = response.json()
+    for detail in details:
+        Business_name = detail.get('Business_name')
+        Email = detail.get('Email')
+        Phone_number = detail.get('Phone_number')
+        Address = detail.get('Physical_address')
+        Code = detail.get('Post_code')
+        Town = detail.get('Town')
+        Pay_bill = detail.get('JP_paybill')
+        Industry = detail.get('Industry')
+    return render(request, 'merchants.html', {'details': details})
