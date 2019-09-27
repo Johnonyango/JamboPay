@@ -32,10 +32,8 @@ def logout_view(request):
 
 
 # Create your views here.
-# def index(request):
-#     url = ('jpaye.herokuap.com/api/GetMerchants/')
-#     response = requests.get(url)
-#     print(response)
+def index(request):
+    pass
    
 
 def merchants(request):
