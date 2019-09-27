@@ -1,5 +1,4 @@
 from django.shortcuts import render
-import requests
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth.decorators import login_required
@@ -8,10 +7,9 @@ from .serializer import *
 from .permissions import IsAdminOrReadOnly
 from rest_framework import status
 from . models import Merchant
-import requests
-# from .forms import *
 
 
+# from .forms import *​
 # login
 def login(request):
     if request.method == 'POST':
@@ -21,36 +19,29 @@ def login(request):
             auth_login(request, user)
             return redirect('index')
     else:
-        form = LoginForm()
-
+        form = LoginForm()​
+        
     return render(request, 'registration/login.html', {'form': form})
-
+​
 @login_required(login_url='register')
 def logout_view(request):
    logout(request)
    return redirect('login')
-
-
+​
+​
 # Create your views here.
-def index(request):
-    pass
+# def index(request):
+#     url = ('jpaye.herokuap.com/api/GetMerchants/')
+#     response = requests.get(url)
+#     print(response)
    
-
-def merchants(request):
-    url = ('https://jpaye.herokuapp.com/api/GetMerchants')
-    response = requests.get(url)
-    details = response.json()
-    for detail in details:
-        Business_name = detail.get('Business_name')
-        Email = detail.get('Email')
-        Phone_number = detail.get('Phone_number')
-        Address = detail.get('Physical_address')
-        Code = detail.get('Post_code')
-        Town = detail.get('Town')
-        Pay_bill = detail.get('JP_paybill')
-        Industry = detail.get('Industry')
-    return render(request, 'merchants.html', {'details': details})
-
+def index(request):
+    return render(request, 'index.html')
+       
+​
+def bills(request):
+    return render(request, 'bills.html')
+​
 class MerchantList(APIView):
     def get(self, request, format=None):
         permission_classes = (IsAdminOrReadOnly,)
@@ -82,7 +73,7 @@ class BillsDetails(APIView):
         all_bills = Bills.objects.all()
         serializers = BillSerializer(all_bills, many=True)
         return Response(serializers.data)
-
+​
 @login_required(login_url='/accounts/login/')
 def merchants(request):
     url = ('https://jpaye.herokuapp.com/api/GetMerchants')
