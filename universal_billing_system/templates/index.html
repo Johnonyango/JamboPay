@@ -9,5 +9,26 @@
 
 
     <h1>Sorry, Nothing here yet!</h1>
+
+
+    <form action="{% url 'Index' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file"
+               title="Upload excel file"
+               name="excel_file"
+               style="border: 1px solid black; padding: 5px;"
+               required="required">
+        <p>
+        <input type="submit"
+               value="Upload"
+               style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
+    </form>
+              {% for row in excel_data %}
+               {% for cell in row %}
+               {{ cell }}&nbsp;&nbsp;
+                 {% endfor %}
+    <br>
+                    {% endfor %}
+                    
 </body>
 </html>
