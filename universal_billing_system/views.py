@@ -76,7 +76,7 @@ class BillsDetails(APIView):
 ​
 @login_required(login_url='/accounts/login/')
 def merchants(request):
-    url = ('https://jpaye.herokuapp.com/api/GetMerchants')
+    url = ('https://jpaye.herokuapp.com/api/BillsDetails')
     response = requests.get(url)
     details = response.json()
     for detail in details:
