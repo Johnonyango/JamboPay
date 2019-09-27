@@ -1,3 +1,4 @@
 virtual/
 .env
 .pyc
+universal_billing_system/migrations/

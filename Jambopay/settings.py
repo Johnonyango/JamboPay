@@ -29,6 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
 
 # Application definition
 
@@ -70,7 +72,7 @@ ROOT_URLCONF = 'Jambopay.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,7 +87,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Jambopay.wsgi.application'
 
-
+# AUTH_USER_MODEL = 'authtools.User'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 if config('MODE')=="dev":
@@ -165,4 +167,5 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+LOGIN_REDIRECT_URL = '/'
 
