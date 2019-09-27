@@ -1,3 +1,5 @@
+{%extends "registration/base.html"%}
+
 {% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="en">
@@ -12,13 +14,9 @@
 <body>
   {% block content %}
   <h2>MERCHANT DETAILS</h2>
-    <!-- <ul>
-      <li>
-        <strong>{{ detail.Business_name }}</strong></p>
-        <p>{{ detail.Phone_number }}</p>
-  </li>
-  </ul> -->
-  <table>
+
+<table class="table table-striped table-dark">
+  <thead>
     <tr>
       <th>Business_name</th> 
       <th>Phone_number</th> 
@@ -29,22 +27,23 @@
       <th>Paybill</th>
       <th>Industry</th>   
     </tr>
-
+  </thead>
+  <tbody>
     {% for detail in details%}
+
     <tr>
-        <td>{{detail.Business_name}}</td>
-        <td>{{detail.Phone_number}}</td>
-        <td>{{detail.Email}}</td>
-        <td>{{detail.Physical_address}}</td>
-        <td>{{detail.Post_code}}</td>
-        <td>{{detail.Town}}</td>
-        <td>{{detail.JP_paybill}}</td>
-        <td>{{detail.Industry}}</td>
-    </tr>
-    {% endfor %}
-
+      <td>{{detail.Business_name}}</td>
+      <td>{{detail.Phone_number}}</td>
+      <td>{{detail.Email}}</td>
+      <td>{{detail.Physical_address}}</td>
+      <td>{{detail.Post_code}}</td>
+      <td>{{detail.Town}}</td>
+      <td>{{detail.JP_paybill}}</td>
+      <td>{{detail.Industry}}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
 </table>
-
   {% endblock %}
 </body>
 
