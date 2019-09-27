@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import requests
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth.decorators import login_required
@@ -29,9 +30,9 @@ def logout_view(request):
    return redirect('login')
 
 
-<<<<<<< HEAD
 # Create your views here.
-def index(request):
+
+def merchants(request):
     url = ('https://jpaye.herokuapp.com/api/GetMerchants')
     response = requests.get(url)
     details = response.json()
@@ -44,16 +45,7 @@ def index(request):
         Town = detail.get('Town')
         Pay_bill = detail.get('JP_paybill')
         Industry = detail.get('Industry')
-    return render(request, 'index.html', {'details': details})
-
-=======
-def index(request):
-    return render(request, 'index.html')
-       
->>>>>>> cc45389c61b6940f2c6e1316381aeb1fb981ccf2
-
-def bills(request):
-    return render(request, 'bills.html')
+    return render(request, 'merchants.html', {'details': details})
 
 class MerchantList(APIView):
     def get(self, request, format=None):

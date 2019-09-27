@@ -1,0 +1,50 @@
+{%extends "registration/base.html"%}
+
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  {% block content %}
+  <h2>MERCHANT DETAILS</h2>
+
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+      <th>Business_name</th> 
+      <th>Phone_number</th> 
+      <th>Email</th>
+      <th>Address</th>
+      <th>Code</th>
+      <th>Town</th>
+      <th>Paybill</th>
+      <th>Industry</th>   
+    </tr>
+  </thead>
+  <tbody>
+    {% for detail in details%}
+
+    <tr>
+      <td>{{detail.Business_name}}</td>
+      <td>{{detail.Phone_number}}</td>
+      <td>{{detail.Email}}</td>
+      <td>{{detail.Physical_address}}</td>
+      <td>{{detail.Post_code}}</td>
+      <td>{{detail.Town}}</td>
+      <td>{{detail.JP_paybill}}</td>
+      <td>{{detail.Industry}}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+  {% endblock %}
+</body>
+
+</html>
