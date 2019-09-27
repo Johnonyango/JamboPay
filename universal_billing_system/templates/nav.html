@@ -12,10 +12,10 @@
         <img width="15%" class="navbar-brand" src="https://www.jambopay.com/img/logo.png  ">
       
         <li class="nav-item active">
-          <a class="nav-link btn btn-outline-primary" href="index.html">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link btn btn-outline-primary" href="{% url 'Index'%}">Home <span class="sr-only">(current)</span></a>
         </li> &nbsp &nbsp
         <li class="nav-item">
-          <a class="nav-link btn btn-outline-primary" href="merchants.html">MERCHANTS</a>
+          <a class="nav-link btn btn-outline-primary" href="templates/merchants.html">MERCHANTS</a>
         </li>&nbsp &nbsp
       
         <li class="nav-item dropdown">
@@ -25,7 +25,7 @@
           </a>&nbsp&nbsp
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="#">Generate Bill</a>
-            <a class="dropdown-item" href="#">Upload Bill</a>
+            <a class="dropdown-item" href="{% url 'bills'%}">Upload Bill</a>
       <a class="dropdown-item" href="{{ 'merchants' }}">Bill Details</a>
           </div>
         </li>&nbsp&nbsp
