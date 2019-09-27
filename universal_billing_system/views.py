@@ -1,16 +1,13 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.contrib.auth.decorators import login_required
 from .models import  *
 from .serializer import *
 from .permissions import IsAdminOrReadOnly
 from rest_framework import status
 from . models import Merchant
-import openpyxl
-# import pyexcel-ods
-# import pyexcel-xls
-# import pyexcel-xlsx
-
+import requests
 # from .forms import *
 
 
@@ -27,6 +24,10 @@ def login(request):
 
     return render(request, 'registration/login.html', {'form': form})
 
+@login_required(login_url='register')
+def logout_view(request):
+   logout(request)
+   return redirect('login')
 
 
 # Create your views here.
@@ -39,36 +40,7 @@ def login(request):
 #     return render(request, 'index.html')
 
 def index(request):
-    if "GET" == request.method:
-        return render(request, 'index.html', {})
-    else:
-        excel_file = request.FILES["excel_file"]
-
-        # you may put validations here to check extension or file size
-
-        wb = openpyxl.load_workbook(excel_file)
-
-        # getting a particular sheet by name out of many sheets
-        worksheet = wb["Sheet1"]
-        print(worksheet)
-
-        excel_data = list()
-        # iterating over the rows and
-        # getting value from each cell in row
-        for row in worksheet.iter_rows():
-            row_data = list()
-            for cell in row:
-                row_data.append(str(cell.value))
-            excel_data.append(row_data)
-
-            #` getting all sheets
-            # sheets = wb.sheetnames
-            # print(sheets)
-            # getting active sheet
-            # active_sheet = wb.active
-            # print(active_sheet)`
-
-        return render(request, 'index.html', {"excel_data":excel_data})
+    return render(request, 'index.html')
        
 
 def bills(request):
@@ -87,9 +59,37 @@ class RevenueStreamsList(APIView):
         all_revenue_streams = Revstreams.objects.all()
         serializers = RevenueStreamsSerializer(all_revenue_streams, many=True)
         return Response(serializers.data)
+class GenerateBill(APIView):
+    # def get(self, request, format=None):
+    #     all_bills = Bills.objects.all()
+    #     serializers = GenerateBillSerializer(all_bills, many=True)
+    #     return Response(serializers.data)
+    def post(self, request, format=None):
+        serializers = GenerateBillSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        permission_classes = (IsAdminOrReadOnly,)
 class BillsDetails(APIView):
     def get(self, request, format=None):
         permission_classes = (IsAdminOrReadOnly,)
         all_bills = Bills.objects.all()
         serializers = BillSerializer(all_bills, many=True)
-        return Response(serializers.data)        
+        return Response(serializers.data)
+
+@login_required(login_url='/accounts/login/')
+def merchants(request):
+    url = ('https://jpaye.herokuapp.com/api/BillsDetails')
+    response = requests.get(url)
+    details = response.json()
+    for detail in details:
+        Business_name = detail.get('Business_name')
+        Email = detail.get('Email')
+        Phone_number = detail.get('Phone_number')
+        Address = detail.get('Physical_address')
+        Code = detail.get('Post_code')
+        Town = detail.get('Town')
+        Pay_bill = detail.get('JP_paybill')
+        Industry = detail.get('Industry')
+    return render(request, 'merchants.html', {'details': details})
