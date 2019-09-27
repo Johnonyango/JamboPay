@@ -20,5 +20,6 @@ urlpatterns=[
     url(r'^bills/$', views.bills, name='bills'),
 ]
 
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

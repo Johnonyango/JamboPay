@@ -26,7 +26,7 @@ class Merchant(models.Model):
     Revstreams = models.ManyToManyField(Revstreams)
     
     def __str__(self):
-        return self.name
+        return self.Business_name
 
 class Bills(models.Model):
     customer_name = models.CharField(max_length=255,blank=False)
