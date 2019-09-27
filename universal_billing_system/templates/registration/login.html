@@ -24,10 +24,9 @@
             {% bootstrap_form form %}
   
               <div class="form-group">
-                <input type="submit" class="btn btn-primary btn-sm" value="Login"><br>
+                <input type="submit" class="btn btn-outline-primary btn-sm" value="Login"><br>
               </div>
                
-              <p> Don't have an account? <a href="/accounts/register">Register here</a>
                 <p>Did you forget password ? <a href="/accounts/password/change">Change Password</a> <br>
                 <a href="{% url 'home' %}">Go to Homepage</a>
               <input type="hidden" name="next" value="{{next}}">
