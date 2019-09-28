@@ -1,0 +1,2 @@
+def billing(request):
+    pass
