@@ -26,6 +26,7 @@ class Merchant(models.Model):
     JP_paybill = models.CharField(max_length=20,blank=False)
     Industry = models.ManyToManyField(Industry)
     Revstreams = models.ManyToManyField(Revstreams)
+    join_date=models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.Business_name
@@ -38,6 +39,7 @@ class Bills(models.Model):
     narration = models.CharField(max_length=255,blank=False)
     amount = models.FloatField(blank=False)
     quantity = models.FloatField(blank=True)
+    post_date = models.DateTimeField(auto_now_add=True)
 
     
 
