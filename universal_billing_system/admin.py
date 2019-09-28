@@ -17,6 +17,7 @@ class RevstreamsAdmin(admin.ModelAdmin):
 
 class BillsAdmin(admin.ModelAdmin):
     list_display = ('customer_name', 'customer_phone')
+
 admin.site.register(Merchant);
 admin.site.register(Industry);
 admin.site.register(Revstreams);
