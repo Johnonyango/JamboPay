@@ -90,3 +90,13 @@ def merchants(request):
         Pay_bill = detail.get('JP_paybill')
         Industry = detail.get('Industry')
     return render(request, 'merchants.html', {'details': details})
+
+def create_bills_notify(request):
+    form = BillsForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        form = BillsForm()
+    context = {
+        'form' : form
+    }
+    return render(request, 'bills.html', context)
