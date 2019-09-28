@@ -1,2 +1,2 @@
-def billing(request):
+def bilin(request):
     pass
