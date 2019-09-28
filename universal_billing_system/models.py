@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Industry(models.Model):
-    name = models.CharField( blank=False,max_length= 40,default='JamboPay')
+    name = models.CharField( blank=False,max_length= 40,default=None)
     def __str__(self):
         return self.name 
 # class Category(models.Model):
@@ -11,7 +11,7 @@ class Industry(models.Model):
 #     def __str__(self):
 #         return self.name                    
 class Revstreams(models.Model):
-    name = models.CharField( blank=False,max_length= 40,default='JamboPay')
+    name = models.CharField( blank=False,max_length= 40,default=None)
     # Category = models.ManyToManyField(Category)
     def __str__(self):
         return self.name
@@ -26,6 +26,7 @@ class Merchant(models.Model):
     JP_paybill = models.CharField(max_length=20,blank=False)
     Industry = models.ManyToManyField(Industry)
     Revstreams = models.ManyToManyField(Revstreams)
+    join_date=models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.Business_name
@@ -38,6 +39,7 @@ class Bills(models.Model):
     narration = models.CharField(max_length=255,blank=False)
     amount = models.FloatField(blank=False)
     quantity = models.FloatField(blank=True)
+    post_date = models.DateTimeField(auto_now_add=True)
 
     
 
