@@ -1,2 +1,1 @@
-def bilin(request):
-    pass
+    
