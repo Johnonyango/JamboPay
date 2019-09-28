@@ -95,3 +95,11 @@ def merchants(request):
         Industry = detail.get('Industry')
     return render(request, 'merchants.html', {'details': details})
 
+def create_bills_notify(request):
+    form = BillsForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    context = {
+        'form' : form
+    }
+return render(request, 'bills.html', context)
