@@ -1,8 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Industry(models.Model):
-    name = models.CharField( blank=False,max_length= 40,default='JamboPay')
+    name = models.CharField( blank=False,max_length= 40,default=None)
     def __str__(self):
         return self.name 
 # class Category(models.Model):
@@ -10,12 +11,13 @@ class Industry(models.Model):
 #     def __str__(self):
 #         return self.name                    
 class Revstreams(models.Model):
-    name = models.CharField( blank=False,max_length= 40,default='JamboPay')
+    name = models.CharField( blank=False,max_length= 40,default=None)
     # Category = models.ManyToManyField(Category)
     def __str__(self):
         return self.name
 class Merchant(models.Model):
     Business_name = models.CharField(max_length=20,blank=False)
+    Business_owner = models.ForeignKey(User,on_delete=models.CASCADE,default=None)
     Email = models.EmailField()
     Phone_number = models.CharField(max_length=60,blank=False)
     Physical_address = models.CharField(max_length=60,blank=False)
