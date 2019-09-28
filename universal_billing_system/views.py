@@ -99,6 +99,7 @@ def create_bills_notify(request):
     form = BillsForm(request.POST or None)
     if form.is_valid():
         form.save()
+        form = BillsForm()
     context = {
         'form' : form
     }
