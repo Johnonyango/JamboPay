@@ -8,6 +8,7 @@ from .permissions import IsAdminOrReadOnly
 from rest_framework import status
 from . models import Merchant
 import requests
+from .forms import GenerateBillForm
 # from .forms import *
 
 
@@ -91,3 +92,11 @@ def merchants(request):
         Industry = detail.get('Industry')
     return render(request, 'merchants.html', {'details': details})
 
+def generate_bill(request):
+    if request.method == 'POST':
+        form = GenerateBillsForm(request.POST)
+        if form.is_valid():
+            pass  # does nothing, just trigger the validation
+    else:
+        form = GenerateBillsForm()
+    return render(request, 'generate_bill.html', {'form': form})

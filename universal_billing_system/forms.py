@@ -1,7 +1,7 @@
 from django import forms
-from models import *	from .models import *
-from django.contrib.auth.models import User	from django.contrib.auth.forms import MerchanLoginForm
-from django.contrib.auth.forms import MerchantLoginForm	from django.contrib.auth.models import Merchant
+from models import *	
+from django.contrib.auth.models import User, Merchant
+from django.contrib.auth.forms import MerchantLoginForm	
 
 # sign up forms
 class LoginForm(MerchantLoginForm):	class LoginForm(MerchantLoginForm):
@@ -10,6 +10,16 @@ class LoginForm(MerchantLoginForm):	class LoginForm(MerchantLoginForm):
    '''	        model = Merchant
 
 
-
-
-
+class GenerateBillForm(forms.Form):
+    name = forms.CharField(max_length=30)
+    email = forms.EmailField(max_length=254)
+    phone = forms.CharField(max_length=30)
+    RevenueStreamID = forms.CharField(max_length=30)
+    narration = forms.CharField(
+        max_length=2000,
+        widget=forms.Textarea(),
+        help_text='Write here your message!'
+    )
+  
+    amount = forms.CharField(max_length=30)
+    Quantity = forms.CharField(max_length=30)
