@@ -7,6 +7,10 @@ from django.contrib import admin
 urlpatterns=[
     url(r'^$',views.index,name='Index'),
     url(r'^merchants/$',views.merchants,name='merchants'),
+    url(r'^index/$', views.index, name='home'),
+    url(r'^bills/$', views.bills, name='bills'),
+    url(r'^upload/$', views.upload, name='upload'),
+
 
 
     #API Endpoints
@@ -16,8 +20,6 @@ urlpatterns=[
     url(r'^api/BillsDetails/$', views.BillsDetails.as_view()),
 
     #moreurls
-    url(r'^index/$', views.index, name='home'),
-    url(r'^bills/$', views.bills, name='bills'),
 ]
 
 
