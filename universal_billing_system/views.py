@@ -6,9 +6,9 @@ from .models import  *
 from .serializer import *
 from .permissions import IsAdminOrReadOnly
 from rest_framework import status
-from . models import Merchant
 import requests
-# from .forms import *
+from .forms import *
+from django.http import HttpResponse,Http404,HttpResponseRedirect
 
 
 # login
@@ -62,7 +62,7 @@ class GenerateBill(APIView):
     #     serializers = GenerateBillSerializer(all_bills, many=True)
     #     return Response(serializers.data)
     def post(self, request, format=None):
-        serializers = GenerateBillSerializer(data=request.data)
+        serializers = BillSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
@@ -77,7 +77,7 @@ class BillsDetails(APIView):
 
 @login_required(login_url='/accounts/login/')
 def merchants(request):
-    url = ('https://jpaye.herokuapp.com/api/BillsDetails')
+    url = ('http://127.0.0.1:8000/api/BillsDetails')
     response = requests.get(url)
     details = response.json()
     for detail in details:
@@ -90,3 +90,22 @@ def merchants(request):
         Pay_bill = detail.get('JP_paybill')
         Industry = detail.get('Industry')
     return render(request, 'merchants.html', {'details': details})
+
+
+@login_required(login_url='/accounts/login/')
+def new_bill(request):
+    current_user=request.user
+    if request.method=="POST":
+        form =BillsForm(request.POST,request.FILES)
+        if form.is_valid():
+            bill = form.save(commit = False)
+            # business.owner = current_user
+            # business.neighbourhood = profile.neighbourhood
+            bill.save()
+
+        return HttpResponseRedirect('/index')
+
+    else:
+        form = BillsForm()
+
+    return render(request,'bills/new-bill.html',{"form":form})
