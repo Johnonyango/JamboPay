@@ -100,3 +100,4 @@ def generate_bill(request):
     else:
         form = GenerateBillsForm()
     return render(request, 'generate_bill.html', {'form': form})
+
