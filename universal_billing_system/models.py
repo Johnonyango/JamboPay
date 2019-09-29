@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+
+
 class Industry(models.Model):
     name = models.CharField( blank=False,max_length= 40,default='JamboPay')
     def __str__(self):

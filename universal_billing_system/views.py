@@ -8,6 +8,8 @@ from .permissions import IsAdminOrReadOnly
 from rest_framework import status
 from . models import Merchant
 import requests
+import openpyxl
+
 # from .forms import *
 
 
@@ -41,7 +43,17 @@ def logout_view(request):
 
 def index(request):
     return render(request, 'index.html')
-       
+
+
+def upload(request):
+    if request.method == "POST":
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            filehandle = request.FILES['file']
+            return excel.make_response(filehandle.get_sheet(), "csv")
+    else:
+        form = UploadFileForm()
+    return render_to_response('index.html', {'form': form}, context_instance=RequestContext(request))      
 
 def bills(request):
     return render(request, 'bills.html')
