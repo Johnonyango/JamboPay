@@ -90,3 +90,4 @@ def merchants(request):
         Pay_bill = detail.get('JP_paybill')
         Industry = detail.get('Industry')
     return render(request, 'merchants.html', {'details': details})
+
