@@ -6,12 +6,11 @@ from .models import  *
 from .serializer import *
 from .permissions import IsAdminOrReadOnly
 from rest_framework import status
-from . models import Merchant
 import requests
 from .forms import *
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 
 
-# login
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -64,7 +63,7 @@ class GenerateBill(APIView):
     #     return Response(serializers.data)
     
     def post(self, request, format=None):
-        serializers = GenerateBillSerializer(data=request.data)
+        serializers = BillSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
@@ -76,10 +75,25 @@ class BillsDetails(APIView):
         all_bills = Bills.objects.all()
         serializers = BillSerializer(all_bills, many=True)
         return Response(serializers.data)
+    
+    # def get_bill(self, pk):
+    #     try:
+    #         return Bills.objects.get(pk=pk)
+    #     except Bills.DoesNotExist:
+    #         return Http404
+
+    # def get(self, request, pk, format=None):
+    #     bill = self.get_bill(pk)
+    #     serializers = BillSerializer(bill)
+    #     return Response(serializers.data)
+
+
+
+
 
 @login_required(login_url='/accounts/login/')
 def merchants(request):
-    url = ('https://jpaye.herokuapp.com/api/BillsDetails')
+    url = ('http://127.0.0.1:8000/api/BillsDetails')
     response = requests.get(url)
     details = response.json()
     for detail in details:
@@ -93,12 +107,35 @@ def merchants(request):
         Industry = detail.get('Industry')
     return render(request, 'merchants.html', {'details': details})
 
-def create_bills_notify(request):
-    form = BillsForm(request.POST or None)
-    if form.is_valid():
-        form.save()
+
+@login_required(login_url='/accounts/login/')
+def new_bill(request):
+    current_user=request.user
+    if request.method=="POST":
+        form =BillsForm(request.POST,request.FILES)
+        if form.is_valid():
+            bill = form.save(commit = False)
+            bill.save()
+        
+        # if request.method=="POST":
+        # form =BillsForm(request.POST)
+        # if form.is_valid():
+        #     name = form.cleaned_data['customer_name']
+        #     email = form.cleaned_data['customer_email']
+
+        #     name = request.POST.get('customer_name')
+        #     email = request.POST.get('customer_email')
+        #     recipient = NewsLetterRecipients(name=name, email=email)
+        #     recipient.save()
+        #     send_welcome_email(name, email)
+
+        return HttpResponseRedirect('/index')
+    
+
+    else:
         form = BillsForm()
-    context = {
-        'form' : form
-    }
-    return render(request, 'bills.html', context)
+    
+    
+
+    return render(request,'bills/new-bill.html',{"form":form})
+
