@@ -1,69 +1,35 @@
-{% extends "registration/base.html" %}
 {% load bootstrap4 %}
-{% load static %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
 
-{% block content %}
-<div class="container">
-    <div class="row">
-        <!-- Empty div -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <div class="col-md-4 phone-section">
-        </div>
+    <title>Generate New Bill</title>
+    {{form.media}}
 
+    {% block styles %} 
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/news.css' %}"> 
+    {% endblock %}
 
+</head>
 
-        <div class="col-md-4 form-section">
-            {{form.media}}
+<body>
 
-            {% if form.errors %}
-            <p>Please enter correct value</p>
-            {% endif %}
+    <form action="{%url 'new-bill'%}" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
 
-            <div class="panel panel-default" style="margin-top:150px;">
+        {% bootstrap_form form%}
+        <input type="submit" class="btn btn-success btn-lg" value="Post">
+    </form>
 
-                <div class="panel-body">
+    {% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% bootstrap_javascript %} {% endblock %}
 
-                    <div class="text-center">
-                        <form action="{% url 'new-bill' %}" method="post" enctype="multipart/form-data">
+</body>
 
-                            {% csrf_token%}
-                            {% bootstrap_form form %}
-
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-primary login-button" value="Post">
-
-                            </div>
-                            <input type="hidden" name="next" value="/">
-
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-        <!-- Empty div -->
-        <div class="col-md-4"></div>
-    </div>
-
-</div>
-
-<!-- <style>
-    .panel {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) fixed;
-    }
-    p,
-    label,
-    a {
-        color: white;
-        font-size: 15px;
-    }
-    .panel-default {
-        border-color: inherit;
-    }
-    input {
-        text-align: center;
-        color: white;
-    }
-</style> -->
-{% endblock %}
+</html>
