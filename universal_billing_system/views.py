@@ -104,7 +104,17 @@ class GetBillDetails(APIView):
         return Response(serializers.data)
 
 
+def search_results(request):
+    if 'customer' in request.GET and request.GET["customer"]:
+        search_term = request.GET.get("customer")
+        searched_customers = Customer.search_by_title(search_term)
+        message = f"{search_term}"
 
+        return render(request, 'search.html',{"message":message,"customer": searched_customer})
+
+    else:
+        message = "You haven't searched for any term."
+        return render(request, 'search.html',{"message":message})
 
 
 @login_required(login_url='/accounts/login/')
