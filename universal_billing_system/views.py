@@ -9,6 +9,7 @@ from rest_framework import status
 import requests
 from .forms import *
 from django.http import HttpResponse,Http404,HttpResponseRedirect
+from .email import send_welcome_email
 
 
 # login
@@ -99,13 +100,27 @@ def new_bill(request):
         form =BillsForm(request.POST,request.FILES)
         if form.is_valid():
             bill = form.save(commit = False)
-            # business.owner = current_user
-            # business.neighbourhood = profile.neighbourhood
             bill.save()
+        
+        # if request.method=="POST":
+        # form =BillsForm(request.POST)
+        # if form.is_valid():
+        #     name = form.cleaned_data['customer_name']
+        #     email = form.cleaned_data['customer_email']
+
+        #     name = request.POST.get('customer_name')
+        #     email = request.POST.get('customer_email')
+        #     recipient = NewsLetterRecipients(name=name, email=email)
+        #     recipient.save()
+        #     send_welcome_email(name, email)
 
         return HttpResponseRedirect('/index')
+    
 
     else:
         form = BillsForm()
+    
+    
 
     return render(request,'bills/new-bill.html',{"form":form})
+

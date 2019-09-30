@@ -1,15 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField
 
 # Create your models here.
 class Industry(models.Model):
     name = models.CharField( blank=False,max_length= 40,default=None)
     def __str__(self):
         return self.name 
-# class Category(models.Model):
-#     name = models.CharField( blank=False,max_length= 40,default='JamboPay')
-#     def __str__(self):
-#         return self.name                    
+                          
 class Revstreams(models.Model):
     name = models.CharField( blank=False,max_length= 40,default=None)
     # Category = models.ManyToManyField(Category)
@@ -43,7 +41,9 @@ class Bills(models.Model):
 
     
 
-
+class NewsLetterRecipients(models.Model):
+    name = models.CharField(max_length = 30)
+    email = models.EmailField()
 
 
 
