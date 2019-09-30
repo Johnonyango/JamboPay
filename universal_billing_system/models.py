@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+
+
 class Industry(models.Model):
     name = models.CharField( blank=False,max_length= 40,default='JamboPay')
     def __str__(self):
@@ -26,13 +28,13 @@ class Merchant(models.Model):
     Revstreams = models.ManyToManyField(Revstreams)
     
     def __str__(self):
-        return self.name
+        return self.Business_name
 
 class Bills(models.Model):
     customer_name = models.CharField(max_length=255,blank=False)
     customer_phone = models.CharField(max_length=255,blank=False)
     customer_email = models.EmailField(max_length=255,blank=False)
-    Revstreams = models.CharField(max_length=255,blank=False)
+    Revstreams = models.ManyToManyField(Revstreams)
     narration = models.CharField(max_length=255,blank=False)
     amount = models.FloatField(blank=False)
     quantity = models.FloatField(blank=True)

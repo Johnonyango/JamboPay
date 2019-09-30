@@ -1,8 +1,12 @@
 {%extends "registration/base.html"%}
 
 {% load bootstrap4 %} {% block content %}
-<hr>
-<div class="card bg-dark text-white" style="margin-left:20%;margin-right:20%">
+<body>
+<br>
+<br>
+<br>
+<br>
+<div class="card text-white" style="margin-left:20%;margin-right:20%; background-color: #0074b6;">
        
   <div class="row">
     <!-- Empty div -->
@@ -24,10 +28,9 @@
             {% bootstrap_form form %}
   
               <div class="form-group">
-                <input type="submit" class="btn btn-primary btn-sm" value="Login"><br>
+                <input type="submit" style="color: #fff;" class="btn btn-primary btn-sm" value="Login"><br>
               </div>
                
-              <p> Don't have an account? <a href="/accounts/register">Register here</a>
                 <p>Did you forget password ? <a href="/accounts/password/change">Change Password</a> <br>
                     <a href="{% url 'home' %}">Go to Homepage</a>
               <input type="hidden" name="next" value="{{next}}">
@@ -40,4 +43,10 @@
       </div>
       </div>
       </div>
+    </body>
+      <style>
+        body{
+          background-image: url('https://wallpapercave.com/wp/wp2164078.jpg');
+        }
+      </style>
       {% endblock %}
