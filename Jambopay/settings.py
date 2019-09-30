@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'registration',
     'rest_framework',
     'authtools',
+    'jamboAdmin',
     'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',

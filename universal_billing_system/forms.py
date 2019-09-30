@@ -11,12 +11,6 @@ class LoginForm():
       class Meta:
               model = Merchant
 
-
-class GenerateBillForm(forms.Form):
-
-   class Meta:
-      model = GenerateBillForm
-
 class BillsForm(forms.ModelForm):
     class Meta:
         model = Bills

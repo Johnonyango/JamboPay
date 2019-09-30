@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 
 # Create your models here.
+
+
 class Industry(models.Model):
     name = models.CharField( blank=False,max_length= 40,default=None)
     def __str__(self):
@@ -66,8 +68,7 @@ class GenerateBillForm(models.Model):
     def __str__(self):
         return self.all
 
-
-
     def save_bill(self):
         self.save()
+ 
  

@@ -9,53 +9,59 @@
 </head>
 
 <body>
+  
+    <nav class="navbar navbar-expand-lg navbar-primary " id='mySidenav'>
+        <img width="15%" class="navbar-brand" src="https://www.jambopay.com/img/logo.png  ">
+      
+        <li class="nav-item active">
+          <a class="nav-link btn btn-outline-primary" href="{% url 'Index'%}">Home <span class="sr-only">(current)</span></a>
+        </li> &nbsp &nbsp
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline-primary" href="admin/login">Admin Panel</a>
+        </li>&nbsp &nbsp
+      
+        <li class="nav-item dropdown">
+          <a style="margin-top: 25%;" class="nav-link dropdown-toggle btn-outline-primary" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            BILLS
+          </a>&nbsp&nbsp
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="{%url 'new-bill'%}">Generate Bill</a>
+            <a class="dropdown-item" href="{% url 'upload'%}">Upload Bill</a>
+      <a class="dropdown-item" href="{{ 'merchants' }}">Bill Details</a>
+          </div>
+        </li>&nbsp&nbsp
+        {% if user.is_authenticated %}
+      
+        <div  class="searchform">
+          <form action="{% url 'search' %}" method="get">
+             {% csrf_token %}
+             <input type="text" name="name" id="names-search" placeholder="Search for customer">
+          </form>
+       </div>&nbsp&nbsp
 
-  <nav class="navbar navbar-expand-lg navbar-primary " id='mySidenav'>
-    <img width="15%" class="navbar-brand" src="https://www.jambopay.com/img/logo.png  ">
+        
+        <li style="float: right;"><a class='btn btn-outline-primary' href="/logout">Logout</a>
+        </li>
+        </li>
+      
+        {% else %}
+        <p>&nbsp &nbsp
+          <a class='btn btn-outline-primary' href="/accounts/login">Login</a>
+        </p>
+        {% endif %}
+      </nav>
+      <style>
+        nav {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          background-color: #fff;
+        }
+    
+        li {
+          list-style-type: none;
+        }
+      </style>
 
-    <li class="nav-item active">
-      <a class="nav-link btn btn-outline-primary" href="{% url 'Index'%}">Home <span
-          class="sr-only">(current)</span></a>
-    </li> &nbsp &nbsp
-    <li class="nav-item">
-      <a class="nav-link btn btn-outline-primary" href="templates/merchants.html">Admin Panel</a>
-    </li>&nbsp &nbsp
-
-    <li class="nav-item dropdown">
-      <a style="margin-top: 20%;" class="nav-link dropdown-toggle btn-outline-primary" href="#" id="navbarDropdownMenuLink"
-        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        BILLS
-      </a>&nbsp&nbsp
-      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{% url 'new-bill' %}">Generate Bill</a>
-        <a class="dropdown-item" href="{% url 'bills'%}">Upload Bill</a>
-        <a class="dropdown-item" href="{{ 'merchants' }}">Bill Details</a>
-      </div>
-    </li>&nbsp&nbsp
-    {% if user.is_authenticated %}
-
-    <li>
-      <a class="nav-link btn btn-outline-primary" href="accounts">Account</a>
-    </li>&nbsp &nbsp
-    <li style="float: right;"><a class='btn btn-outline-primary' href="/logout">Logout</a>
-    </li>
-    </li>
-
-    {% else %}
-    <p>&nbsp &nbsp
-      <a class='btn btn-outline-primary' href="/accounts/login">Login</a>
-    </p>
-    {% endif %}
-  </nav>
-  <style>
-    nav {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      background-color: #fff;
-    }
-
-    li {
-      list-style-type: none;
-    }
-  </style>
+ 
