@@ -8,7 +8,7 @@ from .permissions import IsAdminOrReadOnly
 from rest_framework import status
 from . models import Merchant
 import requests
-# from .forms import *
+from .forms import *
 
 
 # login
