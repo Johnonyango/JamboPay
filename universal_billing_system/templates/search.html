@@ -1,34 +1,41 @@
-{%extends 'all-news/base.html'%} 
+
+{% include "nav.html" %}
 {% block content %}
-<div class="container">
 
-  <div class="row">
-    {% if customer%}
-      <h2 style="color: #fff;">Found {{ customer|length }} of searched term {{message}}</h2>
-    {% else %}
-      <h2 style="color: #fff;"> Found 0 results for the search term. {{message}}</h2>
-    {% endif %}
+   <div class="search-notif">
+      {% if projects %}
+         <h1>Your search for <span>{{ searched }}</span> returned:</h1>  
+      {% else %}
+         <h1>There are no search results for <span>{{ searched }}</span></h1>
+      {% endif %}
+   </div>
+   
+   <div class="project-pane">
+      {% for names in customer %}
+         <a href="{% url 'project_view' prjct.id %}">
+            <div class="project-card">
+               <div class="image">
+                  <img src="{{ prjct.img.url }}" alt="{{ prjct.name }}">
+               </div>
+               <div class="project-desc">
+                  <div class="author">
+                     <div class="avatar-sm">
+                        <img src="{{ prjct.author.avatar.url }}" alt="">
+                     </div>
+                     <p>{{ prjct.author.user.first_name }} {{ prjct.author.user.last_name }}</p>
+                  </div>
+                  <h4>{{ prjct.name }}</h4>
+                  <div class="languages">
+                     {% for lng in prjct.language.all  %}
+                       <p>#{{ lng.language }}</p>
+                     {% endfor %}
+                  </div>
 
-  </div>
+               </div>        
+            </div>        
+         </a>
+      {% endfor %}
+   </div>
 
-  <div class="row">
-
-  {% if customers %}
-    {% for customer in customers %}
-      <div class="col-sm-6 col-md-3">
-          <h1 style="color: rgb(146, 226, 247);">{{customer.title}}</h1>
-      </div>
-      </div>
-      <br>
-      <div class="row">
-          
-          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">           
-              <h4 style="font-style: italic; font-size: 15px; color: #fff;" class="text-left hb">{{customer.details}}</h4>
-          </div>
-          
-
-    {% endfor %}
-  {% endif %}
-  </div>
-</div>
-{% endblock %}
+  
+{% endblock content %}

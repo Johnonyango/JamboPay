@@ -66,8 +66,7 @@ class GenerateBillForm(models.Model):
     def __str__(self):
         return self.all
 
-
-
     def save_bill(self):
         self.save()
+ 
  

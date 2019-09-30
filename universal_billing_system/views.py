@@ -64,6 +64,22 @@ class MerchantList(APIView):
         serializers = MerchantSerializer(all_merchants, many=True)
         return Response(serializers.data)
     
+def search(request):
+   
+   if 'name_search' in request.GET and request.GET["name_search"]:
+      searched = request.GET.get("name_search")
+      if searched:
+         customers = Customer.objects.filter(name=searched).all()
+         title = f"You searched for {searched}"
+
+   context = {
+      'customers': customers,
+      'name': name,
+      'searched': searched
+   }
+
+   return render(request, 'search.html', context)
+
 class RevenueStreamsList(APIView):
     def get(self, request, format=None):
         permission_classes = (IsAdminOrReadOnly,)
@@ -103,18 +119,6 @@ class GetBillDetails(APIView):
         serializers = BillSerializer(bill)
         return Response(serializers.data)
 
-
-def search_results(request):
-    if 'customer' in request.GET and request.GET["customer"]:
-        search_term = request.GET.get("customer")
-        searched_customers = Customer.search_by_title(search_term)
-        message = f"{search_term}"
-
-        return render(request, 'search.html',{"message":message,"customers": searched_customers})
-
-    else:
-        message = "You haven't searched for any term."
-        return render(request, 'search.html',{"message":message})
 
 
 @login_required(login_url='/accounts/login/')
@@ -157,11 +161,8 @@ def new_bill(request):
 
         return HttpResponseRedirect('/index')
     
-
     else:
         form = BillsForm()
     
-    
-
     return render(request,'bills/new-bill.html',{"form":form})
 

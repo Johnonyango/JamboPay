@@ -20,6 +20,7 @@ urlpatterns=[
     url(r'^index/$', views.index, name='home'),
     url(r'^bills/$', views.bills, name='bills'),
     url(r'^new/bill/$', views.new_bill, name='new-bill'),
+    url('^search/$',views.search,name="search"),
 
     #email
 ]
