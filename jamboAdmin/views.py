@@ -7,6 +7,10 @@ from rest_framework import status
 import requests
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 
+#
+def indexone(request):
+    return render(request, 'indexone.html')
+
 @login_required(login_url='/accounts/login/')
 def merchants(request):
     url = ('http://127.0.0.1:8000/api/GetMerchants')
