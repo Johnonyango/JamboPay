@@ -9,6 +9,7 @@ from rest_framework import status
 import requests
 from .forms import *
 from django.http import HttpResponse, Http404, HttpResponseRedirect
+from .email import *
 
 
 def login(request):
@@ -151,7 +152,18 @@ def new_bill(request):
     else:
         form = BillsForm()
     
-    
-
     return render(request,'bills/new-bill.html',{"form":form})
 
+def notification(request):
+    if request.method == 'POST':
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            recipient = NewsLetterRecipients(name = name,email =email)
+            recipient.save()
+            send_notification(name = name, email = email)
+
+    else:
+        form = NoteForm()
+    return render(request, 'note.html', {'form': form})

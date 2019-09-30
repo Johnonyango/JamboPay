@@ -44,8 +44,8 @@ class Bills(models.Model):
     
 
 class NewsLetterRecipients(models.Model):
-    name = models.CharField(max_length = 30)
-    email = models.EmailField()
+    name = models.CharField(max_length = 30, blank=False, null=False)
+    email = models.EmailField(blank=False, null=False)
 
 
 
