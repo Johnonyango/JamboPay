@@ -7,12 +7,11 @@ from .serializer import *
 from .permissions import IsAdminOrReadOnly
 from rest_framework import status
 import requests
-import openpyxl
-
-# from .forms import *
 from .forms import *
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from .email import send_welcome_email
+import openpyxl
+
 
 
 # login
@@ -125,6 +124,38 @@ def merchants(request):
         Pay_bill = detail.get('JP_paybill')
         Industry = detail.get('Industry')
     return render(request, 'merchants.html', {'details': details})
+    return render(request, 'customers.html', {'details': details})
+
+@login_required(login_url='/accounts/login/')
+def new_bill(request):
+    current_user=request.user
+    if request.method=="POST":
+        form =BillsForm(request.POST,request.FILES)
+        if form.is_valid():
+            bill = form.save(commit = False)
+            bill.save()
+        
+        # if request.method=="POST":
+        # form =BillsForm(request.POST)
+        # if form.is_valid():
+        #     name = form.cleaned_data['customer_name']
+        #     email = form.cleaned_data['customer_email']
+
+        #     name = request.POST.get('customer_name')
+        #     email = request.POST.get('customer_email')
+        #     recipient = NewsLetterRecipients(name=name, email=email)
+        #     recipient.save()
+        #     send_welcome_email(name, email)
+
+        return HttpResponseRedirect('/index')
+    
+
+    else:
+        form = BillsForm()
+    
+    
+
+    return render(request,'bills/new-bill.html',{"form":form})
 
 
 
@@ -163,38 +194,4 @@ def upload(request):
                 print(cell.value)
             excel_data.append(row_data)
 
-        return render(request, 'upload.html', {"excel_data":excel_data})  
-    return render(request, 'customers.html', {'details': details})
-
-
-@login_required(login_url='/accounts/login/')
-def new_bill(request):
-    current_user=request.user
-    if request.method=="POST":
-        form =BillsForm(request.POST,request.FILES)
-        if form.is_valid():
-            bill = form.save(commit = False)
-            bill.save()
-        
-        # if request.method=="POST":
-        # form =BillsForm(request.POST)
-        # if form.is_valid():
-        #     name = form.cleaned_data['customer_name']
-        #     email = form.cleaned_data['customer_email']
-
-        #     name = request.POST.get('customer_name')
-        #     email = request.POST.get('customer_email')
-        #     recipient = NewsLetterRecipients(name=name, email=email)
-        #     recipient.save()
-        #     send_welcome_email(name, email)
-
-        return HttpResponseRedirect('/index')
-    
-
-    else:
-        form = BillsForm()
-    
-    
-
-    return render(request,'bills/new-bill.html',{"form":form})
-
+        return render(request, 'upload.html', {"excel_data":excel_data})

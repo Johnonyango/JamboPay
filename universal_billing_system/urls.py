@@ -10,6 +10,8 @@ urlpatterns=[
     url(r'^index/$', views.index, name='home'),
     url(r'^bills/$', views.bills, name='bills'),
     url(r'^upload/$', views.upload, name='upload'),
+    url(r'^new/bill/$', views.new_bill, name='new-bill'),
+
 
 
 
@@ -21,11 +23,7 @@ urlpatterns=[
     url(r'api/GetBillDetails/bill-id/(?P<pk>[0-9]+)/$',views.GetBillDetails.as_view()),
 
     #moreurls
-    url(r'^index/$', views.index, name='home'),
-    url(r'^bills/$', views.bills, name='bills'),
-    url(r'^new/bill/$', views.new_bill, name='new-bill'),
-
-    #email
+   
 ]
 
 
