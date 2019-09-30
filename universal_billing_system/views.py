@@ -75,7 +75,10 @@ class BillsDetails(APIView):
         all_bills = Bills.objects.all()
         serializers = BillSerializer(all_bills, many=True)
         return Response(serializers.data)
-    
+
+
+class GetBillDetails(APIView):
+
     def get_bill(self, pk):
         try:
             return Bills.objects.get(pk=pk)
@@ -105,7 +108,7 @@ def merchants(request):
         Town = detail.get('Town')
         Pay_bill = detail.get('JP_paybill')
         Industry = detail.get('Industry')
-    return render(request, 'merchants.html', {'details': details})
+    return render(request, 'customers.html', {'details': details})
 
 
 @login_required(login_url='/accounts/login/')
