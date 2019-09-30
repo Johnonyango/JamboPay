@@ -9,7 +9,6 @@ from rest_framework import status
 from . models import Merchant
 import requests
 from .forms import GenerateBillForm
-# from .forms import *
 
 
 # login
@@ -30,6 +29,19 @@ def logout_view(request):
    logout(request)
    return redirect('login')
 
+
+@login_required
+def profile(request):
+
+   user = request.user
+   images = Image.objects.filter(author=user.profile)
+
+   context = {
+      'user': user,
+      'images': images
+   }
+
+   return render(request, 'timeline/profile.html', context)
 
 # Create your views here.
 # def index(request):

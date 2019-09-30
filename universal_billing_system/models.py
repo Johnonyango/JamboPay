@@ -36,3 +36,5 @@ class Bills(models.Model):
     narration = models.CharField(max_length=255,blank=False)
     amount = models.FloatField(blank=False)
     quantity = models.FloatField(blank=True)
+
+ 

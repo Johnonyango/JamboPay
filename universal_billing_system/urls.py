@@ -18,6 +18,7 @@ urlpatterns=[
     #moreurls
     url(r'^index/$', views.index, name='home'),
     url(r'^bills/$', views.bills, name='bills'),
+    url(r'^generate/$', views.generate_bill, name='generate'),
 ]
 
 
