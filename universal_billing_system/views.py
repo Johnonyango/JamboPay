@@ -75,6 +75,21 @@ class BillsDetails(APIView):
         all_bills = Bills.objects.all()
         serializers = BillSerializer(all_bills, many=True)
         return Response(serializers.data)
+    
+    def get_bill(self, pk):
+        try:
+            return Bills.objects.get(pk=pk)
+        except Bills.DoesNotExist:
+            return Http404
+
+    def get(self, request, pk, format=None):
+        bill = self.get_bill(pk)
+        serializers = BillSerializer(bill)
+        return Response(serializers.data)
+
+
+
+
 
 @login_required(login_url='/accounts/login/')
 def merchants(request):

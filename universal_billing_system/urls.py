@@ -14,6 +14,7 @@ urlpatterns=[
     url(r'^api/GetRevenueStreams/$', views.RevenueStreamsList.as_view()),
     url(r'^api/GenerateBill/$', views.GenerateBill.as_view()),
     url(r'^api/BillsDetails/$', views.BillsDetails.as_view()),
+    url(r'api/GetBillDetails/bill-id/(?P<pk>[0-9]+)/$',views.BillsDetails.as_view()),
 
     #moreurls
     url(r'^index/$', views.index, name='home'),
