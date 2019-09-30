@@ -11,7 +11,12 @@ class LoginForm():
    	class Meta:
    	        model = Merchant
          
-
+# class SignupForm():
+#     email = forms.EmailField(max_length=200, help_text='Required')
+#     class Meta:
+#         model = Merchant
+#         fields = ('username', 'email', 'password1', 'password2')
+        
 
 
 class BillsForm(forms.ModelForm):
