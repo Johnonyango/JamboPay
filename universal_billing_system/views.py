@@ -110,7 +110,7 @@ def search_results(request):
         searched_customers = Customer.search_by_title(search_term)
         message = f"{search_term}"
 
-        return render(request, 'search.html',{"message":message,"customer": searched_customer})
+        return render(request, 'search.html',{"message":message,"customers": searched_customers})
 
     else:
         message = "You haven't searched for any term."
