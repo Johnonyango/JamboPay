@@ -80,7 +80,6 @@ class MerchantList(APIView):
         return Response(serializers.data)
     
 def search(request):
-   
    if 'name_search' in request.GET and request.GET["name_search"]:
       searched = request.GET.get("name_search")
       if searched:
