@@ -8,3 +8,5 @@ class BillsForm(forms.ModelForm):
         widgets = {
             'Revstreams': forms.CheckboxSelectMultiple(),
         }
+        exclude = ['status']
+
