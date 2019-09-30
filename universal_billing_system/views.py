@@ -138,7 +138,5 @@ def new_bill(request):
     else:
         form = BillsForm()
     
-    
-
     return render(request,'bills/new-bill.html',{"form":form})
 
