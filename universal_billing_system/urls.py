@@ -14,11 +14,14 @@ urlpatterns=[
     url(r'^api/GetRevenueStreams/$', views.RevenueStreamsList.as_view()),
     url(r'^api/GenerateBill/$', views.GenerateBill.as_view()),
     url(r'^api/BillsDetails/$', views.BillsDetails.as_view()),
+    url(r'api/GetBillDetails/bill-id/(?P<pk>[0-9]+)/$',views.GetBillDetails.as_view()),
 
     #moreurls
     url(r'^index/$', views.index, name='home'),
     url(r'^bills/$', views.bills, name='bills'),
-    url(r'^generate/$', views.generate_bill, name='generate'),
+    url(r'^new/bill/$', views.new_bill, name='new-bill'),
+
+    #email
 ]
 
 

@@ -19,6 +19,17 @@ from decouple import config,Csv
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+# Email configurations remember to install python-decouple
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -137,14 +148,6 @@ else:
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'jambopay',
-#         'USER': 'mannuh',
-#         'PASSWORD':'Emmah@7127'
-#     }
-# }
 
 
 # Password validation
@@ -171,13 +174,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
+
 
 
 
