@@ -80,19 +80,16 @@ class MerchantList(APIView):
         return Response(serializers.data)
     
 def search(request):
-   if 'name_search' in request.GET and request.GET["name_search"]:
-      searched = request.GET.get("name_search")
-      if searched:
-         customers = Customer.objects.filter(name=searched).all()
-         title = f"You searched for {searched}"
+    if 'name_search' in request.GET and request.GET["name_search"]:
+        search_term = request.GET.get("name_search")
+        searched_articles = Article.search_by_title(search_term)
+        message = f"{search_term}"
 
-   context = {
-      'customers': customers,
-      'name': name,
-      'searched': searched
-   }
+        return render(request, 'search.html',{"message":message,"articles": searched_articles})
 
-   return render(request, 'search.html', context)
+    else:
+        message = "You haven't searched for any term."
+        return render(request, 'search.html',{"message":message})
 
 class RevenueStreamsList(APIView):
     def get(self, request, format=None):

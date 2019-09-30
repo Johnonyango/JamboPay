@@ -1,14 +1,14 @@
-
+{% load bootstrap4 %}
 {% include "nav.html" %}
 {% block content %}
-
-   <div class="search-notif">
-      {% if projects %}
-         <h1>Your search for <span>{{ searched }}</span> returned:</h1>  
+<div class="row">
+      {% if name_search%}
+        <h2 style="color: #fff;">Found {{ name_serach|length }} of searched term {{message}}</h2>
       {% else %}
-         <h1>There are no search results for <span>{{ searched }}</span></h1>
+        <h2 style="color: #fff;"> Found 0 names for the search term. {{message}}</h2>
       {% endif %}
-   </div>
+  
+    </div>
    
    <table class="table table-striped table-primary">
       <thead>
@@ -25,9 +25,11 @@
     
         </tr>
       </thead>
+
+      {%if name_search%}
+      {% for name_search in nme%}
       <tbody>
-        {% for customers in customer%}
-    
+        
         <tr>
           <td>{{detail.id}}</td>
           <td>{{detail.customer_name}}</td>
@@ -40,8 +42,21 @@
           <td>{{detail.post_date}}</td>
       </tr>
       {% endfor %}
+      {% endif %}
       </tbody>
     </table>
 
-  
 {% endblock content %}
+
+<style>
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #fff;
+  }
+
+  li {
+    list-style-type: none;
+  }
+</style>
