@@ -8,7 +8,9 @@ from .permissions import IsAdminOrReadOnly
 from rest_framework import status
 from . models import Merchant
 import requests
-from .forms import GenerateBillForm
+from .forms import *
+
+# from .forms import GenerateBillForm
 
 
 # login
@@ -106,10 +108,13 @@ def merchants(request):
 
 def generate_bill(request):
     if request.method == 'POST':
-        form = GenerateBillsForm(request.POST)
+        form = GenerateBillForm(request.POST)
         if form.is_valid():
-            pass  # does nothing, just trigger the validation
+            
+            generate_bill = form.save()
+            generate_bill.save()
+        return redirect ('Index')
     else:
-        form = GenerateBillsForm()
+        form = GenerateBillForm()
     return render(request, 'generate_bill.html', {'form': form})
 

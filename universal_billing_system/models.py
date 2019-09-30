@@ -37,4 +37,33 @@ class Bills(models.Model):
     amount = models.FloatField(blank=False)
     quantity = models.FloatField(blank=True)
 
+
+    def __str__(self):
+        return self.customer_name
+
+
+
+    def save_bill(self):
+        self.save()  
+class GenerateBillForm(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField(max_length=254)
+    phone = models.CharField(max_length=30)
+    RevenueStreamID = models.CharField(max_length=30)
+    narration = models.CharField(
+        max_length=2000,
+        # widget=models.Textarea(),
+        help_text='Write here your message!'
+    )
+  
+    amount = models.CharField(max_length=30)
+    Quantity = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.all
+
+
+
+    def save_bill(self):
+        self.save()
  
