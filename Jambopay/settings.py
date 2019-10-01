@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'authtools',
     'jamboAdmin',
+    'import_export',
     'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
