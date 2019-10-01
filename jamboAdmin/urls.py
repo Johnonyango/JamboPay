@@ -6,7 +6,7 @@ from django.contrib import admin
 
 urlpatterns=[
     url(r'^$',views.indexone,name='indexone'),
-    # url(r'^signup/$', views.signup, name='signup'),
+    url(r'^signup/$', views.signup, name='signup'),
 
 ]
 
