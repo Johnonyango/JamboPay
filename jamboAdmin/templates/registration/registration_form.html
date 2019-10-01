@@ -10,7 +10,29 @@
            {% if form.errors %}
            <p>Some information might be incorrect</p>
            {% endif %}
-           <div class="text-center">
+           <div class="signup-fields">
+                <div class="section">
+                    <div class="mylogo">
+                        <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2000px-Instagram_logo.svg.png"  class="mylogo"> -->
+                    </div>
+                    <div class="form-section" id="register">
+                        <form method="post">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary btn-sm" value="Sign up">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="section">
+                    <p class="log forgot">Have an account? <a href="/accounts/login/">Log in</a></p>
+                </div>
+            </div>
+
+
+
+           <!-- <div class="text-center">
                <div class="panel panel-default" style="margin-top:200px;">
                    <div class="panel-body">
                        <form action="/accounts/register/" method="post">
@@ -23,7 +45,7 @@
                        </form>
                    </div>
                </div>
-           </div>
+           </div> -->
            <div class="panel panel-default">
                <div class="panel-body text-center">
                    <p>Have an account? <span><a class="" href="/accounts/login">Login</a></span></p>
