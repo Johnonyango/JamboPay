@@ -22,10 +22,7 @@ urlpatterns=[
     url(r'^api/BillsDetails/$', views.BillsDetails.as_view()),
     url(r'api/GetBillDetails/bill-id/(?P<pk>[0-9]+)/$',views.GetBillDetails.as_view()),
     url(r'^api/GetPayments/$', views.GetPayments.as_view()),
-
-
     url(r'^notification/$', views.notification, name='noteform'),
-
     #moreurls
    
 ]
