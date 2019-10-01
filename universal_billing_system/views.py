@@ -123,6 +123,7 @@ def merchants(request):
         Town = detail.get('Town')
         Pay_bill = detail.get('JP_paybill')
         Industry = detail.get('Industry')
+    return render(request, 'merchants.html', {'details': details})
     return render(request, 'customers.html', {'details': details})
 
 @login_required(login_url='/accounts/login/')

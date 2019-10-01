@@ -26,6 +26,8 @@ urlpatterns=[
 
     url(r'^notification/$', views.notification, name='noteform'),
 
+    #moreurls
+   
 ]
 
 
