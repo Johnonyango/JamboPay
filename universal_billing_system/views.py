@@ -8,8 +8,9 @@ from .permissions import IsAdminOrReadOnly
 from rest_framework import status
 import requests
 from .forms import *
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponse,Http404,HttpResponseRedirect
 from .email import *
+import openpyxl
 
 
 def login(request):
@@ -122,6 +123,7 @@ def merchants(request):
         Town = detail.get('Town')
         Pay_bill = detail.get('JP_paybill')
         Industry = detail.get('Industry')
+    return render(request, 'merchants.html', {'details': details})
     return render(request, 'customers.html', {'details': details})
 
 
@@ -167,6 +169,66 @@ def notification(request):
             recipient.save()
             send_notification(name = name, email = email)
 
+    else:
+        excel_file = request.FILES["excel_file"]
+
+        # you may put validations here to check extension or file size
+
+        wb = openpyxl.load_workbook(excel_file)
+
+        # getting all sheets
+        sheets = wb.sheetnames
+        # print(sheets)
+
+        # getting a particular sheet
+        worksheet = wb["Sheet1"]
+        # print(worksheet)
+
+        # getting active sheet
+        active_sheet = wb.active
+        # print(active_sheet)
+
+        # reading a cell
+        print(worksheet["A1"].value)
+
+        excel_data = list()
+        # iterating over the rows and
+        # getting value from each cell in row
+        for row in worksheet.iter_rows():
+            row_data = list()
+            for cell in row:
+                row_data.append(str(cell.value))
+                print(cell.value)
+            excel_data.append(row_data)
+
+        return render(request, 'upload.html', {"excel_data":excel_data})
+
+
+
+class GetPayments(APIView):
+    def get(self, request, format=None):
+        all_bills = Payments.objects.all()
+        serializers = PaymentsSerializer(all_bills, many=True)
+        return Response(serializers.data)
+    def post(self, request, format=None):
+        serializers = PaymentsSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        permission_classes = (IsAdminOrReadOnly,)
+
+
+def notification(request):
+    if request.method == 'POST':
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            recipient = NewsLetterRecipients(name = name,email =email)
+            recipient.save()
+            send_notification(name = name, email = email)
     else:
         form = NoteForm()
     return render(request, 'note.html', {'form': form})
