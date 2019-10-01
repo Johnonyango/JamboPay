@@ -137,14 +137,17 @@ def new_bill(request):
         # if request.method=="POST":
         # form =BillsForm(request.POST)
         # if form.is_valid():
-        #     name = form.cleaned_data['customer_name']
-        #     email = form.cleaned_data['customer_email']
+            # name = form.cleaned_data['customer_name']
+            # email = form.cleaned_data['customer_email']
 
         #     name = request.POST.get('customer_name')
         #     email = request.POST.get('customer_email')
         #     recipient = NewsLetterRecipients(name=name, email=email)
         #     recipient.save()
         #     send_welcome_email(name, email)
+            recipient = NewsLetterRecipients(name = name,email =email)
+            send_notification(name = name, email = email)
+
 
         return HttpResponseRedirect('/index')
     
