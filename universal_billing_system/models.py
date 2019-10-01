@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 
 # Create your models here.
+
+
 class Industry(models.Model):
     name = models.CharField( blank=False,max_length= 40,default=None)
     def __str__(self):
@@ -42,8 +44,8 @@ class Bills(models.Model):
     
 
 class NewsLetterRecipients(models.Model):
-    name = models.CharField(max_length = 30)
-    email = models.EmailField()
+    name = models.CharField(max_length = 30, blank=False, null=False)
+    email = models.EmailField(blank=False, null=False)
 
 
 

@@ -7,6 +7,12 @@ from django.contrib import admin
 urlpatterns=[
     url(r'^$',views.index,name='Index'),
     url(r'^merchants/$',views.merchants,name='merchants'),
+    url(r'^index/$', views.index, name='home'),
+    url(r'^bills/$', views.bills, name='bills'),
+    url(r'^upload/$', views.upload, name='upload'),
+    url(r'^new/bill/$', views.new_bill, name='new-bill'),
+
+
 
 
     #API Endpoints
@@ -14,14 +20,10 @@ urlpatterns=[
     url(r'^api/GetRevenueStreams/$', views.RevenueStreamsList.as_view()),
     url(r'^api/GenerateBill/$', views.GenerateBill.as_view()),
     url(r'^api/BillsDetails/$', views.BillsDetails.as_view()),
-    url(r'api/GetBillDetails/bill-id/(?P<pk>[0-9]+)/$',views.GetBillDetails.as_view()),
+    url(r'^notification/$', views.notification, name='noteform'),
 
-    #moreurls
-    url(r'^index/$', views.index, name='home'),
-    url(r'^bills/$', views.bills, name='bills'),
-    url(r'^new/bill/$', views.new_bill, name='new-bill'),
+    # url(r'api/GetBillDetails/bill-id/(?P<pk>[0-9]+)/$',views.BillsDetails.as_view()),
 
-    #email
 ]
 
 

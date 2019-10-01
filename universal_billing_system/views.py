@@ -8,11 +8,10 @@ from .permissions import IsAdminOrReadOnly
 from rest_framework import status
 import requests
 from .forms import *
-from django.http import HttpResponse,Http404,HttpResponseRedirect
-from .email import send_welcome_email
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+from .email import *
 
 
-# login
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -37,9 +36,22 @@ def logout_view(request):
 #     response = requests.get(url)
 #     print(response)
    
+# def index(request):
+#     return render(request, 'index.html')
+
 def index(request):
     return render(request, 'index.html')
-       
+
+
+def upload(request):
+    if request.method == "POST":
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            filehandle = request.FILES['file']
+            return excel.make_response(filehandle.get_sheet(), "csv")
+    else:
+        form = UploadFileForm()
+    return render_to_response('index.html', {'form': form}, context_instance=RequestContext(request))      
 
 def bills(request):
     return render(request, 'bills.html')
@@ -58,10 +70,12 @@ class RevenueStreamsList(APIView):
         serializers = RevenueStreamsSerializer(all_revenue_streams, many=True)
         return Response(serializers.data)
 class GenerateBill(APIView):
+    pass
     # def get(self, request, format=None):
     #     all_bills = Bills.objects.all()
     #     serializers = GenerateBillSerializer(all_bills, many=True)
     #     return Response(serializers.data)
+    
     def post(self, request, format=None):
         serializers = BillSerializer(data=request.data)
         if serializers.is_valid():
@@ -123,14 +137,17 @@ def new_bill(request):
         # if request.method=="POST":
         # form =BillsForm(request.POST)
         # if form.is_valid():
-        #     name = form.cleaned_data['customer_name']
-        #     email = form.cleaned_data['customer_email']
+            # name = form.cleaned_data['customer_name']
+            # email = form.cleaned_data['customer_email']
 
         #     name = request.POST.get('customer_name')
         #     email = request.POST.get('customer_email')
         #     recipient = NewsLetterRecipients(name=name, email=email)
         #     recipient.save()
         #     send_welcome_email(name, email)
+            recipient = NewsLetterRecipients(name = name,email =email)
+            send_notification(name = name, email = email)
+
 
         return HttpResponseRedirect('/index')
     
@@ -140,3 +157,16 @@ def new_bill(request):
     
     return render(request,'bills/new-bill.html',{"form":form})
 
+def notification(request):
+    if request.method == 'POST':
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            recipient = NewsLetterRecipients(name = name,email =email)
+            recipient.save()
+            send_notification(name = name, email = email)
+
+    else:
+        form = NoteForm()
+    return render(request, 'note.html', {'form': form})
