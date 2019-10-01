@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import *
-
+from import_export.admin import ImportExportModelAdmin
 
 
 class MerchantAdmin(admin.ModelAdmin):
@@ -18,6 +18,10 @@ class BillsAdmin(admin.ModelAdmin):
 admin.site.register(Merchant);
 admin.site.register(Industry);
 admin.site.register(Revstreams);
-admin.site.register(Bills);
+# admin.site.register(Bills);
 admin.site.register(Payments);
+@admin.register(Bills)
+class viewAdmin(ImportExportModelAdmin):
+    exclude = ('id',)
+
 
