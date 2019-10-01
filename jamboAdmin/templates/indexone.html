@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin</title>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-primary " id='mySidenav'>
+                <img width="15%" class="navbar-brand" src="https://www.jambopay.com/img/logo.png  ">
+              
+                <li class="nav-item active">
+                  <a class="nav-link btn btn-outline-primary" href="{% url 'Index'%}">Home <span class="sr-only"></span></a>
+                </li> &nbsp &nbsp
+
+
+                <li class="nav-item">
+                        <a class="nav-link btn btn-outline-primary" href="/accounts/register/">All Merchants</a>
+                      </li>&nbsp &nbsp
+                    
+
+
+                <li class="nav-item">
+                  <a class="nav-link btn btn-outline-primary" href="/accounts/register/">Register New merchants</a>
+                </li>&nbsp &nbsp
+              
+                <!-- <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle btn-outline-primary" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    BILLS
+                  </a>&nbsp&nbsp -->
+                  <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{% url 'upload'%}">Upload Bill</a>
+                    <a class="dropdown-item" href="{% url 'new-bill' %}">Generate Bill</a> -->
+                    <!-- <a class="dropdown-item" href="{% url 'bills'%}">Upload Bill</a> -->
+                    <!-- <a class="dropdown-item" href="#">Generate Bill</a> -->
+                    <!-- <a class="dropdown-item" href="{% url 'upload'%}">Upload Bill</a> -->
+              <!-- <a class="dropdown-item" href="{{ 'merchants' }}">Bill Details</a> -->
+                  </div>
+                </li>&nbsp&nbsp
+                {% if user.is_authenticated %}
+              
+                
+                <!-- <li style="float: right;"><a class='btn btn-outline-primary' href="{% url 'indexone' %}">JamboAdmin</a> -->
+                </li>
+                <li>
+                  <li style="float: right;"><a class='btn btn-outline-primary' href="/logout">Logout</a>
+        
+                </li>
+                </li>
+                {% endif %}
+              
+
+
+                <style>
+                        nav {
+                          display: flex;
+                          flex-direction: row;
+                          justify-content: space-around;
+                        }
+                      
+                        li {
+                          list-style-type: none;
+                        }
+                      </style>
+
+
+
+
+
+
+
+
+    
+</body>
+</html>
