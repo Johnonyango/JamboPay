@@ -60,6 +60,8 @@ def bills(request):
     return render(request, 'bills.html')
 
 class MerchantList(APIView):
+    permission_classes = (IsAuthenticated,)            # <-- And here
+
     def get(self, request, format=None):
         permission_classes = (IsAdminOrReadOnly,)
         all_merchants = Merchant.objects.all()
@@ -67,12 +69,16 @@ class MerchantList(APIView):
         return Response(serializers.data)
     
 class RevenueStreamsList(APIView):
+    permission_classes = (IsAuthenticated,)            # <-- And here
+
     def get(self, request, format=None):
         permission_classes = (IsAdminOrReadOnly,)
         all_revenue_streams = Revstreams.objects.all()
         serializers = RevenueStreamsSerializer(all_revenue_streams, many=True)
         return Response(serializers.data)
 class GenerateBill(APIView):
+    permission_classes = (IsAuthenticated,)            # <-- And here
+
     # def get(self, request, format=None):
     #     all_bills = Bills.objects.all()
     #     serializers = GenerateBillSerializer(all_bills, many=True)
@@ -83,7 +89,6 @@ class GenerateBill(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-        permission_classes = (IsAdminOrReadOnly,)
 class BillsDetails(APIView):
     permission_classes = (IsAuthenticated,)            # <-- And here
     def get(self, request, format=None):
@@ -94,7 +99,7 @@ class BillsDetails(APIView):
 
 
 class GetBillDetails(APIView):
-
+    permission_classes = (IsAuthenticated,)            # <-- And here
     def get_bill(self, pk):
         try:
             return Bills.objects.get(pk=pk)
@@ -105,7 +110,21 @@ class GetBillDetails(APIView):
         bill = self.get_bill(pk)
         serializers = BillSerializer(bill)
         return Response(serializers.data)
+class GetPayments(APIView):
+    permission_classes = (IsAuthenticated,)            # <-- And here
 
+    def get(self, request, format=None):
+        all_bills = Payments.objects.all()
+        serializers = PaymentsSerializer(all_bills, many=True)
+        return Response(serializers.data)
+    def post(self, request, format=None):
+        serializers = PaymentsSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        permission_classes = (IsAdminOrReadOnly,)
 
 
 
@@ -199,19 +218,7 @@ def upload(request):
 
 
 
-class GetPayments(APIView):
-    def get(self, request, format=None):
-        all_bills = Payments.objects.all()
-        serializers = PaymentsSerializer(all_bills, many=True)
-        return Response(serializers.data)
-    def post(self, request, format=None):
-        serializers = PaymentsSerializer(data=request.data)
-        if serializers.is_valid():
-            serializers.save()
-            return Response(serializers.data, status=status.HTTP_201_CREATED)
 
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-        permission_classes = (IsAdminOrReadOnly,)
 
 
 def notification(request):
