@@ -11,7 +11,7 @@ from .forms import *
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from .email import *
 import openpyxl
-
+from rest_framework.permissions import IsAuthenticated  # <-- Here
 
 
 # login
@@ -73,6 +73,8 @@ def bills(request):
     return render(request, 'bills.html')
 
 class MerchantList(APIView):
+    permission_classes = (IsAuthenticated,)            # <-- And here
+
     def get(self, request, format=None):
         permission_classes = (IsAdminOrReadOnly,)
         all_merchants = Merchant.objects.all()
@@ -92,12 +94,16 @@ def search(request):
         return render(request, 'search.html',{"message":message})
 
 class RevenueStreamsList(APIView):
+    permission_classes = (IsAuthenticated,)            # <-- And here
+
     def get(self, request, format=None):
         permission_classes = (IsAdminOrReadOnly,)
         all_revenue_streams = Revstreams.objects.all()
         serializers = RevenueStreamsSerializer(all_revenue_streams, many=True)
         return Response(serializers.data)
 class GenerateBill(APIView):
+    permission_classes = (IsAuthenticated,)            # <-- And here
+
     # def get(self, request, format=None):
     #     all_bills = Bills.objects.all()
     #     serializers = GenerateBillSerializer(all_bills, many=True)
@@ -108,8 +114,8 @@ class GenerateBill(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-        permission_classes = (IsAdminOrReadOnly,)
 class BillsDetails(APIView):
+    permission_classes = (IsAuthenticated,)            # <-- And here
     def get(self, request, format=None):
         permission_classes = (IsAdminOrReadOnly,)
         all_bills = Bills.objects.all()
@@ -118,7 +124,7 @@ class BillsDetails(APIView):
 
 
 class GetBillDetails(APIView):
-
+    permission_classes = (IsAuthenticated,)            # <-- And here
     def get_bill(self, pk):
         try:
             return Bills.objects.get(pk=pk)
@@ -129,13 +135,28 @@ class GetBillDetails(APIView):
         bill = self.get_bill(pk)
         serializers = BillSerializer(bill)
         return Response(serializers.data)
+class GetPayments(APIView):
+    permission_classes = (IsAuthenticated,)            # <-- And here
 
+    def get(self, request, format=None):
+        all_bills = Payments.objects.all()
+        serializers = PaymentsSerializer(all_bills, many=True)
+        return Response(serializers.data)
+    def post(self, request, format=None):
+        serializers = PaymentsSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        permission_classes = (IsAdminOrReadOnly,)
 
 
 @login_required(login_url='/accounts/login/')
 def merchants(request):
     url = ('http://127.0.0.1:8000/api/BillsDetails')
-    response = requests.get(url)
+    headers = {'Authorization': 'Token a6d89c3ca9efcb0042ac543d5d90bc44f4cbb34a'}
+    response = requests.get(url,headers=headers)
     details = response.json()
     for detail in details:
         Business_name = detail.get('Business_name')
@@ -146,7 +167,6 @@ def merchants(request):
         Town = detail.get('Town')
         Pay_bill = detail.get('JP_paybill')
         Industry = detail.get('Industry')
-    return render(request, 'merchants.html', {'details': details})
     return render(request, 'customers.html', {'details': details})
 
 @login_required(login_url='/accounts/login/')
@@ -216,21 +236,6 @@ def upload(request):
 
         return render(request, 'upload.html', {"excel_data":excel_data})
 
-
-
-class GetPayments(APIView):
-    def get(self, request, format=None):
-        all_bills = Payments.objects.all()
-        serializers = PaymentsSerializer(all_bills, many=True)
-        return Response(serializers.data)
-    def post(self, request, format=None):
-        serializers = PaymentsSerializer(data=request.data)
-        if serializers.is_valid():
-            serializers.save()
-            return Response(serializers.data, status=status.HTTP_201_CREATED)
-
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-        permission_classes = (IsAdminOrReadOnly,)
 
 def search(request):
     if 'name_search' in request.GET and request.GET["name_search"]:
