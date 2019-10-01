@@ -9,7 +9,7 @@ from rest_framework import status
 import requests
 from .forms import *
 from django.http import HttpResponse,Http404,HttpResponseRedirect
-from .email import send_welcome_email
+from .email import *
 import openpyxl
 
 
@@ -123,6 +123,7 @@ def merchants(request):
         Town = detail.get('Town')
         Pay_bill = detail.get('JP_paybill')
         Industry = detail.get('Industry')
+    return render(request, 'merchants.html', {'details': details})
     return render(request, 'customers.html', {'details': details})
 
 @login_required(login_url='/accounts/login/')
@@ -194,3 +195,33 @@ def upload(request):
             excel_data.append(row_data)
 
         return render(request, 'upload.html', {"excel_data":excel_data})
+
+
+
+class GetPayments(APIView):
+    def get(self, request, format=None):
+        all_bills = Payments.objects.all()
+        serializers = PaymentsSerializer(all_bills, many=True)
+        return Response(serializers.data)
+    def post(self, request, format=None):
+        serializers = PaymentsSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        permission_classes = (IsAdminOrReadOnly,)
+
+
+def notification(request):
+    if request.method == 'POST':
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            recipient = NewsLetterRecipients(name = name,email =email)
+            recipient.save()
+            send_notification(name = name, email = email)
+    else:
+        form = NoteForm()
+    return render(request, 'note.html', {'form': form})

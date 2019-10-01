@@ -15,7 +15,7 @@
           <a class="nav-link btn btn-outline-primary" href="{% url 'Index'%}">Home <span class="sr-only">(current)</span></a>
         </li> &nbsp &nbsp
         <li class="nav-item">
-          <a class="nav-link btn btn-outline-primary" href="admin/login">Admin Panel</a>
+          <a class="nav-link btn btn-outline-primary" href="admin/universal_billing_system/merchant/add/">Add merchant</a>
         </li>&nbsp &nbsp
       
         <li class="nav-item dropdown">
@@ -24,8 +24,12 @@
             BILLS
           </a>&nbsp&nbsp
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Generate Bill</a>
+            <a class="dropdown-item" href="{% url 'new-bill' %}">Generate Bill</a>
             <a class="dropdown-item" href="{% url 'upload'%}">Upload Bill</a>
+            <a class="dropdown-item" href="{% url 'new-bill' %}">Generate Bill</a>
+            <!-- <a class="dropdown-item" href="{% url 'bills'%}">Upload Bill</a> -->
+            <!-- <a class="dropdown-item" href="#">Generate Bill</a> -->
+            <!-- <a class="dropdown-item" href="{% url 'upload'%}">Upload Bill</a> -->
       <a class="dropdown-item" href="{{ 'merchants' }}">Bill Details</a>
           </div>
         </li>&nbsp&nbsp
@@ -34,7 +38,11 @@
         <li>
           <a class="nav-link btn btn-outline-primary" href="accounts">Account</a>
         </li>&nbsp &nbsp
-        <li style="float: right;"><a class='btn btn-outline-primary' href="/logout">Logout</a>
+        <li style="float: right;"><a class='btn btn-outline-primary' href="{% url 'indexone' %}">JamboAdmin</a>
+        </li>
+        <li>
+          <li style="float: right;"><a class='btn btn-outline-primary' href="/logout">Logout</a>
+
         </li>
         </li>
       
