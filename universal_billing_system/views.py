@@ -166,8 +166,8 @@ def new_bill(request):
         #     recipient = NewsLetterRecipients(name=name, email=email)
         #     recipient.save()
         #     send_welcome_email(name, email)
-            recipient = NewsLetterRecipients(name = name,email =email)
-            send_notification(name = name, email = email)
+            # recipient = NewsLetterRecipients(name = name,email =email)
+            # send_notification(name = name, email = email)
 
 
         return HttpResponseRedirect('/index')
