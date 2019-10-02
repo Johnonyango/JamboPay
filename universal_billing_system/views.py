@@ -46,19 +46,10 @@ def profile(request):
 
    return render(request, 'timeline/profile.html', context)
 
-# Create your views here.
-# def index(request):
-#     url = ('jpaye.herokuap.com/api/GetMerchants/')
-#     response = requests.get(url)
-#     print(response)
-   
-# def index(request):
-#     return render(request, 'index.html')
-
 def index(request):
     return render(request, 'index.html')
 
-
+@login_required
 def upload(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
@@ -81,17 +72,6 @@ class MerchantList(APIView):
         serializers = MerchantSerializer(all_merchants, many=True)
         return Response(serializers.data)
     
-def search(request):
-    if 'name_search' in request.GET and request.GET["name_search"]:
-        search_term = request.GET.get("name_search")
-        searched_articles = Article.search_by_title(search_term)
-        message = f"{search_term}"
-
-        return render(request, 'search.html',{"message":message,"articles": searched_articles})
-
-    else:
-        message = "You haven't searched for any term."
-        return render(request, 'search.html',{"message":message})
 
 class RevenueStreamsList(APIView):
     permission_classes = (IsAuthenticated,)            # <-- And here
@@ -207,7 +187,7 @@ def new_bill(request):
     return render(request,'bills/new-bill.html',{"form":form})
 
 
-
+@login_required
 def upload(request):
     if "GET" == request.method:
         return render(request, 'upload.html', {})
@@ -245,19 +225,7 @@ def upload(request):
 
         return render(request, 'upload.html', {"excel_data":excel_data})
 
-
-# def search(request):
-#     if 'name_search' in request.GET and request.GET["name_search"]:
-#         search_term = request.GET.get("name_search")
-#         searched_articles = Article.search_by_title(search_term)
-#         message = f"{search_term}"
-
-#         return render(request, 'search.html',{"message":message,"articles": searched_articles})
-
-#     else:
-#         message = "You haven't searched for any term."
-#         return render(request, 'search.html',{"message":message})
-
+@login_required
 def notification(request):
     if request.method == 'POST':
         form = NoteForm(request.POST)
