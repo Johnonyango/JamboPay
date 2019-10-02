@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
-# from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -72,5 +72,20 @@ class Payments(models.Model):
     amount = models.FloatField(blank=False)
     pay_date = models.DateTimeField(auto_now_add=True)
 
+# class Merchant_user(AbstractUser):
+#   USER_TYPE_CHOICES = (
+#       (1, 'student'),
+#       (2, 'teacher'),
+#       (3, 'secretary'),
+#       (4, 'supervisor'),
+#       (5, 'admin'),
+#   )
 
+#   user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES)
 
+class Role(models.Model):
+    Role =(
+        (1, 'Reports_manager'),
+        # (2, 'Bills_manager')
+    # )
+    # Role = models.IntegerField(choices=Role)
