@@ -14,6 +14,19 @@ import openpyxl
 from rest_framework.permissions import IsAuthenticated  # <-- Here
 
 
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            auth_login(request, user)
+            return redirect('Index')
+    else:
+        form = SignUpForm()
+
+    return render(request, 'registration/registration_form.html', {'form': form})
 # login
 def login(request):
     if request.method == 'POST':

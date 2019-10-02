@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
+# from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -15,6 +16,16 @@ class Revstreams(models.Model):
     # Category = models.ManyToManyField(Category)
     def __str__(self):
         return self.name
+# class Merchant(AbstractUser):
+#   USER_TYPE_CHOICES = (
+#       (1, 'student'),
+#       (2, 'teacher'),
+#       (3, 'secretary'),
+#       (4, 'supervisor'),
+#       (5, 'admin'),
+#   )
+
+#   user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES)        
 class Merchant(models.Model):
     Business_name = models.CharField(max_length=20,blank=False)
     Business_owner = models.ForeignKey(User,on_delete=models.CASCADE,default=None)

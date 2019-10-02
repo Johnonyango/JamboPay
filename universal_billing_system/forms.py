@@ -1,6 +1,15 @@
 from django import forms	
 from .models import *
 from django.contrib.auth.models import User	
+
+from django.contrib.auth.forms import UserCreationForm
+from universal_billing_system.models import Merchant
+
+class SignUpForm(UserCreationForm):
+    Email = forms.EmailField()
+    extra_field = forms.CharField(required=True)
+    Business_name = forms.CharField(max_length=20)
+    Business_owner = forms.CharField()
 # from django.contrib.auth.forms import MerchanLoginForm
 # from django.contrib.auth.forms import MerchantLoginForm
 # from django.contrib.auth.models import Merchant

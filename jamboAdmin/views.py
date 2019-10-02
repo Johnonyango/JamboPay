@@ -21,17 +21,17 @@ from jamboAdmin.forms import SignUpForm
 
 #     return render(request, 'registration/register.html', {'form': form})
 
-def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            auth_login(request, user)
-            return redirect('indexone')
-    else:
-        form = SignUpForm()
+# def signup(request):
+#     if request.method == 'POST':
+#         form = SignUpForm(request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             auth_login(request, user)
+#             return redirect('indexone')
+#     else:
+#         form = SignUpForm()
 
-    return render(request, 'registration/registration_form.html', {'form': form})
+#     return render(request, 'registration/registration_form.html', {'form': form})
 
 def indexone(request):
     return render(request, 'indexone.html')

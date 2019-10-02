@@ -11,6 +11,7 @@ urlpatterns=[
     url(r'^bills/$', views.bills, name='bills'),
     url(r'^upload/$', views.upload, name='upload'),
     url(r'^new/bill/$', views.new_bill, name='new-bill'),
+    url(r'^signup/$', views.signup, name='signup'),
 
 
 
