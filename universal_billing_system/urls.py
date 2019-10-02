@@ -25,9 +25,9 @@ urlpatterns=[
 
 
     url(r'^notification/$', views.notification, name='noteform'),
-
     #moreurls
-   
+    url(r'^upload-csv/$', views.uploadCSV, name='bills_upload'),
+
 ]
 
 
