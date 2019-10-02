@@ -1,3 +1,4 @@
+import csv,io
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -261,3 +262,30 @@ def notification(request):
     else:
         form = NoteForm()
     return render(request, 'note.html', {'form': form})
+
+
+def uploadCSV(request):
+    template = "bills_upload.html"
+    prompt = {"order":"order of csv should be as follows:"}
+    if request.method == "GET":
+        return render(request,template,prompt)
+    csv_file=request.FILES['file']
+    if not csv_file.name.endswith('.csv'):
+        message.error(request,"this is not a csv file")
+    data_set = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string,delimiter=',',quotechar="|"):
+        _,created = Bills.objects.update_or_create(
+            customer_name =column[0],
+            customer_phone=column[1],
+            customer_email=column[2],
+            # Revstreams =column[3],
+            narration=column[3],
+            amount=column[4],
+            quantity =column[5],
+            post_date=column[6]
+            # status=column[8],
+        )
+    context = {}
+    return render(request,template,context)

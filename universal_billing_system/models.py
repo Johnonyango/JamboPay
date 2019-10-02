@@ -41,13 +41,14 @@ class Bills(models.Model):
     customer_name = models.CharField(max_length=255,blank=False)
     customer_phone = models.CharField(max_length=255,blank=False)
     customer_email = models.EmailField(max_length=255,blank=False)
-    Revstreams = models.ManyToManyField(Revstreams)
+    Revstreams = models.ManyToManyField(Revstreams,default=0)
     narration = models.CharField(max_length=255,blank=False)
     amount = models.FloatField(blank=False)
     quantity = models.FloatField(blank=True)
     post_date = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=Status,default=0)
-    
+
+
 class NewsLetterRecipients(models.Model):
     name = models.CharField(max_length = 30)
     email = models.EmailField()
