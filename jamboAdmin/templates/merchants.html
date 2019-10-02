@@ -10,13 +10,8 @@
 </head>
 
 <body>
-
-       
-
     {% block content %}
     <br>
-
-
     <h2>BILL DETAILS</h2>
     <br>
     <div class="row">
@@ -37,8 +32,6 @@
                         <th>Industry</th>
                         <th>Revenue Streams</th>
                         <th>Join Date</th>
-
-
                     </tr>
                 </thead>
                 <tbody>
@@ -55,7 +48,6 @@
                         <td>{{detail.Industry}}</td>
                         <td>{{detail.Revstreams}}</td>
                         <td>{{detail.join_date}}</td>
-
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -81,9 +73,6 @@
     </style>
     {% endblock %}
 
-
 </body>
-
-
 
 </html>
