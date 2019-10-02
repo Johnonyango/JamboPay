@@ -4,7 +4,6 @@ from tinymce.models import HTMLField
 
 # Create your models here.
 
-
 class Industry(models.Model):
     name = models.CharField( blank=False,max_length= 40,default=None)
     def __str__(self):
@@ -15,6 +14,7 @@ class Revstreams(models.Model):
     # Category = models.ManyToManyField(Category)
     def __str__(self):
         return self.name
+
 class Merchant(models.Model):
     Business_name = models.CharField(max_length=20,blank=False)
     Business_owner = models.ForeignKey(User,on_delete=models.CASCADE,default=None)
@@ -29,9 +29,15 @@ class Merchant(models.Model):
     join_date=models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
+        
         return self.Business_name
 
 class Bills(models.Model):
+    Status=(
+    (0,'Unpaid'),
+    (1,'Paid'),
+    )
+
     customer_name = models.CharField(max_length=255,blank=False)
     customer_phone = models.CharField(max_length=255,blank=False)
     customer_email = models.EmailField(max_length=255,blank=False)
@@ -40,33 +46,19 @@ class Bills(models.Model):
     amount = models.FloatField(blank=False)
     quantity = models.FloatField(blank=True)
     post_date = models.DateTimeField(auto_now_add=True)
-
-
-    def __str__(self):
-        return self.customer_name
-
+    status = models.IntegerField(choices=Status,default=0)
+    
 class NewsLetterRecipients(models.Model):
     name = models.CharField(max_length = 30)
     email = models.EmailField()
 
-    def save_bill(self):
-        self.save()  
-class GenerateBillForm(models.Model):
-    name = models.CharField(max_length=30)
-    email = models.EmailField(max_length=254)
-    phone = models.CharField(max_length=30)
-    RevenueStreamID = models.CharField(max_length=30)
-    narration = models.CharField(
-        max_length=2000,
-        # widget=models.Textarea(),
-        help_text='Write here your message!'
-    )
-  
-    amount = models.CharField(max_length=30)
-    Quantity = models.CharField(max_length=30)
-
-    def __str__(self):
-        return self.all
+class Payments(models.Model):
+    bill_number = models.ForeignKey(Bills,on_delete=models.CASCADE,default=None)
+    payers_name = models.CharField(max_length=255,blank=False)
+    payers_phone = models.CharField(max_length=255,blank=False)
+    narration = models.CharField(max_length=255,blank=False)
+    amount = models.FloatField(blank=False)
+    pay_date = models.DateTimeField(auto_now_add=True)
 
     def save_bill(self):
         self.save()

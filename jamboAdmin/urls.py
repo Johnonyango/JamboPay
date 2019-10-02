@@ -5,7 +5,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns=[
-    url(r'^$',views.merchants,name='merchants'),
+    url(r'^$',views.indexone,name='indexone'),
+    url(r'^signup/$', views.signup, name='signup'),
+    url(r'^merchants/$',views.merchants,name='merchants'),
+
+
 ]
 
 
