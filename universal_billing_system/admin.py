@@ -13,7 +13,7 @@ class RevstreamsAdmin(admin.ModelAdmin):
     list_display = ('name')
 
 class BillsAdmin(admin.ModelAdmin):
-    list_display = ('customer_name', 'customer_phone')
+    list_display = ('amount', 'quantity')
 
 admin.site.register(Merchant);
 admin.site.register(Industry);
