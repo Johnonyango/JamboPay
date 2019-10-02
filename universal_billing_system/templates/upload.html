@@ -15,7 +15,6 @@
             <br>
           <h1> Upload a bill from files</h1>
 
-
           <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="file"
@@ -38,11 +37,6 @@
             {% endfor %}
             <br>
         {% endfor %}
-
-
-
-
-
 
         {% endblock %}
     </div> 

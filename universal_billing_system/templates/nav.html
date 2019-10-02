@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title></title>
 </head>
+
 <body>
   
     <nav class="navbar navbar-expand-lg navbar-primary " id='mySidenav'>
@@ -19,25 +21,27 @@
         </li>&nbsp &nbsp
       
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle btn-outline-primary" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          <a style="margin-top: 25%;" class="nav-link dropdown-toggle btn-outline-primary" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             BILLS
           </a>&nbsp&nbsp
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="{% url 'new-bill' %}">Generate Bill</a>
             <a class="dropdown-item" href="{% url 'upload'%}">Upload Bill</a>
-            <a class="dropdown-item" href="{% url 'new-bill' %}">Generate Bill</a>
       <a class="dropdown-item" href="{{ 'merchants' }}">Bill Details</a>
           </div>
         </li>&nbsp&nbsp
         {% if user.is_authenticated %}
       
-        <li>
-          <a class="nav-link btn btn-outline-primary" href="accounts">Account</a>
-        </li>&nbsp &nbsp
+        <div  class="searchform">
+          <form action="{% url 'search' %}" method="get">
+             {% csrf_token %}
+             <input type="text" name="name" id="names-search" placeholder="Search for customer">
+          </form>
+       </div>&nbsp&nbsp
         <li style="float: right;"><a class='btn btn-outline-primary' href="{% url 'indexone' %}">JamboAdmin</a>
         </li>
-        <li>
+        <li>&nbsp&nbsp
           <li style="float: right;"><a class='btn btn-outline-primary' href="/logout">Logout</a>
 
         </li>
@@ -54,8 +58,9 @@
           display: flex;
           flex-direction: row;
           justify-content: space-around;
+          background-color: #fff;
         }
-      
+    
         li {
           list-style-type: none;
         }

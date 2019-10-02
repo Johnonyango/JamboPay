@@ -31,6 +31,19 @@ def logout_view(request):
    return redirect('login')
 
 
+@login_required
+def profile(request):
+
+   user = request.user
+   images = Image.objects.filter(author=user.profile)
+
+   context = {
+      'user': user,
+      'images': images
+   }
+
+   return render(request, 'timeline/profile.html', context)
+
 # Create your views here.
 # def index(request):
 #     url = ('jpaye.herokuap.com/api/GetMerchants/')
@@ -66,6 +79,18 @@ class MerchantList(APIView):
         serializers = MerchantSerializer(all_merchants, many=True)
         return Response(serializers.data)
     
+def search(request):
+    if 'name_search' in request.GET and request.GET["name_search"]:
+        search_term = request.GET.get("name_search")
+        searched_articles = Article.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html',{"message":message,"articles": searched_articles})
+
+    else:
+        message = "You haven't searched for any term."
+        return render(request, 'search.html',{"message":message})
+
 class RevenueStreamsList(APIView):
     permission_classes = (IsAuthenticated,)            # <-- And here
 
@@ -126,12 +151,10 @@ class GetPayments(APIView):
         permission_classes = (IsAdminOrReadOnly,)
 
 
-
-
 @login_required(login_url='/accounts/login/')
 def merchants(request):
     url = ('http://127.0.0.1:8000/api/BillsDetails')
-    headers = {'Authorization': 'Token 917458dda2217c882018c4a80fac67dfd69f50ce'}
+    headers = {'Authorization': 'Token a6d89c3ca9efcb0042ac543d5d90bc44f4cbb34a'}
     response = requests.get(url,headers=headers)
     details = response.json()
     for detail in details:
@@ -172,7 +195,6 @@ def new_bill(request):
 
         return HttpResponseRedirect('/index')
     
-
     else:
         form = BillsForm()
     
@@ -223,9 +245,17 @@ def notification(request):
         return render(request, 'upload.html', {"excel_data":excel_data})
 
 
+def search(request):
+    if 'name_search' in request.GET and request.GET["name_search"]:
+        search_term = request.GET.get("name_search")
+        searched_articles = Article.search_by_title(search_term)
+        message = f"{search_term}"
 
+        return render(request, 'search.html',{"message":message,"articles": searched_articles})
 
-
+    else:
+        message = "You haven't searched for any term."
+        return render(request, 'search.html',{"message":message})
 
 def notification(request):
     if request.method == 'POST':
