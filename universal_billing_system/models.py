@@ -48,6 +48,11 @@ class Bills(models.Model):
     post_date = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=Status,default=0)
     
+    @classmethod
+    def search_by_name(cls,search_term):
+        names = cls.objects.filter(customer_name__icontains=search_term)
+        return names
+
 class NewsLetterRecipients(models.Model):
     name = models.CharField(max_length = 30)
     email = models.EmailField()

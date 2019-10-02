@@ -34,10 +34,12 @@
         {% if user.is_authenticated %}
       
         <div  class="searchform">
-          <form action="{% url 'search' %}" method="get">
-             {% csrf_token %}
-             <input type="text" name="name" id="names-search" placeholder="Search for customer">
-          </form>
+            <form class="navbar-form" role="search" action="{% url 'search'%}">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search customer "
+                        name="customer_name">
+                </div>
+            </form>
        </div>&nbsp&nbsp
         <li style="float: right;"><a class='btn btn-outline-primary' href="{% url 'indexone' %}">JamboAdmin</a>
         </li>

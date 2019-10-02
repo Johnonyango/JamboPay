@@ -11,7 +11,7 @@ urlpatterns=[
     url(r'^bills/$', views.bills, name='bills'),
     url(r'^upload/$', views.upload, name='upload'),
     url(r'^new/bill/$', views.new_bill, name='new-bill'),
-    url(r'^search/$',views.search,name="search"),
+    url(r'^search/$',views.search_results,name="search"),
 
     #API Endpoints
     url(r'^api/GetMerchants/$', views.MerchantList.as_view()),

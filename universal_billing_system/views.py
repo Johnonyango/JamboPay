@@ -147,6 +147,15 @@ class GetPayments(APIView):
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
+        
+        #update bills
+        specific_bill = Bills.pk
+        paid_bill = Payments.bill_number
+
+        if specific_bill == paid_bill:
+            specific_bill.status=1
+            # print('true')
+            specific_bill.save()
 
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
         permission_classes = (IsAdminOrReadOnly,)
@@ -237,17 +246,17 @@ def upload(request):
         return render(request, 'upload.html', {"excel_data":excel_data})
 
 
-def search(request):
-    if 'name_search' in request.GET and request.GET["name_search"]:
-        search_term = request.GET.get("name_search")
-        searched_articles = Article.search_by_title(search_term)
-        message = f"{search_term}"
+# def search(request):
+#     if 'name_search' in request.GET and request.GET["name_search"]:
+#         search_term = request.GET.get("name_search")
+#         searched_articles = Article.search_by_title(search_term)
+#         message = f"{search_term}"
 
-        return render(request, 'search.html',{"message":message,"articles": searched_articles})
+#         return render(request, 'search.html',{"message":message,"articles": searched_articles})
 
-    else:
-        message = "You haven't searched for any term."
-        return render(request, 'search.html',{"message":message})
+#     else:
+#         message = "You haven't searched for any term."
+#         return render(request, 'search.html',{"message":message})
 
 def notification(request):
     if request.method == 'POST':
@@ -261,3 +270,19 @@ def notification(request):
     else:
         form = NoteForm()
     return render(request, 'note.html', {'form': form})
+
+@login_required(login_url='/accounts/login/')
+def search_results(request):
+    current_user = request.user
+    if 'customer_name' in request.GET and request.GET["customer_name"]:
+        search_term = request.GET.get("customer_name")
+        searched_names = Bills.search_by_name(search_term)
+        message = f"{search_term}"
+
+        print(searched_names)
+
+        return render(request, 'search.html',{"message":message,"names": searched_names})
+
+    else:
+        message = "You haven't searched for any term."
+        return render(request, 'search.html',{"message":message})
