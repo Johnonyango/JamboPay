@@ -88,4 +88,4 @@ class Role(models.Model):
         (1, 'Reports_manager'),
         (2, 'Bills_manager')
     # )
-    Role = models.IntegerField(choices=Role)
+    Role = models.ChoiceField (choices=Role)
