@@ -48,6 +48,7 @@ class Bills(models.Model):
     post_date = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=Status,default=0)
     
+    
 
 class NewsLetterRecipients(models.Model):
     name = models.CharField(max_length = 30)
