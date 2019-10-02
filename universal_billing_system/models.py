@@ -86,6 +86,6 @@ class Payments(models.Model):
 class Role(models.Model):
     Role =(
         (1, 'Reports_manager'),
-        # (2, 'Bills_manager')
+        (2, 'Bills_manager')
     # )
     # Role = models.IntegerField(choices=Role)
