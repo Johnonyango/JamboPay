@@ -6,7 +6,7 @@ from django.contrib import admin
 
 urlpatterns=[
     url(r'^$',views.index,name='Index'),
-    url(r'^merchants/$',views.merchants,name='merchants'),
+    url(r'^customers/$',views.customers,name='customers'),
     url(r'^index/$', views.index, name='home'),
     url(r'^bills/$', views.bills, name='bills'),
     url(r'^upload/$', views.upload, name='upload'),
