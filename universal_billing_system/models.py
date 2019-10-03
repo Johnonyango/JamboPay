@@ -7,7 +7,10 @@ from tinymce.models import HTMLField
 class Industry(models.Model):
     name = models.CharField( blank=False,max_length= 40,default=None)
     def __str__(self):
-        return self.name 
+        return self.name
+
+    def save_industry(self):
+        self.save()
                           
 class Revstreams(models.Model):
     name = models.CharField( blank=False,max_length= 40,default=None)
