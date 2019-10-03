@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -15,6 +16,16 @@ class Revstreams(models.Model):
     # Category = models.ManyToManyField(Category)
     def __str__(self):
         return self.name
+# class Merchant(AbstractUser):
+#   USER_TYPE_CHOICES = (
+#       (1, 'student'),
+#       (2, 'teacher'),
+#       (3, 'secretary'),
+#       (4, 'supervisor'),
+#       (5, 'admin'),
+#   )
+
+#   user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES)        
 class Merchant(models.Model):
     Business_name = models.CharField(max_length=20,blank=False)
     Business_owner = models.ForeignKey(User,on_delete=models.CASCADE,default=None)
@@ -27,11 +38,19 @@ class Merchant(models.Model):
     Industry = models.ManyToManyField(Industry)
     Revstreams = models.ManyToManyField(Revstreams)
     join_date=models.DateTimeField(auto_now_add=True)
+    Role = models.IntegerField()
+
     
     def __str__(self):
         return self.Business_name
 
 class Bills(models.Model):
+
+    Status=(
+    (0,'Unpaid'),
+    (1,'Paid'),
+    )
+
     customer_name = models.CharField(max_length=255,blank=False)
     customer_phone = models.CharField(max_length=255,blank=False)
     customer_email = models.EmailField(max_length=255,blank=False)
@@ -40,14 +59,37 @@ class Bills(models.Model):
     amount = models.FloatField(blank=False)
     quantity = models.FloatField(blank=True)
     post_date = models.DateTimeField(auto_now_add=True)
-
+    status = models.IntegerField(choices=Status,default=0)
     
 
 class NewsLetterRecipients(models.Model):
     name = models.CharField(max_length = 30)
     email = models.EmailField()
 
+class Payments(models.Model):
+    bill_number = models.ForeignKey(Bills,on_delete=models.CASCADE,default=None)
+    payers_name = models.CharField(max_length=255,blank=False)
+    payers_phone = models.CharField(max_length=255,blank=False)
+    narration = models.CharField(max_length=255,blank=False)
+    amount = models.FloatField(blank=False)
+    pay_date = models.DateTimeField(auto_now_add=True)
 
+# class Merchant_user(AbstractUser):
+#   USER_TYPE_CHOICES = (
+#       (1, 'student'),
+#       (2, 'teacher'),
+#       (3, 'secretary'),
+#       (4, 'supervisor'),
+#       (5, 'admin'),
+#   )
 
+#   user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES)
 
-
+class Role(Merchant):
+    class Meta:
+        proxy = True
+    # Role =(
+    #     (1, 'Reports_manager'),
+    #     (2, 'Bills_manager')
+    # )
+    # role = models.Field (choices=Role)

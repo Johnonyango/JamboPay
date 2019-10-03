@@ -11,6 +11,7 @@ urlpatterns=[
     url(r'^bills/$', views.bills, name='bills'),
     url(r'^upload/$', views.upload, name='upload'),
     url(r'^new/bill/$', views.new_bill, name='new-bill'),
+    url(r'^signup/$', views.signup, name='signup'),
 
 
 
@@ -21,6 +22,10 @@ urlpatterns=[
     url(r'^api/GenerateBill/$', views.GenerateBill.as_view()),
     url(r'^api/BillsDetails/$', views.BillsDetails.as_view()),
     url(r'api/GetBillDetails/bill-id/(?P<pk>[0-9]+)/$',views.GetBillDetails.as_view()),
+    url(r'^api/GetPayments/$', views.GetPayments.as_view()),
+
+
+    url(r'^notification/$', views.notification, name='noteform'),
 
     #moreurls
    

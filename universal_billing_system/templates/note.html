@@ -1,0 +1,31 @@
+{%extends "base.html"%} {% load bootstrap4 %} {% block content %}
+<hr>
+<div class="card bg-dark text-white" style="margin-left:20%;margin-right:20%">
+
+    <div class="row">
+        <!-- Empty div -->
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {% if form.errors %}
+            <p style="color:white"></p>
+            {% endif %}
+
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <h3 class="text-center">Customer De</h3>
+                </div>
+                <div class="panel-body">
+
+                    <form method="post">{% csrf_token %}
+                        {% bootstrap_form form%}
+                        <input type="submit" value="submit" />
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

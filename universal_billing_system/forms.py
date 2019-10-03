@@ -1,6 +1,20 @@
 from django import forms	
 from .models import *
 from django.contrib.auth.models import User	
+# from .models import Merchant_user
+
+from django.contrib.auth.forms import UserCreationForm
+from universal_billing_system.models import Merchant
+
+class SignUpForm(UserCreationForm):
+    Email = forms.EmailField()
+    Role = (
+      (1, 'Bills_manager'),
+      (2, 'Reports_manager'),
+     
+  )
+    Role = forms.ChoiceField(choices=Role)
+
 # from django.contrib.auth.forms import MerchanLoginForm
 # from django.contrib.auth.forms import MerchantLoginForm
 # from django.contrib.auth.models import Merchant
@@ -26,3 +40,9 @@ class BillsForm(forms.ModelForm):
         widgets = {
             'Revstreams': forms.CheckboxSelectMultiple(),
         }
+        exclude = ['status']
+
+class NoteForm(forms.ModelForm):
+    class Meta:
+        model = NewsLetterRecipients
+        fields = '__all__'

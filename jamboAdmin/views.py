@@ -21,17 +21,17 @@ from jamboAdmin.forms import SignUpForm
 
 #     return render(request, 'registration/register.html', {'form': form})
 
-def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            auth_login(request, user)
-            return redirect('indexone')
-    else:
-        form = SignUpForm()
+# def signup(request):
+#     if request.method == 'POST':
+#         form = SignUpForm(request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             auth_login(request, user)
+#             return redirect('indexone')
+#     else:
+#         form = SignUpForm()
 
-    return render(request, 'registration/registration_form.html', {'form': form})
+#     return render(request, 'registration/registration_form.html', {'form': form})
 
 def indexone(request):
     return render(request, 'indexone.html')
@@ -39,7 +39,8 @@ def indexone(request):
 @login_required(login_url='/accounts/login/')
 def merchants(request):
     url = ('http://127.0.0.1:8000/api/GetMerchants')
-    response = requests.get(url)
+    headers = {'Authorization': "7ec8ee9b01c16dcc9a3df741570a790cc3501bda"}
+    response = requests.get(url,headers=headers)
     details = response.json()
     for detail in details:
         Business_name = detail.get('Business_name')

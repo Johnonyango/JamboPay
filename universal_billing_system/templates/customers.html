@@ -36,6 +36,7 @@
       <th>Amount</th>
       <th>Quantity</th>
       <th>Bill Date</th>
+      <th>Bill status</th>
 
     </tr>
   </thead>
@@ -52,7 +53,9 @@
       <td>{{detail.amount}}</td>
       <td>{{detail.quantity}}</td>
       <td>{{detail.post_date}}</td>
-  </tr>
+      <td>{{detail.status}}</td>
+
+    </tr>
   {% endfor %}
   </tbody>
 </table>
