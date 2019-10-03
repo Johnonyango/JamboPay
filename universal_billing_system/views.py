@@ -1,4 +1,3 @@
-import csv,io
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -47,10 +46,19 @@ def profile(request):
 
    return render(request, 'timeline/profile.html', context)
 
+# Create your views here.
+# def index(request):
+#     url = ('jpaye.herokuap.com/api/GetMerchants/')
+#     response = requests.get(url)
+#     print(response)
+   
+# def index(request):
+#     return render(request, 'index.html')
+
 def index(request):
     return render(request, 'index.html')
 
-@login_required
+
 def upload(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
@@ -73,6 +81,17 @@ class MerchantList(APIView):
         serializers = MerchantSerializer(all_merchants, many=True)
         return Response(serializers.data)
     
+def search(request):
+    if 'name_search' in request.GET and request.GET["name_search"]:
+        search_term = request.GET.get("name_search")
+        searched_articles = Article.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html',{"message":message,"articles": searched_articles})
+
+    else:
+        message = "You haven't searched for any term."
+        return render(request, 'search.html',{"message":message})
 
 class RevenueStreamsList(APIView):
     permission_classes = (IsAuthenticated,)            # <-- And here
@@ -128,15 +147,6 @@ class GetPayments(APIView):
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
-        
-        #update bills
-        specific_bill = Bills.pk
-        paid_bill = Payments.bill_number
-
-        if specific_bill == paid_bill:
-            specific_bill.status=1
-            # print('true')
-            specific_bill.save()
 
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
         permission_classes = (IsAdminOrReadOnly,)
@@ -188,7 +198,7 @@ def new_bill(request):
     return render(request,'bills/new-bill.html',{"form":form})
 
 
-@login_required
+
 def upload(request):
     if "GET" == request.method:
         return render(request, 'upload.html', {})
@@ -226,7 +236,19 @@ def upload(request):
 
         return render(request, 'upload.html', {"excel_data":excel_data})
 
-@login_required
+
+def search(request):
+    if 'name_search' in request.GET and request.GET["name_search"]:
+        search_term = request.GET.get("name_search")
+        searched_articles = Article.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html',{"message":message,"articles": searched_articles})
+
+    else:
+        message = "You haven't searched for any term."
+        return render(request, 'search.html',{"message":message})
+
 def notification(request):
     if request.method == 'POST':
         form = NoteForm(request.POST)
@@ -239,45 +261,3 @@ def notification(request):
     else:
         form = NoteForm()
     return render(request, 'note.html', {'form': form})
-
-
-def uploadCSV(request):
-    template = "bills_upload.html"
-    prompt = {"order":"order of csv should be as follows:"}
-    if request.method == "GET":
-        return render(request,template,prompt)
-    csv_file=request.FILES['file']
-    if not csv_file.name.endswith('.csv'):
-        message.error(request,"this is not a csv file")
-    data_set = csv_file.read().decode('UTF-8')
-    io_string = io.StringIO(data_set)
-    next(io_string)
-    for column in csv.reader(io_string,delimiter=',',quotechar="|"):
-        _,created = Bills.objects.update_or_create(
-            customer_name =column[0],
-            customer_phone=column[1],
-            customer_email=column[2],
-            # Revstreams =column[3],
-            narration=column[3],
-            amount=column[4],
-            quantity =column[5],
-            post_date=column[6]
-            # status=column[8],
-        )
-    context = {}
-    return render(request,template,context)
-@login_required(login_url='/accounts/login/')
-def search_results(request):
-    current_user = request.user
-    if 'customer_name' in request.GET and request.GET["customer_name"]:
-        search_term = request.GET.get("customer_name")
-        searched_names = Bills.search_by_name(search_term)
-        message = f"{search_term}"
-
-        print(searched_names)
-
-        return render(request, 'search.html',{"message":message,"names": searched_names})
-
-    else:
-        message = "You haven't searched for any term."
-        return render(request, 'search.html',{"message":message})
