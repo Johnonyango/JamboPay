@@ -13,7 +13,7 @@ class SignUpForm(UserCreationForm):
       (2, 'Reports_manager'),
      
   )
-    Role = forms.IntegerField()
+    Role = forms.ChoiceField(choices=Role)
 
 # from django.contrib.auth.forms import MerchanLoginForm
 # from django.contrib.auth.forms import MerchantLoginForm

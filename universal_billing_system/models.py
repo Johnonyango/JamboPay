@@ -38,6 +38,8 @@ class Merchant(models.Model):
     Industry = models.ManyToManyField(Industry)
     Revstreams = models.ManyToManyField(Revstreams)
     join_date=models.DateTimeField(auto_now_add=True)
+    Role = models.IntegerField()
+
     
     def __str__(self):
         return self.Business_name
@@ -83,9 +85,11 @@ class Payments(models.Model):
 
 #   user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES)
 
-class Role(models.Model):
-    Role =(
-        (1, 'Reports_manager'),
-        (2, 'Bills_manager')
+class Role(Merchant):
+    class Meta:
+        proxy = True
+    # Role =(
+    #     (1, 'Reports_manager'),
+    #     (2, 'Bills_manager')
     # )
-    Role = models.ChoiceField (choices=Role)
+    # role = models.Field (choices=Role)
