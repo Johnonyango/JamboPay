@@ -1,20 +1,11 @@
-{% load bootstrap4 %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Upload Bills</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <body>
+    {% include 'nav.html' %}
+
     <div style="text-align: center;" class="container">
         {% block content %}
-        {% include 'nav.html' %}
         <br>
         {% if messages%}
         {% for message in messages%}
@@ -25,7 +16,8 @@
         {% else %}
 
         {{order}}
-        <form method="POST" enctype="multipart/form-data">
+        <div class="card">
+        <form class="card" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <label for="">Upload a File</label>
             <br><br>
@@ -35,6 +27,7 @@
             <br><br>
             <button class="btn btn-primary" type="submit">Upload</button>
         </form>
+        </div>
         {% endif %}
         <hr>
     </div>
@@ -48,6 +41,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+        <style>
+                body{
+                    background-image: url('https://wallpapercave.com/wp/wp2164091.jpg');
+                    overflow-x: hidden;
+                }
+            </style>
+            {%endblock%}
 </body>
 
 </html>
