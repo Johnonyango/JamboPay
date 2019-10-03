@@ -2,10 +2,10 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth.decorators import login_required
-from .models import  *
+from .models import *
 from rest_framework import status
 import requests
-from django.http import HttpResponse,Http404,HttpResponseRedirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from jamboAdmin.forms import SignUpForm
 
 
@@ -21,8 +21,10 @@ def signup(request):
 
     return render(request, 'registration/registration_form.html', {'form': form})
 
+
 def indexone(request):
     return render(request, 'indexone.html')
+
 
 @login_required(login_url='/accounts/login/')
 def merchants(request):

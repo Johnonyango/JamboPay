@@ -52,6 +52,10 @@ class Bills(models.Model):
     status = models.IntegerField(choices=Status,default=0)
     
     
+    @classmethod
+    def search_by_name(cls,search_term):
+        names = cls.objects.filter(customer_name__icontains=search_term)
+        return names
 
 class NewsLetterRecipients(models.Model):
     name = models.CharField(max_length = 30, blank=False, null=False)
