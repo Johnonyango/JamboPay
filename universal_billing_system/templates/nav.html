@@ -15,8 +15,18 @@
           <a class="nav-link btn btn-outline-primary" href="{% url 'Index'%}">Home <span class="sr-only">(current)</span></a>
         </li> &nbsp &nbsp
         <li class="nav-item">
-          <a class="nav-link btn btn-outline-primary" href="signup">Create Users</a>
-        </li>&nbsp &nbsp
+ <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle btn-outline-primary" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Create Users
+          </a>&nbsp&nbsp
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="signup">Bills Manager</a>
+            <a class="dropdown-item" href="signup">Reports Manager</a>
+            <!-- <a class="dropdown-item" href="{% url 'new-bill' %}">Generate Bill</a> -->
+      <!-- <a class="dropdown-item" href="{{ 'merchants' }}">Bill Details</a> -->
+          </div>
+        </li>&nbsp&nbsp        </li>&nbsp &nbsp
       
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle btn-outline-primary" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
