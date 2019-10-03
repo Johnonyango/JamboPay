@@ -27,7 +27,7 @@ def indexone(request):
 @login_required(login_url='/accounts/login/')
 def merchants(request):
     url = ('http://127.0.0.1:8000/api/GetMerchants')
-    headers = {'Authorization': 'Token 917458dda2217c882018c4a80fac67dfd69f50ce'}
+    headers = {'Authorization': 'Token bfe29d5c25ca612a216dca9627a557cdab536b3b'}
     response = requests.get(url,headers=headers)
     details = response.json()
     for detail in details:
