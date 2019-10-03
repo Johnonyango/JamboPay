@@ -11,29 +11,28 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'Index'%}">Home <span class="sr-only"></span></a>
+        <a class="nav-link" href="{% url 'Index'%}">HOME <span class="sr-only"></span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'merchants'%}">All Merchants</a>
+        <a style="color: #000;" class="nav-link" href="{% url 'merchants'%}">ALL_MERCHANTS</a>
       </li>
       
       <li class="nav-item">
-        <a class="nav-link" href="/admin/universal_billing_system/merchant/add/">Register New
-          merchants</a>
+        <a class="nav-link" href="/admin/universal_billing_system/merchant/add/">REGISTER_NEW_MERCHANTS</a>
       </li>
       {% if user.is_authenticated %}
 
 
       <li>
-      <li><a class='nav-link' href="/logout">Logout</a>
+      <li><a class='nav-link' href="/logout">LOGOUT</a>
 
       </li>
       </li>
 
       {% else %}
       <p>
-        <a class='nav-link' href="/accounts/login">Login</a>
+        <a class='nav-link' href="/accounts/login">LOGIN</a>
       </p>
       {% endif %}
     </ul>

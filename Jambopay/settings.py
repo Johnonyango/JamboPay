@@ -71,7 +71,6 @@ INSTALLED_APPS = [
     'universal_billing_system',
     'bootstrap4',
     'tinymce',
-    'widget_tweaks',
     'registration',
     'rest_framework',
     'authtools',

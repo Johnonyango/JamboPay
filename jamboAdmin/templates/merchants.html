@@ -15,14 +15,14 @@
     {% block content %}
     {% include 'indexone.html' %}
     <br>
-    <h2>BILL DETAILS</h2>
+    <h2 style="text-align: center;">BILL DETAILS</h2>
     <br>
     <div class="row">
 
         <div class="col-md-1"></div>
 
         <div class="col-md-10">
-            <table class="table table-bordered table-primary">
+            <table id="bills" class="table table-bordered table-primary">
                 <thead>
                     <tr>
                         <th>Business Name</th>
@@ -55,9 +55,32 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <br>
             <div class="col-md-1"></div>
+            <input class="btn btn-primary" type="button" id="btnExport" value="Download pdf" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script type="text/javascript">
+      $("body").on("click", "#btnExport", function () {
+        html2canvas($('#bills')[0], {
+          onrendered: function (canvas) {
+            var data = canvas.toDataURL();
+            var docDefinition = {
+              content: [{
+                image: data,
+                width: 500
+              }]
+            };
+            pdfMake.createPdf(docDefinition).download("Table.pdf");
+          }
+        });
+      });
+    </script>
+  
         </div>
     </div>
+    
 
     {% endblock %}
 
@@ -70,6 +93,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
+        <style>
+                body{
+                    background-image: url('https://wallpapercave.com/wp/wp2164091.jpg');
+                    overflow-x: hidden;
+                }
+            </style>
 </body>
 </html>

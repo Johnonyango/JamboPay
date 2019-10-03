@@ -8,10 +8,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link " href="{% url 'Index'%}">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link " href="{% url 'Index'%}">HOME <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/accounts/register/">Create Users</a>
+        <a class="nav-link" href="/accounts/register/">CEATE USERS</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -29,21 +29,21 @@
 
       <form class="navbar-form" role="search" action="{% url 'search'%}">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search customer " name="customer_name">
+          <input type="text" class="form-control" placeholder="Search Customer " name="customer_name">
         </div>
       </form>
 
-      <li><a class='nav-link' href="{% url 'indexone' %}">JamboAdmin</a>
+      <li><a class='nav-link' href="{% url 'indexone' %}">JAMBO-ADMIN</a>
       </li>
       <li>
-      <li><a class='nav-link' href="/logout">Logout</a>
+      <li><a class='nav-link' href="/logout">LOGOUT</a>
 
       </li>
       </li>
 
       {% else %}
       <p>
-        <a class='nav-link' href="/accounts/login">Login</a>
+        <a class='nav-link' href="/accounts/login">LOGIN</a>
       </p>
       {% endif %}
     </ul>
