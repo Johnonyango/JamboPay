@@ -15,16 +15,16 @@ class IndustryTestClass(TestCase):
         industries = Industry.objects.all()
         self.assertTrue(len(industries))
 
-class MerchantTestClass(TestCase):
-    def setUp(self):
-        self.user = User.objects.create_user(username='Emmanuel')
+# class MerchantTestClass(TestCase):
+#     def setUp(self):
+#         self.user = User.objects.create_user(username='Emmanuel')
         # self.revstreams = Revstreams.objects.create_revstream(revstream = 'Food & Beverages')
         # self.industry = Industry.objects.create_industry(industry = 'Ho')
-        self.aquamist = Merchant(Business_name = 'Aquamist', Business_owner = self.user,Email = 'john@gmail.com', Phone_number = '80745637', Physical_address ='P.O Box 10702', Post_code = '00100', Town = 'Nairobi', JP_paybill = '23451', Industry = 'Hospitality', Revstreams ='Food & Beverages', join_date = '2019-09-01' )
+    #     self.aquamist = Merchant(Business_name = 'Aquamist', Business_owner = self.user,Email = 'john@gmail.com', Phone_number = '80745637', Physical_address ='P.O Box 10702', Post_code = '00100', Town = 'Nairobi', JP_paybill = '23451', Industry = 'Hospitality', Revstreams ='Food & Beverages', join_date = '2019-09-01' )
         
 
-    def test_instance(self):
-        self.assertTrue(isinstance(self.aquamist,Merchant))
+    # def test_instance(self):
+    #     self.assertTrue(isinstance(self.aquamist,Merchant))
 
 
 # class BillsTestCase(TestCase):
