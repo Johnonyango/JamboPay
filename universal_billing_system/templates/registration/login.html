@@ -1,0 +1,52 @@
+{%extends "registration/base.html"%}
+
+{% load bootstrap4 %} {% block content %}
+<body>
+<br>
+<br>
+<br>
+<br>
+<div class="card text-white" style="margin-left:20%;margin-right:20%; background-color: #0074b6;">
+       
+  <div class="row">
+    <!-- Empty div -->
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      {% if form.errors %}
+      <p style="color:white"> It seeems Your password or Username is incorrect </p>
+      {% endif %}
+
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <h3 class="text-center">Sign In</h3>
+        </div>
+        <div class="panel-body">
+
+          <form action="/accounts/login/" method="POST" style="color: white">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+  
+              <div class="form-group">
+                <input type="submit" style="color: #fff;" class="btn btn-primary btn-sm" value="Login"><br>
+              </div>
+               
+                <p>Did you forget password ? <a href="/accounts/password/change">Change Password</a> <br>
+                    <a href="{% url 'home' %}">Go to Homepage</a>
+              <input type="hidden" name="next" value="{{next}}">
+  
+            </form>
+
+        </div>
+
+      </div>
+      </div>
+      </div>
+      </div>
+    </body>
+      <style>
+        body{
+          background-image: url('https://wallpapercave.com/wp/wp2164078.jpg');
+        }
+      </style>
+      {% endblock %}
