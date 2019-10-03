@@ -7,3 +7,8 @@ class IndustryTestClass(TestCase):
 
     def test_instance(self):
         self.assertTrue(isinstance(self.hospitality,Industry))
+
+    def test_save_method(self):
+        self.hospitality.save_industry()
+        industries = Industry.objects.all()
+        self.assertTrue(len(industries))
