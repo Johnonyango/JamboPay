@@ -155,7 +155,7 @@ class GetPayments(APIView):
 @login_required(login_url='/accounts/login/')
 def merchants(request):
     url = ('http://127.0.0.1:8000/api/BillsDetails')
-    headers = {'Authorization': 'Token bfe29d5c25ca612a216dca9627a557cdab536b3b'}
+    headers = {'Authorization': 'Token 70f064f893633467463bbdbb1dafc0884b7a376e'}
     response = requests.get(url,headers=headers)
     details = response.json()
     for detail in details:
