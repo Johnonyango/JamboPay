@@ -60,6 +60,8 @@ class Bills(models.Model):
 class NewsLetterRecipients(models.Model):
     name = models.CharField(max_length = 30, blank=False, null=False)
     email = models.EmailField(blank=False, null=False)
+    amount = models.FloatField(blank=False, default=None)
+    quantity = models.FloatField(blank=False, default=None)
 
 class Payments(models.Model):
     bill_number = models.ForeignKey(Bills,on_delete=models.CASCADE,default=None)
