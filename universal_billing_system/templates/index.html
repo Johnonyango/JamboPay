@@ -5,6 +5,7 @@
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -12,7 +13,7 @@
     <style>
         body {
             overflow-x: hidden;
-            
+
         }
 
         /* 
@@ -53,7 +54,7 @@ It's above the background image in our stack, so it appears to
 darken the image 
 */
         .image-box__overlay {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
 
             z-index: 2;
         }
@@ -69,7 +70,7 @@ to place the content appropriately
             z-index: 3;
 
             color: white;
-            min-height: 100vh;
+            min-height: 44vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -84,23 +85,62 @@ to place the content appropriately
         }
 
         h1 {
-            font-size: 30px;
+            font-size: 2em;
+            font-family: 'Bree Serif', serif;
+        }
+
+        .image-box__content ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .image-box__content li {
+            float: left;
+        }
+
+        .image-box__content li a {
+            display: block;
+            color: white;
+            text-align: center;
+            margin: 10%;
+            padding: 20px;
+            text-decoration: none;
+        }
+
+        .btn {
+            border-radius: 60%;
+            font-weight: bold;
         }
     </style>
+    
     {%include 'nav.html'%}
 
     <div class="image-box">
-        <div class="image-box__background" style="--image-url: url(https://wallpapercave.com/wp/wp2164078.jpg)"></div>
+        <div class="image-box__background" style="--image-url: url(http://staffingstream.wpengine.netdna-cdn.com/wp-content/uploads/2013/06/going-global.jpg)"></div>
         <div class="image-box__overlay"></div>
         <div class="image-box__content row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
+            <div class="col-md-1"></div>
+            <div class="col-md-7">
                 <h1>Register with us to manage your customers bills effectively. See all the bills you billed your
                     customer on each and track payments. </h1>
             </div>
-            <div class="col-md-2"></div>
+            <div class="col-md-4"></div>
+        </div>
+
+        <div class="image-box__content">
+            <ul>
+                <li><a class="btn btn-primary nav-link" href="{% url 'new-bill' %}">Generate
+                        Bill</a></li>
+                <li><a class="btn btn-primary nav-link" href="{% url 'bills_upload'%}">Upload
+                        Bill</a></li>
+                <li><a class="btn btn-primary nav-link" href="{% url 'customers'%}">Customer Bills</a></li>
+            </ul>
         </div>
     </div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

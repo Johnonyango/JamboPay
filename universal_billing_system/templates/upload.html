@@ -6,32 +6,52 @@
 
     <div style="text-align: center;" class="container">
         {% block content %}
-        <br>
-        {% if messages%}
-        {% for message in messages%}
-        <div>
-            <strong>{{message|safe}}</strong>
-        </div>
-        {% endfor %}
-        {% else %}
-
         {{order}}
         <div class="card">
-        <form class="card" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <label for="">Upload a File</label>
-            <br><br>
-            <input type="file" name="file" id="">
-            <br><br>
-            <p>Only accepts CSV files</p>
-            <br><br>
-            <button class="btn btn-primary" type="submit">Upload</button>
-        </form>
+            <form class="card" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="">Upload a File</label>
+                <br><br>
+                <input type="file" name="file" id="">
+                <br><br>
+                <p>Only accepts CSV files</p>
+                <br><br>
+                <button class="btn btn-primary" type="submit">Upload</button>
+            </form>
         </div>
         {% endif %}
         <hr>
     </div>
 
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Bill Number</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Customer Phone</th>
+                <th scope="col">Customer Email</th>
+                <th scope="col">Narration</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Bill Date</th>
+                <th scope="col">Bill status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>John Doe</td>
+                <td>+254725698423</td>
+                <td>johndoe@gmial.com</td>
+                <td>Delivery of Naruto figurine</td>
+                <td>Ksh.200,000</td>
+                <td>1</td>
+                <td>Oct. 2, 2019, 1:01 p.m.</td>
+                <td>Paid</td>
+            </tr>
+        </tbody>
+    </table>
+{%endblock%}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -42,13 +62,13 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-        <style>
-                body{
-                    background-image: url('https://wallpapercave.com/wp/wp2164091.jpg');
-                    overflow-x: hidden;
-                }
-            </style>
-            {%endblock%}
+    <style>
+        body {
+            background-image: url('https://wallpapercave.com/wp/wp2164091.jpg');
+            overflow-x: hidden;
+        }
+    </style>
+    {%endblock%}
 </body>
 
 </html>
