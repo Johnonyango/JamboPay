@@ -1,21 +1,21 @@
 {%extends "registration/base.html"%} {% load bootstrap4 %} {% block content %}
 {% include 'nav.html' %}
 <hr>
-<div class="card  text-white" style="margin-left:20%;margin-right:20%; background-color:#323333;">
+<div class="card  text-white" style="margin-left:20%;margin-right:20%; background-color:#a7acac;">
        
   <div class="row">
     <!-- Empty div -->
     <div class="col-md-4"></div>
     <div class="col-md-4">
       {% if form.errors %}
-      <p style="color:rgb(80, 76, 76)"></p>
+      <p style="color:rgb(197, 191, 191)"></p>
       {% endif %}
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="text-center" style="color: white;">New Bill</h3>
         </div>
         <div class="panel-body">
-          <form method="post" novalidate>
+          <form method="post" novalidate style="color: rgb(20, 20, 22)" >
             {% csrf_token %}
             {{ form }}
             <button type="submit">Submit</button>
