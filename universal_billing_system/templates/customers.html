@@ -19,14 +19,14 @@ y{%extends "registration/base.html"%}
   <br>
 ​
   
-  <h2>BILL DETAILS</h2>
+  <h2>Customer Bills</h2>
   <br>
   <div class="row">
   
   <div class="col-md-1"></div>
 ​
-<div class="col-md-10">
-  <table class="table table-bordered table-primary" id="tblCustomers" cellspacing="0" cellpadding="0">
+<!-- <div class="col-md-10">
+  <table class="table table-bordered table-success" id="tblCustomers" cellspacing="0" cellpadding="0">
     <tr>
       <th>Bill Number</th> 
       <th>Customer Name</th> 
@@ -51,7 +51,33 @@ y{%extends "registration/base.html"%}
       <td>{{detail.post_date}}</td>
       <td>{{detail.status}}</td>
     </tr>
-    {% endfor %}
+    {% endfor %} -->
+
+    <!-- On rows -->
+<tr class="table-active">Bill Number</tr>
+
+<tr class="table-primary">Customer Name</tr>
+<tr class="table-secondary">Customer Phone</tr>
+<tr class="table-success">Customer Email</tr>
+<tr class="table-danger">Narration</tr>
+<tr class="table-warning">Amount</tr>
+<tr class="table-info">Quantity</tr>
+<tr class="table-light">Bill Date</tr>
+<tr class="table-dark">Bill status</tr>
+
+<!-- On cells (`td` or `th`) -->
+<tr>
+  <td class="table-active">...</td>
+  
+  <td class="table-primary">...</td>
+  <td class="table-secondary">...</td>
+  <td class="table-success">...</td>
+  <td class="table-danger">...</td>
+  <td class="table-warning">...</td>
+  <td class="table-info">...</td>
+  <td class="table-light">...</td>
+  <td class="table-dark">...</td>
+</tr>
 ​
 </table>
 <br/>
