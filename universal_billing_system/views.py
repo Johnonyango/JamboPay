@@ -10,10 +10,11 @@ from rest_framework import status
 import requests
 from .forms import *
 from django.http import HttpResponse,Http404,HttpResponseRedirect
-from .email import *
+from .emails import *
 import openpyxl
 from rest_framework.permissions import IsAuthenticated  # <-- Here
-
+from django.core.mail import EmailMessage
+from django.contrib import messages
 
 # login
 def login(request):
@@ -171,8 +172,17 @@ def new_bill(request):
         # if request.method=="POST":
         # form =BillsForm(request.POST)
         # if form.is_valid():
-        #     name = form.cleaned_data['customer_name']
-        #     email = form.cleaned_data['customer_email']
+            name = form.cleaned_data['customer_name']
+            email = form.cleaned_data['customer_email']
+                            # current_site=get_current_site(request)
+            mail_subject='Pay bills.'
+            message=render_to_string('email/bill.html',{
+
+            })
+
+            to_email=email
+            email=EmailMessage(mail_subject,message,to=[to_email])
+            email.send()
 
         #     name = request.POST.get('customer_name')
         #     email = request.POST.get('customer_email')
@@ -243,12 +253,15 @@ def notification(request):
 
 def uploadCSV(request):
     template = "bills_upload.html"
-    prompt = {"order":"order of csv should be as follows:"}
+    prompt = {"order":"order of csv should be as follows: \n customer_name,customer_phone,customer_email,narration,amount,quantity,post_date"}
     if request.method == "GET":
         return render(request,template,prompt)
     csv_file=request.FILES['file']
     if not csv_file.name.endswith('.csv'):
         message.error(request,"this is not a csv file")
+    else:
+        messages.success(request,'Upload successfull')
+
     data_set = csv_file.read().decode('UTF-8')
     io_string = io.StringIO(data_set)
     next(io_string)
