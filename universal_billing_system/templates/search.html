@@ -12,18 +12,21 @@
     {%extends "base.html"%}
   {% block content %}
   <br>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
   <div class=" container row text-center">
     {% if names %}
-    <h2> Found {{names|length}} bills with the search name {{message}}.</h2>
+    <h2 style="font-family: 'Bree Serif', serif;"> Found {{names|length}} bills with the search name {{message}}.</h2>
     {% else %}
-    <h2> Found 0 names for the search term</h2>
+    <h2 style="font-family: 'Bree Serif', serif;"> Found 0 names for the search term</h2>
     {% endif %}
   </div>
 
 <br>
-  <table id="bill" class=" table table-bordered table-primary">
+  <table id="bill" class=" table table-bordered table-striped">
     <thead>
-      <tr>
+      <tr style="background-color:#9CC4DD;">
         <th>Bill Number</th>
         <th>Customer Name</th>
         <th>Customer Phone</th>
@@ -55,10 +58,18 @@
       {% endfor %}
     </tbody>
   </table>
-  <input class="btn btn-primary" type="button" id="btnExport" value="Export" />
+
+<input style="background-color:#9CC4DD;" class="btn btn-lg" type="button" id="btnExport" value="Download pdf" />
+  
+</div>
+<div class="col-md-1"></div>
+
+</div>
+  
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
   <script type="text/javascript">
     $("body").on("click", "#btnExport", function () {
       html2canvas($('#bill')[0], {

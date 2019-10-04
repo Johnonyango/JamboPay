@@ -1,33 +1,21 @@
-{%extends "registration/base.html"%}
+{%extends "base.html"%}
 {% load bootstrap4 %}
-<!DOCTYPE html>
-<html lang="en">
-​
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <title>Document</title>
-</head>
-​
+
 <body>
 
   {% block content %}
-  {% include 'nav.html' %}
   <br>
 ​
+  <h2 style="font-family: 'Bree Serif', serif;
+  ">BILL DETAILS</h2>
   
-  <h2>BILL DETAILS</h2>
-  <br>
   <div class="row">
   
   <div class="col-md-1"></div>
 ​
 <div class="col-md-10">
-  <table class="table table-bordered table-primary" id="tblCustomers" cellspacing="0" cellpadding="0">
-    <tr>
+  <table class="table table-bordered table-striped " id="tblCustomers" cellspacing="0" cellpadding="0">
+    <tr style="background-color:#9CC4DD;">
       <th>Bill Number</th> 
       <th>Customer Name</th> 
       <th>Customer Phone</th> 
@@ -55,7 +43,7 @@
 ​
 </table>
 <br/>
-<input class="btn btn-primary" type="button" id="btnExport" value="Export" />
+<input style="background-color:#9CC4DD;" class="btn btn-lg" type="button" id="btnExport" value="Download pdf" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
@@ -83,11 +71,6 @@
   h2{
     text-align: center;
   }
-    body{
-      background-image: url('https://wallpapercave.com/wp/wp2164078.jpg');
-
-      overflow-x: hidden;
-    }
 
     .container {
       background-color: #0073b659;
@@ -97,4 +80,3 @@
 ​
   
   </body>
-</html>
