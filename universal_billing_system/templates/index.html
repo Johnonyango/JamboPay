@@ -79,38 +79,31 @@ to place the content appropriately
         /* just for the demo */
         html,
         body {
-            margin: 0;
-            padding: 0;
             font-family: sans-serif;
         }
 
-        h1 {
-            font-size: 2em;
+        h3 {
+            font-size: 1.5em;
             font-family: 'Bree Serif', serif;
         }
 
         .image-box__content ul {
             list-style-type: none;
-            margin: 0;
-            padding: 0;
             overflow: hidden;
-        }
 
-        .image-box__content li {
-            float: left;
         }
 
         .image-box__content li a {
-            display: block;
             color: white;
-            text-align: center;
+            text-align:left;
             margin: 10%;
-            padding: 20px;
+            padding: 5px;
+            padding-right:5px;
             text-decoration: none;
+            float: left;
         }
 
         .btn {
-            border-radius: 60%;
             font-weight: bold;
         }
     </style>
@@ -122,20 +115,20 @@ to place the content appropriately
         <div class="image-box__overlay"></div>
         <div class="image-box__content row">
             <div class="col-md-1"></div>
-            <div class="col-md-7">
-                <h1>Register with us to manage your customers bills effectively. See all the bills you billed your
-                    customer on each and track payments. </h1>
+            <div class="col-md-5"><br><br><br><br><br>  
+                <h3>Register with us to manage your customers' bills effectively. <br> See all the bills you billed your
+                    customer on each transaction and track payments. </h3>
             </div>
-            <div class="col-md-4"></div>
+            <div class="col-md-6"></div>
         </div>
 
-        <div class="image-box__content">
+        <div class="image-box__content buttons">
             <ul>
-                <li><a class="btn btn-primary nav-link" href="{% url 'new-bill' %}">Generate
+                <li><a style="background-color:#0074b6;" class="btn btn-primary nav-link" href="{% url 'new-bill' %}">Generate
                         Bill</a></li>
-                <li><a class="btn btn-primary nav-link" href="{% url 'bills_upload'%}">Upload
+                <li><a style="background-color:#0074b6;" class="btn btn-primary nav-link" href="{% url 'bills_upload'%}">Upload
                         Bill</a></li>
-                <li><a class="btn btn-primary nav-link" href="{% url 'customers'%}">Customer Bills</a></li>
+                <li><a style="background-color:#0074b6;" class="btn btn-primary nav-link" href="{% url 'customers'%}">Customer Bills</a></li>
             </ul>
         </div>
     </div>
