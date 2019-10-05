@@ -46,12 +46,19 @@ class Bills(models.Model):
     amount = models.FloatField(blank=False)
     quantity = models.FloatField(blank=True)
     post_date = models.DateTimeField(auto_now_add=True)
+    due_date = models.DateTimeField(help_text='Due date')
     status = models.IntegerField(choices=Status,default=0)
+    generated_by=models.CharField(max_length=255,blank=False)
     
     @classmethod
     def search_by_name(cls,search_term):
         names = cls.objects.filter(customer_name__icontains=search_term)
         return names
+    
+    @classmethod
+    def get_merchant_bills(cls,generated_by):
+        merchants_bills=cls.objects.filter(generated_by=generated_by).all()
+        return merchants_bills
 
 class NewsLetterRecipients(models.Model):
     name = models.CharField(max_length = 30)

@@ -25,15 +25,14 @@
             <table class="table table-bordered table-primary">
                 <thead>
                     <tr>
+                        <th>No</th>
                         <th>Business Name</th>
-                        <th>Business Owner</th>
                         <th>Email</th>
                         <th>Phone Number</th>
                         <th>Revenue Streams</th>
+                        <th>Industry</th>
                         <th>Physical_address</th>
                         <th>Town</th>
-                        <th>Industry</th>
-                        <th>Revenue Streams</th>
                         <th>Join Date</th>
                     </tr>
                 </thead>
@@ -43,13 +42,12 @@
                     <tr>
                         <td>{{detail.id}}</td>
                         <td>{{detail.Business_name}}</td>
-                        <td>{{detail.Business_owner}}</td>
                         <td>{{detail.Email}}</td>
                         <td>{{detail.Phone_number}}</td>
-                        <td>{{detail.Physical_address}}</td>
-                        <td>{{detail.Town}}</td>
                         <td>{{detail.Industry}}</td>
                         <td>{{detail.Revstreams}}</td>
+                        <td>{{detail.Physical_address}}</td>
+                        <td>{{detail.Town}}</td>
                         <td>{{detail.join_date}}</td>
                     </tr>
                     {% endfor %}
