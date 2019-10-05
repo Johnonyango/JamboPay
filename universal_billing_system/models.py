@@ -60,6 +60,7 @@ class Bills(models.Model):
     quantity = models.FloatField(blank=True)
     post_date = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=Status,default=0)
+    bill_number = models.CharField(max_length=20,blank=False)
     
 
 class NewsLetterRecipients(models.Model):
