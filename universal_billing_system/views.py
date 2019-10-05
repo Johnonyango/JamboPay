@@ -146,7 +146,7 @@ class GetPayments(APIView):
 @login_required(login_url='/accounts/login/')
 def customers(request):
     url = ('http://127.0.0.1:8000/api/BillsDetails')
-    headers = {'Authorization': 'Token b8970394cf65a6256843fffdd5ddb57f200b81ae'}
+    headers = {'Authorization': 'Token 2683eacc0edd0c08360e7532197f303dc574a3ac'}
     response = requests.get(url,headers=headers)
     details = response.json()
     for detail in details:
@@ -167,22 +167,25 @@ def new_bill(request):
         form =BillsForm(request.POST,request.FILES)
         if form.is_valid():
             bill = form.save(commit = False)
+            # bill.username = current_user
+            # bill.generated_by=current_user
+            bill.generated_by=current_user
             bill.save()
         
         # if request.method=="POST":
         # form =BillsForm(request.POST)
         # if form.is_valid():
-            name = form.cleaned_data['customer_name']
-            email = form.cleaned_data['customer_email']
-                            # current_site=get_current_site(request)
-            mail_subject='Pay bills.'
-            message=render_to_string('email/bill.html',{
+            # name = form.cleaned_data['customer_name']
+            # email = form.cleaned_data['customer_email']
+            #                 # current_site=get_current_site(request)
+            # mail_subject='Pay bills.'
+            # message=render_to_string('email/bill.html',{
 
-            })
+            # })
 
-            to_email=email
-            email=EmailMessage(mail_subject,message,to=[to_email])
-            email.send()
+            # to_email=email
+            # email=EmailMessage(mail_subject,message,to=[to_email])
+            # email.send()
 
         #     name = request.POST.get('customer_name')
         #     email = request.POST.get('customer_email')
@@ -294,3 +297,13 @@ def search_results(request):
     else:
         message = "You haven't searched for any term."
         return render(request, 'search.html',{"message":message})
+
+
+@login_required(login_url='/accounts/login/')
+def merchant_bills(request):
+    details = Bills.get_merchant_bills(request.user)
+
+    message = "The Following are bills that you have generated : "
+
+
+    return render(request, 'mybills.html', {'details': details,'message':message})

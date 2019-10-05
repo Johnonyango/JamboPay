@@ -26,6 +26,9 @@ urlpatterns=[
     #moreurls
     url(r'^upload-csv/$', views.uploadCSV, name='bills_upload'),
 
+    url(r'^merchantbills/$', views.merchant_bills, name='merchantbills'),
+
+
 ]
 
 if settings.DEBUG:
