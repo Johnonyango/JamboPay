@@ -1,35 +1,27 @@
-{% load bootstrap4 %}
-{% load staticfiles %}
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Generate New Bill</title>
-    {{form.media}}
-
-    {% block styles %} 
-    {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'css/news.css' %}"> 
-    {% endblock %}
-
-</head>
-
-<body>
-
-    <form action="{%url 'new-bill'%}" method="post" enctype="multipart/form-data">
-        {%csrf_token%}
-
-        {% bootstrap_form form%}
-        <input type="submit" class="btn btn-success btn-lg" value="Post">
-    </form>
-
-    {% block scripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    {% bootstrap_javascript %} {% endblock %}
-
-</body>
-
-</html>
+{%extends "registration/base.html"%} {% load bootstrap4 %} {% block content %}
+{% include 'nav.html' %}
+<hr>
+<div class="card  text-white" style="margin-left:20%;margin-right:20%; background-color:#0074b6;">
+       
+  <div class="row">
+    <!-- Empty div -->
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      {% if form.errors %}
+      <p style="color:white"></p>
+      {% endif %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="text-center">Bills:</h3>
+        </div>
+        <div class="panel-body">
+            <form method="post">{% csrf_token %}
+                {% bootstrap_form form%}
+                <input type="submit" value="submit" />
+            </form>
+        </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      {% endblock %}
