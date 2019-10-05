@@ -21,7 +21,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="{% url 'new-bill' %}">Generate Bill</a>
           <a class="dropdown-item" href="{% url 'bills_upload'%}">Upload Bill</a>
-          <a class="dropdown-item" href="{% url 'customers'%}">Bill Details</a>
+          <a class="dropdown-item" href="{% url 'merchantbills'%}">Bill Details</a>
         </div>
       </li>
       {% if user.is_authenticated %}
