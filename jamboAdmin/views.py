@@ -55,24 +55,6 @@ def revenueStreams(request):
         name = detail.get('name')
     return render(request, 'revenueStreams.html', {'details': details})
 
-@login_required(login_url='/accounts/login/')
-def allBills(request):
-    url = ('http://127.0.0.1:8000/api/BillsDetails/')
-    headers = {'Authorization': 'Token 2683eacc0edd0c08360e7532197f303dc574a3ac'}
-    response = requests.get(url,headers=headers)
-    details = response.json()
-    for detail in details:
-        id = detail.get('id')
-        customer_name = detail.get('customer_name')
-        customer_phone = detail.get('customer_phone')
-        customer_email = detail.get('customer_email')
-        narration = detail.get('narration')
-        amount = detail.get('amount')
-        post_date = detail.get('post_date')
-        due_date = detail.get('due_date')
-        status = detail.get('status')
-    return render(request, 'bills.html', {'details': details})
-
 
 def payments(request):
     url = ('http://127.0.0.1:8000/api/GetPayments/')
@@ -88,3 +70,24 @@ def payments(request):
         amount = detail.get('amount')
         pay_date = detail.get('pay_date')
     return render(request, 'payments.html', {'details': details})
+
+
+
+def merchantBills(request):
+    url = ('http://127.0.0.1:8000/api/BillsDetails/')
+    headers = {'Authorization': 'Token 2683eacc0edd0c08360e7532197f303dc574a3ac'}
+    response = requests.get(url,headers=headers)
+    details = response.json()
+    for detail in details:
+        id = detail.get('id')
+        customer_name = detail.get('customer_name')
+        customer_phone = detail.get('customer_phone')
+        customer_email = detail.get('customer_email')
+        narration = detail.get('narration')
+        quantity = detail.get('quantity')
+        amount = detail.get('amount')
+        post_date = detail.get('post_date')
+        due_date = detail.get('due_date')
+        generated_by = detail.get('generated_by')
+        status = detail.get('status')
+    return render(request, 'merchant_bills.html', {'details': details})

@@ -9,8 +9,9 @@ urlpatterns=[
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^merchants/$',views.merchants,name='merchants'),
     url(r'^revenuestreams/$',views.revenueStreams,name='revenueStreams'),
-    url(r'^bills/$',views.allBills,name='bills'),
     url(r'^payments/$',views.payments,name='payments'),
+    url(r'^merchantbills/$',views.merchantBills,name='merchantBills'),
+
 
 
 ]
