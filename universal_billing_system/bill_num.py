@@ -1,7 +1,7 @@
 import random
 import string
 ​
-def randomStringDigits(stringLength=8):
+def randomStringDigits(stringLength=5):
     """Generate a random string of letters and digits """
   
     lettersAndDigits = string.ascii_letters + string.digits

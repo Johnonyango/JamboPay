@@ -166,6 +166,8 @@ def new_bill(request):
         form =BillsForm(request.POST,request.FILES)
         if form.is_valid():
             bill = form.save(commit = False)
+            val=randomStringDigits()
+            Bills.bill_number=str(customer_name.id)+val+str(Bills.customer_name)
             bill.save()
         
         # if request.method=="POST":
