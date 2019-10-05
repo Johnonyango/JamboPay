@@ -9,6 +9,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from jamboAdmin.forms import SignUpForm
 
 
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -42,3 +43,14 @@ def merchants(request):
         Pay_bill = detail.get('JP_paybill')
         Industry = detail.get('Industry')
     return render(request, 'merchants.html', {'details': details})
+
+@login_required(login_url='/accounts/login/')
+def revenueStreams(request):
+    url = ('http://127.0.0.1:8000/api/GetRevenueStreams')
+    headers = {'Authorization': 'Token 2683eacc0edd0c08360e7532197f303dc574a3ac'}
+    response = requests.get(url, headers=headers)
+    details = response.json()
+    for detail in details:
+        id= detail.get('id')
+        name = detail.get('name')
+    return render(request, 'revenueStreams.html', {'details': details})
