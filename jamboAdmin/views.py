@@ -57,7 +57,7 @@ def revenueStreams(request):
 
 @login_required(login_url='/accounts/login/')
 def allBills(request):
-    url = ('http://127.0.0.1:8000/api/BillsDetails')
+    url = ('http://127.0.0.1:8000/api/BillsDetails/')
     headers = {'Authorization': 'Token 2683eacc0edd0c08360e7532197f303dc574a3ac'}
     response = requests.get(url,headers=headers)
     details = response.json()
@@ -72,3 +72,19 @@ def allBills(request):
         due_date = detail.get('due_date')
         status = detail.get('status')
     return render(request, 'bills.html', {'details': details})
+
+
+def payments(request):
+    url = ('http://127.0.0.1:8000/api/GetPayments/')
+    headers = {'Authorization': 'Token 2683eacc0edd0c08360e7532197f303dc574a3ac'}
+    response = requests.get(url,headers=headers)
+    details = response.json()
+    for detail in details:
+        id = detail.get('id')
+        bill_number = detail.get('bill_number')
+        payers_name = detail.get('payers_name')
+        payers_phone = detail.get('payers_phone')
+        narration = detail.get('narration')
+        amount = detail.get('amount')
+        pay_date = detail.get('pay_date')
+    return render(request, 'payments.html', {'details': details})

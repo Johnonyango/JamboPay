@@ -180,28 +180,6 @@ def new_bill(request):
             # bill.generated_by=current_user
             bill.generated_by=current_user
             bill.save()
-        
-        # if request.method=="POST":
-        # form =BillsForm(request.POST)
-        # if form.is_valid():
-            # name = form.cleaned_data['customer_name']
-            # email = form.cleaned_data['customer_email']
-            #                 # current_site=get_current_site(request)
-            # mail_subject='Pay bills.'
-            # message=render_to_string('email/bill.html',{
-
-            # })
-
-            # to_email=email
-            # email=EmailMessage(mail_subject,message,to=[to_email])
-            # email.send()
-
-        #     name = request.POST.get('customer_name')
-        #     email = request.POST.get('customer_email')
-        #     recipient = NewsLetterRecipients(name=name, email=email)
-        #     recipient.save()
-        #     send_welcome_email(name, email)
-
         return HttpResponseRedirect('/index')
     
     else:
