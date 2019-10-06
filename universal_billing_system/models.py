@@ -38,7 +38,7 @@ class Merchant(models.Model):
     Industry = models.ManyToManyField(Industry)
     Revstreams = models.ManyToManyField(Revstreams)
     join_date=models.DateTimeField(auto_now_add=True)
-    Role = models.IntegerField()
+    Role = models.IntegerField(default=None)
 
     
     def __str__(self):
