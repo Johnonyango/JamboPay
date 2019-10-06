@@ -47,7 +47,7 @@ def merchants(request):
 def sign(request):
     current_user = request.user
     if request.method == "POST":
-        form = BillsForm(request.POST, request.FILES)
+        form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
             bill = form.save(commit=False)
             bill.save()
@@ -55,10 +55,9 @@ def sign(request):
         # if request.method=="POST":
         # form =BillsForm(request.POST)
         # if form.is_valid():
-            name = form.cleaned_data.get('customer_name')
-            email = form.cleaned_data.get('customer_email')
-            amount = form.cleaned_data.get('amount')
-            quantity = form.cleaned_data.get('quantity')
+            name = form.cleaned_data.get('Business_owner')
+            email = form.cleaned_data.get('email')
+            
 
         #     name = request.POST.get('customer_name')
         #     email = request.POST.get('customer_email')
