@@ -9,6 +9,11 @@
 </head>
 
 <body>
+    <style>
+        body{
+            overflow-x: hidden;
+        }
+    </style>
     {% include "nav.html" %}
     {% block content %} <h1 class='text-center'>News for {{date|date:"l d-F Y"}}</h1> {%endblock%}
     {% block scripts %}
