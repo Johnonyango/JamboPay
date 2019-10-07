@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from django.contrib.auth.decorators import login_required
 from .models import *
 from rest_framework import status
+from universal_billing_system .models import *
 import requests
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from jamboAdmin.forms import SignUpForm
@@ -41,6 +42,7 @@ def merchants(request):
         Town = detail.get('Town')
         Pay_bill = detail.get('JP_paybill')
         Industry = detail.get('Industry')
+        
     return render(request, 'merchants.html', {'details': details})
 
 
@@ -49,21 +51,13 @@ def sign(request):
     if request.method == "POST":
         form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
-            bill = form.save(commit=False)
-            bill.save()
+            merchant = form.save(commit=False)
+            merchant.save()
 
-        # if request.method=="POST":
-        # form =BillsForm(request.POST)
-        # if form.is_valid():
             name = form.cleaned_data.get('Business_owner')
             email = form.cleaned_data.get('email')
-            
-
-        #     name = request.POST.get('customer_name')
-        #     email = request.POST.get('customer_email')
-            recipient = NewsLetterRecipients(name=name, email=email,amount=amount,quantity=quantity)
+        
+            recipient = Merchant(name=Business_owner, email=email)
             recipient.save()
-            send_notification(name, email,amount=amount,quantity=quantity)
-            # recipient = NewsLetterRecipients(name = name,email =email)
-            # send_notification(name = name, email = email)
-
+            send_message(name, email)
+            
