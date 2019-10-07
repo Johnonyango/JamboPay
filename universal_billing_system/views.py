@@ -182,18 +182,6 @@ def new_bill(request):
             bill = form.save(commit=False)
             bill.save()
 
-        # if request.method=="POST":
-        # form =BillsForm(request.POST)
-        # if form.is_valid():
-        #     name = form.cleaned_data['customer_name']
-        #     email = form.cleaned_data['customer_email']
-
-        #     name = request.POST.get('customer_name')
-        #     email = request.POST.get('customer_email')
-        #     recipient = NewsLetterRecipients(name=name, email=email)
-        #     recipient.save()
-        #     send_welcome_email(name, email)
-
         return HttpResponseRedirect('/index')
 
     else:
@@ -201,44 +189,6 @@ def new_bill(request):
 
     return render(request, 'bills/new-bill.html', {"form": form})
 
-
-@login_required
-def upload(request):
-    if "GET" == request.method:
-        return render(request, 'upload.html', {})
-    else:
-        excel_file = request.FILES["excel_file"]
-
-        # you may put validations here to check extension or file size
-
-        wb = openpyxl.load_workbook(excel_file)
-
-        # getting all sheets
-        sheets = wb.sheetnames
-        # print(sheets)
-
-        # getting a particular sheet
-        worksheet = wb["Sheet1"]
-        # print(worksheet)
-
-        # getting active sheet
-        active_sheet = wb.active
-        # print(active_sheet)
-
-        # reading a cell
-        print(worksheet["A1"].value)
-
-        excel_data = list()
-        # iterating over the rows and
-        # getting value from each cell in row
-        for row in worksheet.iter_rows():
-            row_data = list()
-            for cell in row:
-                row_data.append(str(cell.value))
-                print(cell.value)
-            excel_data.append(row_data)
-
-        return render(request, 'upload.html', {"excel_data": excel_data})
 
 
 @login_required
@@ -255,7 +205,7 @@ def notification(request):
         form = NoteForm()
     return render(request, 'note.html', {'form': form})
 
-
+@login_required(login_url='/accounts/login/')
 def uploadCSV(request):
     template = "bills_upload.html"
     prompt = {"order": "order of csv should be as follows:"}
