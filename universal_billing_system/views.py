@@ -208,7 +208,7 @@ def notification(request):
 @login_required(login_url='/accounts/login/')
 def uploadCSV(request):
     template = "bills_upload.html"
-    prompt = {"order": "order of csv should be as follows:"}
+    prompt = {"order": "Download template and upload file in csv format:"}
     if request.method == "GET":
         return render(request, template, prompt)
     csv_file = request.FILES['file']
