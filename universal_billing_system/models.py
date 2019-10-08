@@ -38,7 +38,6 @@ class Merchant(models.Model):
     Industry = models.ManyToManyField(Industry)
     Revstreams = models.ManyToManyField(Revstreams)
     join_date=models.DateTimeField(auto_now_add=True)
-    Role = models.IntegerField(default=None)
 
     
     def __str__(self):
@@ -63,9 +62,9 @@ class Bills(models.Model):
     bill_number = models.CharField(max_length=20,blank=False, default=None)
     
 
-class NewsLetterRecipients(models.Model):
-    name = models.CharField(max_length = 30)
-    email = models.EmailField()
+# class NewsLetterRecipients(models.Model):
+#     name = models.CharField(max_length = 30)
+#     email = models.EmailField()
 
 class Payments(models.Model):
     bill_number = models.ForeignKey(Bills,on_delete=models.CASCADE,default=None)
@@ -86,9 +85,9 @@ class Payments(models.Model):
 
 #   user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES)
 
-class Role(Merchant):
-    class Meta:
-        proxy = True
+# class Role(Merchant):
+#     class Meta:
+#         proxy = True
     # Role =(
     #     (1, 'Reports_manager'),
     #     (2, 'Bills_manager')

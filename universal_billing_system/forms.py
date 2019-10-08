@@ -42,7 +42,7 @@ class BillsForm(forms.ModelForm):
         }
         exclude = ['status','bill_number']
 
-class NoteForm(forms.ModelForm):
-    class Meta:
-        model = NewsLetterRecipients
-        fields = '__all__'
+# class NoteForm(forms.ModelForm):
+#     class Meta:
+#         model = NewsLetterRecipients
+#         fields = '__all__'

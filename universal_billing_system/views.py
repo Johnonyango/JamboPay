@@ -12,6 +12,7 @@ from django.http import HttpResponse,Http404,HttpResponseRedirect
 from .email import *
 import openpyxl
 from rest_framework.permissions import IsAuthenticated  # <-- Here
+from .bill_num import *
 
 
 
@@ -167,7 +168,7 @@ def new_bill(request):
         if form.is_valid():
             bill = form.save(commit = False)
             val=randomStringDigits()
-            Bills.bill_number=str(customer_name.id)+val+str(Bills.customer_name)
+            Bills.bill_number=str("xyz")+val
             bill.save()
         
         # if request.method=="POST":

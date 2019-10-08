@@ -1,6 +1,5 @@
 import random
 import string
-​
 def randomStringDigits(stringLength=5):
     """Generate a random string of letters and digits """
   
