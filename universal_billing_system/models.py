@@ -73,5 +73,4 @@ class Payments(models.Model):
 
     def save_bill(self):
         self.save()
- 
- 
+

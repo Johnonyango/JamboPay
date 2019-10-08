@@ -4,21 +4,28 @@ from rest_framework.views import APIView
 from django.contrib.auth.decorators import login_required
 from .models import *
 from rest_framework import status
-from universal_billing_system .models import *
+from .models import *
 import requests
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from jamboAdmin.forms import SignUpForm
-
+from .email import *
+from .forms import *
 
 def signup(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        form = merchantUSers(request.POST)
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
+
+            name = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            recipient = NewsLetterRecipientss(name=name, email=email)
+            recipient.save()
+            send_message(name, email)
             return redirect('indexone')
     else:
-        form = SignUpForm()
+        form = merchantUSers()
 
     return render(request, 'registration/registration_form.html', {'form': form})
 
