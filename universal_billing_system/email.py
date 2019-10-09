@@ -3,7 +3,7 @@ from django.template.loader import render_to_string
 
 def send_notification(name,email,amount,quantity):
     # Creating message subject and sender
-    subject = 'Lipa deni'
+    subject = 'Pay bill'
     sender = 'j.yayah7@gmail.com'
 
     text_content = render_to_string('email/bill.txt',{ "name": name,"amount":amount,"quantity":quantity })

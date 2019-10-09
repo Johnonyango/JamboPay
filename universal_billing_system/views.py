@@ -288,10 +288,10 @@ def notification(request):
         form = NoteForm()
     return render(request, 'note.html', {'form': form})
 
-
+@login_required(login_url='/accounts/login/')
 def uploadCSV(request):
     template = "bills_upload.html"
-    prompt = {"order": "order of csv should be as follows:"}
+    prompt = {"order": "Download template and upload file in csv format:"}
     if request.method == "GET":
         return render(request, template, prompt)
     csv_file = request.FILES['file']
@@ -331,3 +331,6 @@ def search_results(request):
     else:
         message = "You haven't searched for any term."
         return render(request, 'search.html', {"message": message})
+    
+
+
