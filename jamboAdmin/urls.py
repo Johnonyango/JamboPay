@@ -8,6 +8,8 @@ urlpatterns=[
     url(r'^$',views.merchants,name='indexone'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^merchants/$',views.merchants,name='merchants'),
+
+
 ]
 
 

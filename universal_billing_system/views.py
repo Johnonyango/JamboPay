@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import csv
 import io
+=======
+>>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -46,11 +49,23 @@ def profile(request):
     return render(request, 'timeline/profile.html', context)
 
 
+# Create your views here.
+# def index(request):
+#     url = ('jpaye.herokuap.com/api/GetMerchants/')
+#     response = requests.get(url)
+#     print(response)
+   
+# def index(request):
+#     return render(request, 'index.html')
+
 def index(request):
     return render(request, 'index.html')
 
 
+<<<<<<< HEAD
 @login_required
+=======
+>>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe
 def upload(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
@@ -74,7 +89,22 @@ class MerchantList(APIView):
         all_merchants = Merchant.objects.all()
         serializers = MerchantSerializer(all_merchants, many=True)
         return Response(serializers.data)
+<<<<<<< HEAD
 
+=======
+    
+def search(request):
+    if 'name_search' in request.GET and request.GET["name_search"]:
+        search_term = request.GET.get("name_search")
+        searched_articles = Article.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html',{"message":message,"articles": searched_articles})
+
+    else:
+        message = "You haven't searched for any term."
+        return render(request, 'search.html',{"message":message})
+>>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe
 
 class RevenueStreamsList(APIView):
     permission_classes = (IsAuthenticated,)            # <-- And here
@@ -140,6 +170,7 @@ class GetPayments(APIView):
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
+<<<<<<< HEAD
 
         # update bills
         specific_bill = Bills.pk
@@ -149,6 +180,8 @@ class GetPayments(APIView):
             specific_bill.status = 1
             # print('true')
             specific_bill.save()
+=======
+>>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe
 
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
         permission_classes = (IsAdminOrReadOnly,)
@@ -215,7 +248,7 @@ def notification(request):
             recipient.save()
             send_notification(name = name, email = email)
 
-@login_required
+
 def upload(request):
     if "GET" == request.method:
         return render(request, 'upload.html', {})
@@ -254,7 +287,19 @@ def upload(request):
         return render(request, 'upload.html', {"excel_data": excel_data})
 
 
-@login_required
+
+def search(request):
+    if 'name_search' in request.GET and request.GET["name_search"]:
+        search_term = request.GET.get("name_search")
+        searched_articles = Article.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html',{"message":message,"articles": searched_articles})
+
+    else:
+        message = "You haven't searched for any term."
+        return render(request, 'search.html',{"message":message})
+
 def notification(request):
     if request.method == 'POST':
         form = NoteForm(request.POST)
@@ -267,6 +312,7 @@ def notification(request):
     else:
         form = NoteForm()
     return render(request, 'note.html', {'form': form})
+<<<<<<< HEAD
 
 
 def uploadCSV(request):
@@ -311,3 +357,5 @@ def search_results(request):
     else:
         message = "You haven't searched for any term."
         return render(request, 'search.html', {"message": message})
+=======
+>>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe

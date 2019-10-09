@@ -2,11 +2,11 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth.decorators import login_required
-from .models import *
+from .models import  *
 from rest_framework import status
 from .models import *
 import requests
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponse,Http404,HttpResponseRedirect
 from jamboAdmin.forms import SignUpForm
 from .email import *
 from .forms import *
@@ -29,15 +29,17 @@ def signup(request):
 
     return render(request, 'registration/registration_form.html', {'form': form})
 
-
 def indexone(request):
     return render(request, 'indexone.html')
-
 
 @login_required(login_url='/accounts/login/')
 def merchants(request):
     url = ('http://127.0.0.1:8000/api/GetMerchants')
+<<<<<<< HEAD
     headers = {'Authorization': 'Token b76be7fe9c4ecd62b0e003661426ccbe6cd01d05'}
+=======
+    headers = {'Authorization': 'Token a6d89c3ca9efcb0042ac543d5d90bc44f4cbb34a'}
+>>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe
     response = requests.get(url,headers=headers)
     details = response.json()
     for detail in details:
