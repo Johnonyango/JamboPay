@@ -11,6 +11,7 @@ from jamboAdmin.forms import SignUpForm
 from .email import *
 from .forms import *
 
+
 def signup(request):
     if request.method == 'POST':
         form = merchantUSers(request.POST)
@@ -34,9 +35,15 @@ def indexone(request):
 
 @login_required(login_url='/accounts/login/')
 def merchants(request):
+<<<<<<< HEAD
     url = ('http://127.0.0.1:8000/api/GetMerchants')
     headers = {'Authorization': 'Token 6841dd7a3c767c125ca2fdaddf05ee5f127ab6f8'}
     response = requests.get(url,headers=headers)
+=======
+    url = ('https://jpaye.herokuapp.com/api/GetMerchants')
+    headers = {'Authorization': 'Token 4d7607cc35bc893b6f80eac430d4371fb46dc0c8'}
+    response = requests.get(url, headers=headers)
+>>>>>>> 9ec2200006d4c28fa6e31e37299b0c1648ca27f3
     details = response.json()
     for detail in details:
         Business_name = detail.get('Business_name')
@@ -50,6 +57,7 @@ def merchants(request):
         
     return render(request, 'merchants.html', {'details': details})
 
+<<<<<<< HEAD
 
 def sign(request):
     current_user = request.user
@@ -66,3 +74,52 @@ def sign(request):
             recipient.save()
             send_message(name, email)
             
+=======
+@login_required(login_url='/accounts/login/')
+def revenueStreams(request):
+    url = ('https://jpaye.herokuapp.com/api/GetRevenueStreams')
+    headers = {'Authorization': 'Token 4d7607cc35bc893b6f80eac430d4371fb46dc0c8'}
+    response = requests.get(url, headers=headers)
+    details = response.json()
+    for detail in details:
+        id= detail.get('id')
+        name = detail.get('name')
+    return render(request, 'revenueStreams.html', {'details': details})
+
+
+def payments(request):
+    url = ('https://jpaye.herokuapp.com/api/GetPayments/')
+    headers = {'Authorization': 'Token 4d7607cc35bc893b6f80eac430d4371fb46dc0c8'}
+    response = requests.get(url,headers=headers)
+    details = response.json()
+    for detail in details:
+        id = detail.get('id')
+        bill_number = detail.get('bill_number')
+        payers_name = detail.get('payers_name')
+        payers_phone = detail.get('payers_phone')
+        narration = detail.get('narration')
+        amount = detail.get('amount')
+        pay_date = detail.get('pay_date')
+    return render(request, 'payments.html', {'details': details})
+
+
+
+def merchantBills(request):
+    url = ('https://jpaye.herokuapp.com/api/BillsDetails/')
+    headers = {'Authorization': 'Token 4d7607cc35bc893b6f80eac430d4371fb46dc0c8'}
+    response = requests.get(url,headers=headers)
+    details = response.json()
+    for detail in details:
+        id = detail.get('id')
+        customer_name = detail.get('customer_name')
+        customer_phone = detail.get('customer_phone')
+        customer_email = detail.get('customer_email')
+        narration = detail.get('narration')
+        quantity = detail.get('quantity')
+        amount = detail.get('amount')
+        post_date = detail.get('post_date')
+        due_date = detail.get('due_date')
+        generated_by = detail.get('generated_by')
+        status = detail.get('status')
+    return render(request, 'merchant_bills.html', {'details': details})
+>>>>>>> 9ec2200006d4c28fa6e31e37299b0c1648ca27f3
