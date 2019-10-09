@@ -176,7 +176,7 @@ class GetPayments(APIView):
 @login_required(login_url='/accounts/login/')
 def customers(request):
     url = ('http://127.0.0.1:8000/api/BillsDetails')
-    headers = {'Authorization': 'Token 2683eacc0edd0c08360e7532197f303dc574a3ac'}
+    headers = {'Authorization': 'Token b76be7fe9c4ecd62b0e003661426ccbe6cd01d05'}
     response = requests.get(url,headers=headers)
     details = response.json()
     for detail in details:
@@ -217,6 +217,11 @@ def new_bill(request):
             # send_notification(name = name, email = email)
 
 
+            bill = form.save(commit = False)
+            # bill.username = current_user
+            # bill.generated_by=current_user
+            bill.generated_by=current_user
+            bill.save()
         return HttpResponseRedirect('/index')
 
     else:

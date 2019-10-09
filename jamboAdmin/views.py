@@ -35,15 +35,9 @@ def indexone(request):
 
 @login_required(login_url='/accounts/login/')
 def merchants(request):
-<<<<<<< HEAD
-    url = ('http://127.0.0.1:8000/api/GetMerchants')
-    headers = {'Authorization': 'Token 6841dd7a3c767c125ca2fdaddf05ee5f127ab6f8'}
-    response = requests.get(url,headers=headers)
-=======
     url = ('https://jpaye.herokuapp.com/api/GetMerchants')
     headers = {'Authorization': 'Token 4d7607cc35bc893b6f80eac430d4371fb46dc0c8'}
     response = requests.get(url, headers=headers)
->>>>>>> 9ec2200006d4c28fa6e31e37299b0c1648ca27f3
     details = response.json()
     for detail in details:
         Business_name = detail.get('Business_name')
@@ -57,24 +51,6 @@ def merchants(request):
         
     return render(request, 'merchants.html', {'details': details})
 
-<<<<<<< HEAD
-
-def sign(request):
-    current_user = request.user
-    if request.method == "POST":
-        form = SignUpForm(request.POST, request.FILES)
-        if form.is_valid():
-            merchant = form.save(commit=False)
-            merchant.save()
-
-            name = form.cleaned_data.get('Business_owner')
-            email = form.cleaned_data.get('email')
-        
-            recipient = Merchant(name=Business_owner, email=email)
-            recipient.save()
-            send_message(name, email)
-            
-=======
 @login_required(login_url='/accounts/login/')
 def revenueStreams(request):
     url = ('https://jpaye.herokuapp.com/api/GetRevenueStreams')
@@ -122,4 +98,3 @@ def merchantBills(request):
         generated_by = detail.get('generated_by')
         status = detail.get('status')
     return render(request, 'merchant_bills.html', {'details': details})
->>>>>>> 9ec2200006d4c28fa6e31e37299b0c1648ca27f3
