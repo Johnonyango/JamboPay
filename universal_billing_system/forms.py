@@ -26,9 +26,22 @@ class BillsForm(forms.ModelForm):
         widgets = {
             'Revstreams': forms.CheckboxSelectMultiple(),
         }
-        exclude = ['status']
+        exclude = ['status','generated_by']
 
 class NoteForm(forms.ModelForm):
     class Meta:
         model = NewsLetterRecipients
         fields = '__all__'
+
+class NewsLetterForm(forms.Form):
+    customer_name = forms.CharField(label="First Name",max_length=30)
+    customer_email = forms.EmailField(label="Enter your Email Address")
+
+
+class EmailForm(forms.Form):
+    firstname = forms.CharField(max_length=255)
+    lastname = forms.CharField(max_length=255)
+    email = forms.EmailField()
+    subject = forms.CharField(max_length=255)
+    botcheck = forms.CharField(max_length=5)
+    message = forms.CharField()
