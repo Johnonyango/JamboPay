@@ -12,29 +12,15 @@
 </head>
 
 <body>
-<<<<<<< HEAD
   {% block content %}
   {% include 'indexone.html' %}
   <br>
   <h2 style="text-align: center;">MERCHANT DETAILS</h2>
   <br>
   <div class="row">
-=======
-
-       
-
-    {% block content %}
-    <br>
-
-
-    <h2>BILL DETAILS</h2>
-    <br>
-    <div class="row">
->>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe
 
     <div class="col-md-1"></div>
 
-<<<<<<< HEAD
     <div class="col-md-10">
       <table id="bills" class="table table-bordered">
         <thead>
@@ -94,48 +80,6 @@
           });
         });
       </script>
-=======
-        <div class="col-md-10">
-            <table class="table table-striped table-primary">
-                <thead>
-                    <tr>
-                        <th>Business Name</th>
-                        <th>Business Owner</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Revenue Streams</th>
-                        <th>Physical_address</th>
-                        <th>Town</th>
-                        <th>Industry</th>
-                        <th>Revenue Streams</th>
-                        <th>Join Date</th>
-
-
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for detail in details%}
-
-                    <tr>
-                        <td>{{detail.id}}</td>
-                        <td>{{detail.Business_name}}</td>
-                        <td>{{detail.Business_owner}}</td>
-                        <td>{{detail.Email}}</td>
-                        <td>{{detail.Phone_number}}</td>
-                        <td>{{detail.Physical_address}}</td>
-                        <td>{{detail.Town}}</td>
-                        <td>{{detail.Industry}}</td>
-                        <td>{{detail.Revstreams}}</td>
-                        <td>{{detail.join_date}}</td>
-
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <div class="col-md-1"></div>
-        </div>
-    </div>
->>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe
 
     </div>
   </div>
@@ -157,15 +101,11 @@
       overflow-x: hidden;
     }
 
-<<<<<<< HEAD
     h2 {
       font-size: 2em;
       font-family: 'Bree Serif', serif;
     }
   </style>
-=======
-
->>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe
 </body>
 
 

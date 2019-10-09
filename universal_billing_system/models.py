@@ -51,15 +51,12 @@ class Bills(models.Model):
     post_date = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=Status,default=0)
     
-<<<<<<< HEAD
     
     @classmethod
     def search_by_name(cls,search_term):
         names = cls.objects.filter(customer_name__icontains=search_term)
         return names
 
-=======
->>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe
 class NewsLetterRecipients(models.Model):
     name = models.CharField(max_length = 30, blank=False, null=False)
     email = models.EmailField(blank=False, null=False)
