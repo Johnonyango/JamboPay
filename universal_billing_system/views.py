@@ -198,6 +198,7 @@ def new_bill(request):
         form = BillsForm(request.POST, request.FILES)
         if form.is_valid():
             bill = form.save(commit=False)
+            bill.generated_by=current_user/
             bill.save()
 
         # if request.method=="POST":
@@ -217,17 +218,13 @@ def new_bill(request):
             # send_notification(name = name, email = email)
 
 
-            bill = form.save(commit = False)
-            # bill.username = current_user
-            # bill.generated_by=current_user
-            bill.generated_by=current_user
-            bill.save()
         return HttpResponseRedirect('/index')
 
     else:
         form = BillsForm()
 
     return render(request, 'bills/new-bill.html', {"form": form})
+
 
 def notification(request):
     if request.method == 'POST':
