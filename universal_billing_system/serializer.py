@@ -14,4 +14,9 @@ class RevenueStreamsSerializer(serializers.ModelSerializer):
 class BillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bills
-        fields='__all__'        
+        fields='__all__'      
+
+class PaymentsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Payments
+        fields='__all__'      

@@ -1,20 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField
 
 # Create your models here.
+
 class Industry(models.Model):
     name = models.CharField( blank=False,max_length= 40,default=None)
     def __str__(self):
         return self.name 
-# class Category(models.Model):
-#     name = models.CharField( blank=False,max_length= 40,default='JamboPay')
-#     def __str__(self):
-#         return self.name                    
+                          
 class Revstreams(models.Model):
     name = models.CharField( blank=False,max_length= 40,default=None)
     # Category = models.ManyToManyField(Category)
     def __str__(self):
         return self.name
+
 class Merchant(models.Model):
     Business_name = models.CharField(max_length=20,blank=False)
     Business_owner = models.ForeignKey(User,on_delete=models.CASCADE,default=None)
@@ -29,23 +29,52 @@ class Merchant(models.Model):
     join_date=models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
+        
         return self.Business_name
 
 class Bills(models.Model):
+    Status=(
+    (0,'Unpaid'),
+    (1,'Paid'),
+    )
+
     customer_name = models.CharField(max_length=255,blank=False)
     customer_phone = models.CharField(max_length=255,blank=False)
     customer_email = models.EmailField(max_length=255,blank=False)
-    Revstreams = models.ManyToManyField(Revstreams)
+    Revstreams = models.ManyToManyField(Revstreams,default=0)
     narration = models.CharField(max_length=255,blank=False)
     amount = models.FloatField(blank=False)
     quantity = models.FloatField(blank=True)
     post_date = models.DateTimeField(auto_now_add=True)
+    due_date = models.DateTimeField(help_text='Due date')
+    status = models.CharField(choices=Status,default='Unpaid',max_length=10)
+    generated_by=models.CharField(max_length=255,blank=False)
+    
+    @classmethod
+    def search_by_name(cls,search_term):
+        names = cls.objects.filter(customer_name__icontains=search_term)
+        return names
+    
+    @classmethod
+    def get_merchant_bills(cls,generated_by):
+        merchants_bills=cls.objects.filter(generated_by=generated_by).all()
+        return merchants_bills
 
     
 
+class NewsLetterRecipients(models.Model):
+    name = models.CharField(max_length = 30)
+    email = models.EmailField()
 
+class Payments(models.Model):
+    bill_number = models.ForeignKey(Bills,on_delete=models.CASCADE,default=None)
+    payers_name = models.CharField(max_length=255,blank=False)
+    payers_phone = models.CharField(max_length=255,blank=False)
+    narration = models.CharField(max_length=255,blank=False)
+    amount = models.FloatField(blank=False)
+    pay_date = models.DateTimeField(auto_now_add=True)
 
-
-
-
-
+    def save_bill(self):
+        self.save()
+ 
+ 

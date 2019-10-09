@@ -1,12 +1,15 @@
 from django.contrib import admin
 from .models import *
+from import_export.admin import ImportExportModelAdmin
 
-# from django.contrib.auth import get_user_model
-# from django.contrib.auth.forms import PasswordResetForm
-# from django.utils.crypto import get_random_string
-# from authtools.admin import NamedUserAdmin
 
 admin.site.register(Merchant);
 admin.site.register(Industry);
 admin.site.register(Revstreams);
-admin.site.register(Bills);
+# admin.site.register(Bills);
+admin.site.register(Payments);
+@admin.register(Bills)
+class viewAdmin(ImportExportModelAdmin):
+    exclude = ('id',)
+
+
