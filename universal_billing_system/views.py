@@ -1,4 +1,5 @@
-from django.shortcuts import render
+import csv,io
+from django.shortcuts import render,redirect
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth.decorators import login_required
@@ -9,11 +10,12 @@ from rest_framework import status
 import requests
 from .forms import *
 from django.http import HttpResponse,Http404,HttpResponseRedirect
-from .email import *
+from .emails import *
 import openpyxl
 from rest_framework.permissions import IsAuthenticated  # <-- Here
-from .bill_num import *
-
+from django.core.mail import EmailMessage
+from django.contrib import messages
+from jamboAdmin import views as jamboAdmin_views
 
 
 
@@ -47,19 +49,31 @@ def logout_view(request):
    return redirect('login')
 
 
-# Create your views here.
-# def index(request):
-#     url = ('jpaye.herokuap.com/api/GetMerchants/')
-#     response = requests.get(url)
-#     print(response)
-   
-# def index(request):
-#     return render(request, 'index.html')
+@login_required
+def profile(request):
+
+   user = request.user
+   images = Image.objects.filter(author=user.profile)
+
+   context = {
+      'user': user,
+      'images': images
+   }
+
+   return render(request, 'timeline/profile.html', context)
 
 def index(request):
-    return render(request, 'index.html')
+    current_user=request.user
+    if current_user.is_superuser==True:
 
+        print(current_user.is_superuser,"Admiiiiin")
 
+        return redirect(jamboAdmin_views.indexone)
+    else:
+
+        return render(request, 'index.html')
+
+@login_required
 def upload(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
@@ -82,6 +96,7 @@ class MerchantList(APIView):
         serializers = MerchantSerializer(all_merchants, many=True)
         return Response(serializers.data)
     
+
 class RevenueStreamsList(APIView):
     permission_classes = (IsAuthenticated,)            # <-- And here
 
@@ -136,17 +151,24 @@ class GetPayments(APIView):
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
+        
+        #update bills
+        specific_bill = Bills.pk
+        paid_bill = Payments.bill_number
+
+        if specific_bill == paid_bill:
+            specific_bill.status=1
+            # print('true')
+            specific_bill.save()
 
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
         permission_classes = (IsAdminOrReadOnly,)
 
 
-
-
 @login_required(login_url='/accounts/login/')
-def merchants(request):
+def customers(request):
     url = ('http://127.0.0.1:8000/api/BillsDetails')
-    headers = {'Authorization': 'Token b8970394cf65a6256843fffdd5ddb57f200b81ae'}
+    headers = {'Authorization': 'Token 2683eacc0edd0c08360e7532197f303dc574a3ac'}
     response = requests.get(url,headers=headers)
     details = response.json()
     for detail in details:
@@ -167,34 +189,19 @@ def new_bill(request):
         form =BillsForm(request.POST,request.FILES)
         if form.is_valid():
             bill = form.save(commit = False)
-            val=randomStringDigits()
-            Bills.bill_number=str("xyz")+val
+            # bill.username = current_user
+            # bill.generated_by=current_user
+            bill.generated_by=current_user
             bill.save()
-        
-        # if request.method=="POST":
-        # form =BillsForm(request.POST)
-        # if form.is_valid():
-        #     name = form.cleaned_data['customer_name']
-        #     email = form.cleaned_data['customer_email']
-
-        #     name = request.POST.get('customer_name')
-        #     email = request.POST.get('customer_email')
-        #     recipient = NewsLetterRecipients(name=name, email=email)
-        #     recipient.save()
-        #     send_welcome_email(name, email)
-
         return HttpResponseRedirect('/index')
     
-
     else:
         form = BillsForm()
     
-    
-
     return render(request,'bills/new-bill.html',{"form":form})
 
 
-
+@login_required
 def upload(request):
     if "GET" == request.method:
         return render(request, 'upload.html', {})
@@ -232,11 +239,7 @@ def upload(request):
 
         return render(request, 'upload.html', {"excel_data":excel_data})
 
-
-
-
-
-
+@login_required
 def notification(request):
     if request.method == 'POST':
         form = NoteForm(request.POST)
@@ -249,3 +252,58 @@ def notification(request):
     else:
         form = NoteForm()
     return render(request, 'note.html', {'form': form})
+
+
+def uploadCSV(request):
+    template = "bills_upload.html"
+    prompt = {"order":"order of csv should be as follows: \n customer_name,customer_phone,customer_email,narration,amount,quantity,post_date"}
+    if request.method == "GET":
+        return render(request,template,prompt)
+    csv_file=request.FILES['file']
+    if not csv_file.name.endswith('.csv'):
+        message.error(request,"this is not a csv file")
+    else:
+        messages.success(request,'Upload successfull')
+
+    data_set = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string,delimiter=',',quotechar="|"):
+        _,created = Bills.objects.update_or_create(
+            customer_name =column[0],
+            customer_phone=column[1],
+            customer_email=column[2],
+            # Revstreams =column[3],
+            narration=column[3],
+            amount=column[4],
+            quantity =column[5],
+            post_date=column[6]
+            # status=column[8],
+        )
+    context = {}
+    return render(request,template,context)
+@login_required(login_url='/accounts/login/')
+def search_results(request):
+    current_user = request.user
+    if 'customer_name' in request.GET and request.GET["customer_name"]:
+        search_term = request.GET.get("customer_name")
+        searched_names = Bills.search_by_name(search_term)
+        message = f"{search_term}"
+
+        print(searched_names)
+
+        return render(request, 'search.html',{"message":message,"names": searched_names})
+
+    else:
+        message = "You haven't searched for any term."
+        return render(request, 'search.html',{"message":message})
+
+
+@login_required(login_url='/accounts/login/')
+def merchant_bills(request):
+    details = Bills.get_merchant_bills(request.user)
+
+    message = f"The Following are bills generated by : {request.user}"
+
+
+    return render(request, 'mybills.html', {'details': details,'message':message})
