@@ -48,8 +48,8 @@ class Bills(models.Model):
     narration = models.CharField(max_length=255,blank=False)
     amount = models.FloatField(blank=False)
     quantity = models.FloatField(blank=True)
-    post_date = models.DateTimeField(auto_now_add=True)
-    due_date = models.DateTimeField(help_text='Due date')
+    post_date = models.DateField(auto_now_add=True)
+    due_date = models.DateField(null=True)
     status = models.CharField(choices=Status,default='Unpaid',max_length=10)
     generated_by=models.CharField(max_length=255,blank=False)
     
