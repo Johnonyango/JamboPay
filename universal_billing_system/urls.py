@@ -27,6 +27,9 @@ urlpatterns=[
 
     url(r'^merchantbills/$', views.merchant_bills, name='merchantbills'),
 
+    url(r'^addEmployee/$',views.addEmployee,name='addEmployee'),
+
+
 
 ]
 

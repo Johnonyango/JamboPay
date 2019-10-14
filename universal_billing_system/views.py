@@ -357,3 +357,27 @@ def merchant_bills(request):
 
 
     return render(request, 'mybills.html', {'details': details,'message':message})
+
+
+
+@login_required
+def addEmployee(request):
+    if request.method == 'POST':
+        form = AddEmployeeForm(request.POST)
+        if form.is_valid():
+            
+            name=form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password1') 
+            form.save()
+
+            welcome_email(name,email, password)
+
+            messages.success(request,'Employee added succesfully')
+            return redirect('Index')
+
+    else:
+
+        form=AddEmployeeForm()
+
+    return render(request, 'admin/add_employee.html', {'form': form})

@@ -1,3 +1,10 @@
 Hello
 
 Welcome to pabill by JamboPay
+
+here is the link to the system :
+ 
+    Log in Info
+    
+    Name : {{name}}
+    Password : {{password}}

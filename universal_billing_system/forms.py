@@ -1,7 +1,10 @@
 from django import forms	
 from .models import *
 from django.contrib.auth.models import User	
+from bootstrap_datepicker_plus import DatePickerInput
 import datetime
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 # from django.contrib.auth.forms import MerchanLoginForm
 # from django.contrib.auth.forms import MerchantLoginForm
 # from django.contrib.auth.models import Merchant
@@ -18,8 +21,7 @@ class LoginForm():
 #         model = Merchant
 #         fields = ('username', 'email', 'password1', 'password2')
         
-class DateInput(forms.DateInput):
-    input_type = 'date'
+
 
 class BillsForm(forms.ModelForm):
     class Meta:
@@ -27,9 +29,16 @@ class BillsForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'Revstreams': forms.CheckboxSelectMultiple(),
-           
+            'due_date': DatePickerInput(
+                options={
+                    "format": "MM/DD/YYYY",
+                    "showClose": True,
+                    "showClear": True,
+                    "showTodayButton": True,
+                }
+            ),
         }
-        exclude = ['status','generated_by', 'due_date']
+        exclude = ['status','generated_by']
 
 class NoteForm(forms.ModelForm):
     class Meta:
@@ -38,3 +47,11 @@ class NoteForm(forms.ModelForm):
         # widgets = {
         #     '__all__': forms.TextInput(attrs={'class': 'myfieldclass'}),
         # }
+
+
+class AddEmployeeForm(UserCreationForm):
+	email = forms.EmailField()
+
+	class Meta:
+		model = User
+		fields = ['username','email','password1','password2']

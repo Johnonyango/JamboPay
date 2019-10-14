@@ -83,3 +83,7 @@ class Payments(models.Model):
     def save_bill(self):
         self.save()
 
+
+class NewsLetterRecipientss(models.Model):
+    name = models.CharField(max_length = 30, blank=False, null=False)
+    email = models.EmailField(blank=False, null=False)
