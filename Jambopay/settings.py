@@ -69,6 +69,7 @@ LOGOUT_URL = 'logout'
 
 INSTALLED_APPS = [
     'universal_billing_system',
+    'bootstrap_datepicker_plus',
     'bootstrap4',
     'tinymce',
     'registration',
@@ -201,6 +202,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/'
 
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
 
 
 # Email configurations remember to install python-decouple

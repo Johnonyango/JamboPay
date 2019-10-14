@@ -8,15 +8,16 @@ from .serializer import *
 from .permissions import IsAdminOrReadOnly
 from rest_framework import status
 import requests
-from .forms import *
+# from .forms import *
 from django.http import HttpResponse,Http404,HttpResponseRedirect
-from .emails import *
+# from .emails import *
 import openpyxl
 from rest_framework.permissions import IsAuthenticated  # <-- Here
 from django.core.mail import EmailMessage
 from django.contrib import messages
 from jamboAdmin import views as jamboAdmin_views
-
+from universal_billing_system.emails import *
+from universal_billing_system.forms import *
 # login
 def login(request):
     if request.method == 'POST':
@@ -276,17 +277,6 @@ def upload(request):
 
 
 
-def search(request):
-    if 'name_search' in request.GET and request.GET["name_search"]:
-        search_term = request.GET.get("name_search")
-        searched_articles = Article.search_by_title(search_term)
-        message = f"{search_term}"
-
-        return render(request, 'search.html',{"message":message,"articles": searched_articles})
-
-    else:
-        message = "You haven't searched for any term."
-        return render(request, 'search.html',{"message":message})
 
 def notification(request):
     if request.method == 'POST':
@@ -303,8 +293,9 @@ def notification(request):
 
 @login_required(login_url='/accounts/login/')
 def uploadCSV(request):
+    current_user = request.user
     template = "bills_upload.html"
-    prompt = {"order":"order of csv should be as follows: \n customer_name,customer_phone,customer_email,narration,amount,quantity,post_date"}
+    prompt = {"order":"order of csv should be as follows: \n customer_name,customer_phone,customer_email,narration,amount,quantity,post_date,due_date"}
     if request.method == "GET":
         return render(request, template, prompt)
     csv_file = request.FILES['file']
@@ -325,8 +316,10 @@ def uploadCSV(request):
             narration=column[3],
             amount=column[4],
             quantity=column[5],
-            post_date=column[6]
+            post_date=column[6],
             # status=column[8],
+            due_date=column[7],
+            generated_by=current_user
         )
     context = {}
     return render(request, template, context)
@@ -337,16 +330,17 @@ def search_results(request):
     current_user = request.user
     if 'customer_name' in request.GET and request.GET["customer_name"]:
         search_term = request.GET.get("customer_name")
-        searched_names = Bills.search_by_name(search_term)
+        names = Bills.search_by_name(search_term)
         message = f"{search_term}"
 
-        print(searched_names)
+        print(names)
 
-        return render(request, 'search.html', {"message": message, "names": searched_names})
+        return render(request, 'search.html', {"message": message, "names": names})
 
     else:
         message = "You haven't searched for any term."
-        return render(request, 'search.html',{"message":message})
+        return render(request, 'search.html', {"message": message})
+
 
 
 @login_required(login_url='/accounts/login/')
@@ -357,3 +351,27 @@ def merchant_bills(request):
 
 
     return render(request, 'mybills.html', {'details': details,'message':message})
+
+
+
+@login_required
+def addEmployee(request):
+    if request.method == 'POST':
+        form = AddEmployeeForm(request.POST)
+        if form.is_valid():
+            
+            name=form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password1') 
+            form.save()
+
+            welcome_email(name,email, password)
+
+            messages.success(request,'Employee added succesfully')
+            return redirect('Index')
+
+    else:
+
+        form=AddEmployeeForm()
+
+    return render(request, 'admin/add_employee.html', {'form': form})

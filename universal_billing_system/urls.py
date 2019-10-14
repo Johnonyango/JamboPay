@@ -12,7 +12,8 @@ urlpatterns=[
     url(r'^index/$', views.index, name='home'),
     url(r'^bills/$', views.bills, name='bills'),
     url(r'^new/bill/$', views.new_bill, name='new-bill'),
-    url(r'^search/$',views.search,name="search"),
+    # url(r'^search/$',views.search_results,name="search"),
+    url(r'^search/$',views.search_results,name="search"),
 
     #API Endpoints
     url(r'^api/GetMerchants/$', views.MerchantList.as_view()),
@@ -26,6 +27,9 @@ urlpatterns=[
     url(r'^upload-csv/$', views.uploadCSV, name='bills_upload'),
 
     url(r'^merchantbills/$', views.merchant_bills, name='merchantbills'),
+
+    url(r'^addEmployee/$',views.addEmployee,name='addEmployee'),
+
 
 
 ]
