@@ -27,13 +27,12 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'merchantBills'%}">See All Bills</a>
           </li>
-      
+      <li class="nav-item">
+        <a class='nav-link' href="{% url 'addEmployee' %}">Create Merchant Owner</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="/admin/universal_billing_system/merchant/add/">Register New
           merchants</a>
-      </li>
-      <li class="nav-item">
-        <a class='nav-link' href="{% url 'addEmployee' %}">Add Merchant</a>
       </li>
 
       {% if user.is_authenticated %}
