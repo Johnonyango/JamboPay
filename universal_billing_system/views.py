@@ -303,8 +303,9 @@ def notification(request):
 
 @login_required(login_url='/accounts/login/')
 def uploadCSV(request):
+    current_user = request.user
     template = "bills_upload.html"
-    prompt = {"order":"order of csv should be as follows: \n customer_name,customer_phone,customer_email,narration,amount,quantity,post_date"}
+    prompt = {"order":"order of csv should be as follows: \n customer_name,customer_phone,customer_email,narration,amount,quantity,post_date,due_date"}
     if request.method == "GET":
         return render(request, template, prompt)
     csv_file = request.FILES['file']
@@ -327,10 +328,8 @@ def uploadCSV(request):
             quantity=column[5],
             post_date=column[6],
             # status=column[8],
-            due_date=column[7]
-            # generated_by=current_user
-
-
+            due_date=column[7],
+            generated_by=current_user
         )
     context = {}
     return render(request, template, context)

@@ -15,11 +15,9 @@
                 <br><br>
                 <input type="file" name="file" id="">
                 <br><br>
-                <!-- <p>Only accepts CSV files</p> -->
+                <p>Only accepts CSV files</p>
                 <br><br>
                 <button class="btn" type="submit">Upload</button>
-                <a href="bills.csv">DOWNLOAD</a>
-
             </form>
         {% endif %}
         <hr>
@@ -36,11 +34,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-        <script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
-        <!-- js -->
-        <!-- start-smooth-scrolling -->
-        <script type="text/javascript" src="js/move-top.js"></script>
-        <script type="text/javascript" src="js/easing.js"></script>
 
     <style>
         body {
@@ -61,25 +54,5 @@
         {% endblock %}
     </div> 
 
-    <script type="text/javascript">
-        var $ = jQuery.noConflict();
-        $(function () {
-            $('#activator').click(function () {
-                $('#box').animate({'top': '0px'}, 900);
-            });
-            $('#boxclose').click(function () {
-                $('#box').animate({'top': '-1000px'}, 900);
-            });
-        });
-        $(document).ready(function () {
-            //Hide (Collapse) the toggle containers on load
-            $(".toggle_container").hide();
-            //Switch the "Open" and "Close" state per click then slide up/down (depending on open/close state)
-            $(".trigger").click(function () {
-                $(this).toggleClass("active").next().slideToggle("slow");
-                return false; //Prevent the browser jump to the link anchor
-            });
-        });
-    </script>
 </body>
 </html>
