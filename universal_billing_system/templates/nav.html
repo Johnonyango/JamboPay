@@ -47,6 +47,7 @@
         <a style="color: #000;" class='nav-link' href="/accounts/login">Login</a>
       </p>
       {% endif %}
+      <button onclick="download_csv()" class="btn btn-primary nav-link">Download CSV</button> 
     </ul>
 
   </div>
@@ -80,3 +81,25 @@
     color: #dd5771;
   }
 </style>
+
+<script>
+  var data = [
+     
+  ];
+   
+   
+  function download_csv() {
+      var csv = 'customer_name,customer_phone,customer_email,narration,amount,quantity,post_date,due_date\n';
+      data.forEach(function(row) {
+              csv += row.join(',');
+              csv += "\n";
+      });
+   
+      console.log(csv);
+      var hiddenElement = document.createElement('a');
+      hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+      hiddenElement.target = '_blank';
+      hiddenElement.download = 'upload_bills_template.csv';
+      hiddenElement.click();
+  }
+  </script>
