@@ -44,4 +44,14 @@
     {%endblock%}
 </body>
 
+        {% for row in excel_data %}
+            {% for cell in row %}
+                {{ cell }}&nbsp;&nbsp;
+            {% endfor %}
+            <br>
+        {% endfor %}
+
+        {% endblock %}
+    </div> 
+</body>
 </html>

@@ -19,6 +19,7 @@ from django.contrib.auth import views
 from rest_framework.authtoken.views import obtain_auth_token
 from jamboAdmin import views as user_views
 
+# from jamboAdmin import views as user_views
 # from jamboAdmin import urls
 
 handler404 = 'universal_billing_system.views.error_404_view'
