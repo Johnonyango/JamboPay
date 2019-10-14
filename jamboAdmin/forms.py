@@ -41,3 +41,8 @@ class SignUpForm(UserCreationForm):
     #         user.save()
     #     return user
         
+# class merchantUSers(UserCreationForm):
+#     # email=forms.EmailField()
+#     class Meta:
+#         model=User
+#         fields='__all__'

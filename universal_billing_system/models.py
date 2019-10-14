@@ -49,7 +49,7 @@ class Bills(models.Model):
     customer_name = models.CharField(max_length=255,blank=False)
     customer_phone = models.CharField(max_length=255,blank=False)
     customer_email = models.EmailField(max_length=255,blank=False)
-    Revstreams = models.ManyToManyField(Revstreams,default=0)
+    Revstreams = models.ManyToManyField(Revstreams)
     narration = models.CharField(max_length=255,blank=False)
     amount = models.FloatField(blank=False)
     quantity = models.FloatField(blank=True)
@@ -57,6 +57,7 @@ class Bills(models.Model):
     due_date = models.DateTimeField(help_text='Due date')
     status = models.CharField(choices=Status,default='Unpaid',max_length=10)
     generated_by=models.CharField(max_length=255,blank=False)
+    
     
     @classmethod
     def search_by_name(cls,search_term):
@@ -71,8 +72,10 @@ class Bills(models.Model):
     
 
 class NewsLetterRecipients(models.Model):
-    name = models.CharField(max_length = 30)
-    email = models.EmailField()
+    name = models.CharField(max_length = 30, blank=False, null=False)
+    email = models.EmailField(blank=False, null=False)
+    amount = models.FloatField(blank=False, default=None)
+    quantity = models.FloatField(blank=False, default=None)
 
 class Payments(models.Model):
     bill_number = models.ForeignKey(Bills,on_delete=models.CASCADE,default=None)
@@ -84,5 +87,4 @@ class Payments(models.Model):
 
     def save_bill(self):
         self.save()
- 
- 
+
