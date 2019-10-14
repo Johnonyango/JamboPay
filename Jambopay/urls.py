@@ -13,12 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url,include
+from django.conf.urls import url,include, handler404
 from django.contrib import admin
 from django.contrib.auth import views 
 from rest_framework.authtoken.views import obtain_auth_token
 from jamboAdmin import views as user_views
+
 # from jamboAdmin import urls
+
+handler404 = 'universal_billing_system.views.error_404_view'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -31,6 +34,4 @@ urlpatterns = [
     url(r'^jamboAdmin/accounts/', include('registration.backends.simple.urls')),
 
     url(r'^jamboAdmin/',include('jamboAdmin.urls')),
-
-
 ]

@@ -240,7 +240,6 @@ def search_results(request):
         search_term = request.GET.get("customer_name")
         searched_names = Bills.search_by_name(search_term)
         message = f"{search_term}"
-
         print(searched_names)
 
         return render(request, 'search.html', {"message": message, "names": searched_names})
@@ -250,4 +249,9 @@ def search_results(request):
         return render(request, 'search.html', {"message": message})
     
 
+def error_404_view(request, exception):
+    data = {"name": "ThePythonDjango.com"}
+    return render(request,'404.html', data)
 
+def tablez(request):
+    return render(request, 'tablez.html')

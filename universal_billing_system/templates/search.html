@@ -17,9 +17,9 @@
     <div class="col-md-10">
   <div class=" container row text-center">
     {% if names %}
-    <h2 style="font-family: 'Bree Serif', serif;"> Found {{names|length}} bills with the search name {{message}}.</h2>
+    <h2> Found {{names|length}} bills with the search name {{message}}.</h2>
     {% else %}
-    <h2 style="font-family: 'Bree Serif', serif;"> Found 0 names for the search term</h2>
+    <h2> Found 0 names for the search term</h2>
     {% endif %}
   </div>
 
@@ -65,6 +65,11 @@
 <div class="col-md-1"></div>
 
 </div>
+<style>
+  body {
+            font-family: sans-serif;
+        }
+</style>
   
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
@@ -86,6 +91,7 @@
       });
     });
   </script>
+
 
   {% endblock %}
 </body>
