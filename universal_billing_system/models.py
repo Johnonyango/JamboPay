@@ -8,12 +8,18 @@ class Industry(models.Model):
     name = models.CharField( blank=False,max_length= 40,default=None)
     def __str__(self):
         return self.name 
+    def save_industry(self):
+        self.save()
+
                           
 class Revstreams(models.Model):
     name = models.CharField( blank=False,max_length= 40,default=None)
     # Category = models.ManyToManyField(Category)
     def __str__(self):
         return self.name
+    
+    def save_RevStream(self):
+        self.save()
 
 class Merchant(models.Model):
     Business_name = models.CharField(max_length=20,blank=False)
@@ -31,6 +37,8 @@ class Merchant(models.Model):
     def __str__(self):
         
         return self.Business_name
+    
+    
 
 class Bills(models.Model):
     Status=(

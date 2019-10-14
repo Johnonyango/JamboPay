@@ -29,7 +29,7 @@ def indexone(request):
 
 @login_required(login_url='/accounts/login/')
 def merchants(request):
-    url = ('https://jpaye.herokuapp.com/api/GetMerchants')
+    url = ('http://127.0.0.1:8000/api/GetMerchants')
     headers = {'Authorization': 'Token 4d7607cc35bc893b6f80eac430d4371fb46dc0c8'}
     response = requests.get(url, headers=headers)
     details = response.json()
@@ -42,11 +42,13 @@ def merchants(request):
         Town = detail.get('Town')
         Pay_bill = detail.get('JP_paybill')
         Industry = detail.get('Industry')
-    return render(request, 'merchants.html', {'details': details})
+        Revstreams = detail.get('Revstreams')
+
+    return render(request, 'merchants.html', {'details': details,'Industry':Industry,'Revstreams':Revstreams})
 
 @login_required(login_url='/accounts/login/')
 def revenueStreams(request):
-    url = ('https://jpaye.herokuapp.com/api/GetRevenueStreams')
+    url = ('http://127.0.0.1:8000/api/GetRevenueStreams')
     headers = {'Authorization': 'Token 4d7607cc35bc893b6f80eac430d4371fb46dc0c8'}
     response = requests.get(url, headers=headers)
     details = response.json()
@@ -57,7 +59,7 @@ def revenueStreams(request):
 
 
 def payments(request):
-    url = ('https://jpaye.herokuapp.com/api/GetPayments/')
+    url = ('http://127.0.0.1:8000/api/GetPayments/')
     headers = {'Authorization': 'Token 4d7607cc35bc893b6f80eac430d4371fb46dc0c8'}
     response = requests.get(url,headers=headers)
     details = response.json()
@@ -74,7 +76,7 @@ def payments(request):
 
 
 def merchantBills(request):
-    url = ('https://jpaye.herokuapp.com/api/BillsDetails/')
+    url = ('http://127.0.0.1:8000/api/BillsDetails/')
     headers = {'Authorization': 'Token 4d7607cc35bc893b6f80eac430d4371fb46dc0c8'}
     response = requests.get(url,headers=headers)
     details = response.json()
