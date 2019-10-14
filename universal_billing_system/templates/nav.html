@@ -1,4 +1,27 @@
-<nav class="navbar bg-light navbar-expand-lg navbar-light border-top ">
+{% load bootstrap4 %}
+{% load static%}
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+    name='viewport' />
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{%static 'assets/css/material-dashboard.css?v=2.1.1'%}">
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+    <link href="{% static 'assets/demo/demo.css'%}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'assets/css/material-dashboard.css?v=2.1.1' %}">
+</head>
+
+<nav class="navbar bg-light navbar-expand-lg navbar-light  shadow-sm">
   <img width="15%" class="navbar-brand" src="https://www.jambopay.com/img/logo.png  ">
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -11,7 +34,9 @@
         <a style="color: #000;" class="nav-link " href="{% url 'Index'%}">Home<span
             class="sr-only">(current)</span></a>
       </li>
-      
+      <li class="nav-item">
+        <a style="color: #000;" class="nav-link" href="/accounts/register/">Create Users</a>
+      </li>
       <li class="nav-item dropdown">
         <a style="color: #000;" class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -26,11 +51,6 @@
       {% if user.is_authenticated %}
 
 
-      <form class="navbar-form" role="search" action="{% url 'search'%}">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search customer " name="customer_name">
-        </div>
-      </form>
       <li>
       <li><a style="color: #000;" class='nav-link' href="/logout">Logout</a>
 
@@ -52,7 +72,6 @@
   </div>
 </nav>
 
-
 <style>
   ul {
     padding: 0;
@@ -60,154 +79,19 @@
     justify-content: space-between;
     list-style-type: none;
   }
-
   nav ul {
     padding: 0;
     display: flex;
     justify-content: space-between;
     list-style-type: none;
   }
-
   nav li a {
     font-family: cursive;
     color: #ff1e4b;
     font-size: 16px;
     text-decoration: none;
-    font-family: sans-serif;
-
   }
-
   nav li a:hover {
     color: #dd5771;
   }
 </style>
-
-
-<div class="logo">
-  <a href=""><img width="15%" src="https://www.jambopay.com/img/logo.png  "></a>  
-  </div>
-  <div class="sidebar-wrapper">
-    <ul class="nav">
-      <li class="nav-item  ">
-        <a class="nav-link" href="./dashboard.html">
-          <i class="material-icons">dashboard</i>
-          <p>Dashboard</p>
-        </a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="./user.html">
-          <i class="material-icons">person</i>
-          <p>User Profile</p>
-        </a>
-      </li>
-      <li class="nav-item active ">
-        <a class="nav-link" href="./tables.html">
-          <i class="material-icons">content_paste</i>
-          <p>Table List</p>
-        </a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="./typography.html">
-          <i class="material-icons">library_books</i>
-          <p>Typography</p>
-        </a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="./icons.html">
-          <i class="material-icons">bubble_chart</i>
-          <p>Icons</p>
-        </a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="./map.html">
-          <i class="material-icons">location_ons</i>
-          <p>Maps</p>
-        </a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="./notifications.html">
-          <i class="material-icons">notifications</i>
-          <p>Notifications</p>
-        </a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="./rtl.html">
-          <i class="material-icons">language</i>
-          <p>RTL Support</p>
-        </a>
-      </li>
-      <li class="nav-item active-pro ">
-        <a class="nav-link" href="./upgrade.html">
-          <i class="material-icons">unarchive</i>
-          <p>Upgrade to PRO</p>
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
-<div class="main-panel">
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-    <div class="container-fluid">
-      <div class="navbar-wrapper">
-        <a class="navbar-brand" href="#pablo">Table List</a>
-      </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="navbar-toggler-icon icon-bar"></span>
-        <span class="navbar-toggler-icon icon-bar"></span>
-        <span class="navbar-toggler-icon icon-bar"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end">
-        <form class="navbar-form" action="{% url 'search'%}">
-          <div class="input-group no-border">
-            <input type="text" value="" class="form-control" placeholder="Search...">
-            <button type="submit" class="btn btn-white btn-round btn-just-icon">
-              <i class="material-icons">search</i>
-              <div class="ripple-container"></div>
-            </button>
-          </div>
-        </form>
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#pablo">
-              <i class="material-icons">dashboard</i>
-              <p class="d-lg-none d-md-block">
-                Stats
-              </p>
-            </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="material-icons">notifications</i>
-              <span class="notification">5</span>
-              <p class="d-lg-none d-md-block">
-                Some Actions
-              </p>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Mike John responded to your email</a>
-              <a class="dropdown-item" href="#">You have 5 new tasks</a>
-              <a class="dropdown-item" href="#">You're now friend with Andrew</a>
-              <a class="dropdown-item" href="#">Another Notification</a>
-              <a class="dropdown-item" href="#">Another One</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="material-icons">person</i>
-              <p class="d-lg-none d-md-block">
-                Account
-              </p>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-              <a class="dropdown-item" href="#">Profile</a>
-              <a class="dropdown-item" href="#">Settings</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Log out</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>

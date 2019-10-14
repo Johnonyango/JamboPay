@@ -26,8 +26,8 @@ class BillsForm(forms.ModelForm):
         widgets = {
             'Revstreams': forms.CheckboxSelectMultiple(),
         }
-        exclude = ['status','generated_by']
-
+        exclude = ['status']
+        
 class NoteForm(forms.ModelForm):
     class Meta:
         model = NewsLetterRecipients

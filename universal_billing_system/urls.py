@@ -12,9 +12,7 @@ urlpatterns=[
     url(r'^index/$', views.index, name='home'),
     url(r'^bills/$', views.bills, name='bills'),
     url(r'^new/bill/$', views.new_bill, name='new-bill'),
-    url(r'^search/$',views.search_results,name="search"),
     url(r'^tablez/', views.tablez, name='tablez'),
-    
     url(r'^search/$',views.search,name="search"),
 
     #API Endpoints
@@ -27,8 +25,12 @@ urlpatterns=[
     url(r'^notification/$', views.notification, name='noteform'),
     #moreurls
     url(r'^upload-csv/$', views.uploadCSV, name='bills_upload'),
-    
+
+    url(r'^merchantbills/$', views.merchant_bills, name='merchantbills'),
+
+
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
