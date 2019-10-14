@@ -6,15 +6,12 @@ from django.contrib import admin
 
 urlpatterns=[
     url(r'^$',views.index,name='Index'),
-    url(r'^merchants/$',views.merchants,name='merchants'),
+    url(r'^customers/$',views.customers,name='customers'),
     url(r'^index/$', views.index, name='home'),
     url(r'^bills/$', views.bills, name='bills'),
     url(r'^upload/$', views.upload, name='upload'),
     url(r'^new/bill/$', views.new_bill, name='new-bill'),
-    url(r'^signup/$', views.signup, name='signup'),
-
-
-
+    url(r'^search/$',views.search_results,name="search"),
 
     #API Endpoints
     url(r'^api/GetMerchants/$', views.MerchantList.as_view()),
@@ -26,11 +23,13 @@ urlpatterns=[
 
 
     url(r'^notification/$', views.notification, name='noteform'),
-
     #moreurls
-   
-]
+    url(r'^upload-csv/$', views.uploadCSV, name='bills_upload'),
 
+    url(r'^merchantbills/$', views.merchant_bills, name='merchantbills'),
+
+
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
