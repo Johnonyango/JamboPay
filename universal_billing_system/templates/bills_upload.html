@@ -51,7 +51,7 @@
                 {{order}}
                 <input style="background-color:#9CC4DD;" class="btn" type="button" id="btnExport" value="Download csv file template" />
 
-                <a href="universal_billing_system/templates/pdf.csv">Download Template</a>
+                <a href="universal_billing_system/templates/bills.csv">Download Template</a>
                 <input type="button" value="Download" onclick="window.open('universal_billing_system/templates/pdf.csv')">
 
 
@@ -85,6 +85,32 @@
         }
     </style>
     {% endblock %}
+    <script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+    <!-- js -->
+    <!-- start-smooth-scrolling -->
+    <script type="text/javascript" src="js/move-top.js"></script>
+    <script type="text/javascript" src="js/easing.js"></script>
+
+    <script type="text/javascript">
+        var $ = jQuery.noConflict();
+        $(function () {
+            $('#activator').click(function () {
+                $('#box').animate({'top': '0px'}, 900);
+            });
+            $('#boxclose').click(function () {
+                $('#box').animate({'top': '-1000px'}, 900);
+            });
+        });
+        $(document).ready(function () {
+            //Hide (Collapse) the toggle containers on load
+            $(".toggle_container").hide();
+            //Switch the "Open" and "Close" state per click then slide up/down (depending on open/close state)
+            $(".trigger").click(function () {
+                $(this).toggleClass("active").next().slideToggle("slow");
+                return false; //Prevent the browser jump to the link anchor
+            });
+        });
+    </script>
 </body>
 
 </html>
