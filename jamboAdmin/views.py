@@ -2,35 +2,41 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth.decorators import login_required
-from .models import *
+from .models import  *
 from rest_framework import status
+from .models import *
 import requests
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponse,Http404,HttpResponseRedirect
 from jamboAdmin.forms import SignUpForm
-
+from .email import *
+from .forms import *
 
 
 def signup(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        form = merchantUSers(request.POST)
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
+
+            name = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            recipient = NewsLetterRecipientss(name=name, email=email)
+            recipient.save()
+            send_message(name, email)
             return redirect('indexone')
     else:
-        form = SignUpForm()
+        form = merchantUSers()
 
     return render(request, 'registration/registration_form.html', {'form': form})
-
 
 def indexone(request):
     return render(request, 'indexone.html')
 
-
 @login_required(login_url='/accounts/login/')
 def merchants(request):
-    url = ('https://jpaye.herokuapp.com/api/GetMerchants')
-    headers = {'Authorization': 'Token 4d7607cc35bc893b6f80eac430d4371fb46dc0c8'}
+    url = ('http://127.0.0.1:8000/api/GetMerchants')
+    headers = {'Authorization': 'Token 88ead485afc9666e1c6a3367ad90fde8a2889e7a'}
     response = requests.get(url, headers=headers)
     details = response.json()
     for detail in details:
@@ -42,12 +48,14 @@ def merchants(request):
         Town = detail.get('Town')
         Pay_bill = detail.get('JP_paybill')
         Industry = detail.get('Industry')
+        Revstreams = detail.get('Revstreams')
+
     return render(request, 'merchants.html', {'details': details})
 
 @login_required(login_url='/accounts/login/')
 def revenueStreams(request):
-    url = ('https://jpaye.herokuapp.com/api/GetRevenueStreams')
-    headers = {'Authorization': 'Token 4d7607cc35bc893b6f80eac430d4371fb46dc0c8'}
+    url = ('http://127.0.0.1:8000/api/GetRevenueStreams')
+    headers = {'Authorization': 'Token 88ead485afc9666e1c6a3367ad90fde8a2889e7a'}
     response = requests.get(url, headers=headers)
     details = response.json()
     for detail in details:
@@ -57,8 +65,8 @@ def revenueStreams(request):
 
 
 def payments(request):
-    url = ('https://jpaye.herokuapp.com/api/GetPayments/')
-    headers = {'Authorization': 'Token 4d7607cc35bc893b6f80eac430d4371fb46dc0c8'}
+    url = ('http://127.0.0.1:8000/api/GetPayments/')
+    headers = {'Authorization': 'Token 88ead485afc9666e1c6a3367ad90fde8a2889e7a'}
     response = requests.get(url,headers=headers)
     details = response.json()
     for detail in details:
@@ -74,8 +82,8 @@ def payments(request):
 
 
 def merchantBills(request):
-    url = ('https://jpaye.herokuapp.com/api/BillsDetails/')
-    headers = {'Authorization': 'Token 4d7607cc35bc893b6f80eac430d4371fb46dc0c8'}
+    url = ('http://127.0.0.1:8000/api/BillsDetails/')
+    headers = {'Authorization': 'Token 88ead485afc9666e1c6a3367ad90fde8a2889e7a'}
     response = requests.get(url,headers=headers)
     details = response.json()
     for detail in details:
