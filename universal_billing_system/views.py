@@ -325,8 +325,12 @@ def uploadCSV(request):
             narration=column[3],
             amount=column[4],
             quantity=column[5],
-            post_date=column[6]
+            post_date=column[6],
             # status=column[8],
+            due_date=column[7]
+            # generated_by=current_user
+
+
         )
     context = {}
     return render(request, template, context)
