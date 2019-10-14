@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 from django.contrib.auth.models import AbstractUser
 
+
+
+
 # Create your models here.
 
 class Industry(models.Model):
@@ -47,7 +50,9 @@ class Bills(models.Model):
     amount = models.FloatField(blank=False)
     quantity = models.FloatField(blank=True)
     post_date = models.DateTimeField(auto_now_add=True)
-    due_date = models.DateTimeField(help_text='Due date')
+    # due_date = models.DateTimeField(help_text='Due date')
+    bill_id = models.CharField(max_length=120, blank= True)
+
     status = models.CharField(choices=Status,default='Unpaid',max_length=10)
     generated_by=models.CharField(max_length=255,blank=False)
     
@@ -60,15 +65,17 @@ class Bills(models.Model):
     def get_merchant_bills(cls,generated_by):
         merchants_bills=cls.objects.filter(generated_by=generated_by).all()
         return merchants_bills
-
     
+    def __str__(self):
+        return self.bill_id
+
 
 class NewsLetterRecipients(models.Model):
     name = models.CharField(max_length = 30)
     email = models.EmailField()
 
 class Payments(models.Model):
-    bill_number = models.ForeignKey(Bills,on_delete=models.CASCADE,default=None)
+    # bill_number = models.ForeignKey(Bills,on_delete=models.CASCADE,default=None)
     payers_name = models.CharField(max_length=255,blank=False)
     payers_phone = models.CharField(max_length=255,blank=False)
     narration = models.CharField(max_length=255,blank=False)
