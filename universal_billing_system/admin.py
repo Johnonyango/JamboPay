@@ -11,5 +11,6 @@ admin.site.register(Payments);
 @admin.register(Bills)
 class viewAdmin(ImportExportModelAdmin):
     exclude = ('id',)
-
+# class Merchant(models.Model):
+#     exclude = ('Merchant_id',)
 
