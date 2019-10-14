@@ -352,6 +352,7 @@ def search_results(request):
         return render(request, 'search.html',{"message":message})
 
 
+
 @login_required(login_url='/accounts/login/')
 def merchant_bills(request):
     details = Bills.get_merchant_bills(request.user)
