@@ -12,7 +12,7 @@ from .forms import *
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from .emails import *
 import openpyxl
-from rest_framework.permissions import IsAuthenticated  # <-- Here
+from rest_framework.permissions import IsAuthenticated  
 from django.core.mail import EmailMessage
 from django.contrib import messages
 from jamboAdmin import views as jamboAdmin_views
