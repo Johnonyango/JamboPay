@@ -30,7 +30,7 @@ class Merchant(models.Model):
     JP_paybill = models.CharField(max_length=20,blank=False)
     Industry = models.ManyToManyField(Industry)
     Revstreams = models.ManyToManyField(Revstreams)
-    join_date=models.DateTimeField(auto_now_add=True)
+    join_date=models.DateField(auto_now_add=True)
     
   
 
