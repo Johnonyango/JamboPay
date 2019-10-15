@@ -10,9 +10,9 @@ import requests
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from jamboAdmin.forms import SignUpForm
 from .email import *
-# from universal_billing_system.emails import *
+from universal_billing_system.emails import *
 from .forms import *
-# from universal_billing_system.forms import *
+from universal_billing_system.forms import *
 from django.contrib import messages
 # from django.shortcuts import get_object_or_404, redirect, render
 

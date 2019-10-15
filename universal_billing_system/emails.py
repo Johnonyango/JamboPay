@@ -26,8 +26,8 @@ def send_message(name, receiver):
     msg.send()
 
 def welcome_email(name,receiver, password):
-    subject ='link to your to the lms'
-    sender = 'sprovider549@gmail.com'
+    subject ='Welcome to the Universal Billing System'
+    sender = 'j.yayah7@gmail.com'
 
     text_content = render_to_string('email/notify.txt',{"name": name, "password":password})
     html_content = render_to_string('email/notify.html',{"name":name, "password":password})

@@ -8,15 +8,16 @@ from .serializer import *
 from .permissions import IsAdminOrReadOnly
 from rest_framework import status
 import requests
-from .forms import *
+# from .forms import *
 from django.http import HttpResponse,Http404,HttpResponseRedirect
-from .emails import *
+# from .emails import *
 import openpyxl
 from rest_framework.permissions import IsAuthenticated  # <-- Here
 from django.core.mail import EmailMessage
 from django.contrib import messages
 from jamboAdmin import views as jamboAdmin_views
-
+from universal_billing_system.emails import *
+from universal_billing_system.forms import *
 # login
 def login(request):
     if request.method == 'POST':
@@ -276,17 +277,6 @@ def upload(request):
 
 
 
-def search(request):
-    if 'name_search' in request.GET and request.GET["name_search"]:
-        search_term = request.GET.get("name_search")
-        searched_articles = Article.search_by_title(search_term)
-        message = f"{search_term}"
-
-        return render(request, 'search.html',{"message":message,"articles": searched_articles})
-
-    else:
-        message = "You haven't searched for any term."
-        return render(request, 'search.html',{"message":message})
 
 def notification(request):
     if request.method == 'POST':
@@ -340,16 +330,16 @@ def search_results(request):
     current_user = request.user
     if 'customer_name' in request.GET and request.GET["customer_name"]:
         search_term = request.GET.get("customer_name")
-        searched_names = Bills.search_by_name(search_term)
+        names = Bills.search_by_name(search_term)
         message = f"{search_term}"
 
-        print(searched_names)
+        print(names)
 
-        return render(request, 'search.html', {"message": message, "names": searched_names})
+        return render(request, 'search.html', {"message": message, "names": names})
 
     else:
         message = "You haven't searched for any term."
-        return render(request, 'search.html',{"message":message})
+        return render(request, 'search.html', {"message": message})
 
 
 
@@ -385,3 +375,9 @@ def addEmployee(request):
         form=AddEmployeeForm()
 
     return render(request, 'admin/add_employee.html', {'form': form})
+
+
+
+#template
+import mimetypes
+
