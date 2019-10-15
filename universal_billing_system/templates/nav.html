@@ -22,14 +22,14 @@
 </head>
 
 
-<nav class="navbar bg-light navbar-expand-lg navbar-light  shadow-sm">
-  <img width="10%" class="navbar-brand" src="https://www.jambopay.com/img/logo.png  ">
+<nav class="nav  navbar-expand-lg  " style="width: auto; background-color: transparent; padding-top: 1em;">
+  <!-- <img width="10%" class="navbar-brand" src="https://www.jambopay.com/img/logo.png  "> -->
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-left:20em">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a style="color: #000;" class="nav-link " href="{% url 'Index'%}">Home<span class="sr-only">(current)</span></a>
@@ -62,14 +62,17 @@
         <a style="color: #000;" class='nav-link' href="/accounts/login">Login</a>
       </li>
       {% endif %}
-      
+
 
     </ul>
-    <form class="navbar-form" role="search" action="{% url 'search'%}">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search Customer " name="customer_name">
-      </div>
-    </form>
+    <div style="float: left;">
+        <form class="navbar-form" role="search" action="{% url 'search'%}">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search Customer " name="customer_name">
+            </div>
+          </form>
+    </div>
+
 
   </div>
 </nav>
@@ -98,24 +101,23 @@
 </style>
 
 <script>
-        var data = [
-           
-        ];
-         
-         
-        function download_csv() {
-            var csv = 'customer_name,customer_phone,customer_email,narration,amount,quantity,post_date,due_date\n';
-            data.forEach(function(row) {
-                    csv += row.join(',');
-                    csv += "\n";
-            });
-         
-            console.log(csv);
-            var hiddenElement = document.createElement('a');
-            hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-            hiddenElement.target = '_blank';
-            hiddenElement.download = 'upload_bills_template.csv';
-            hiddenElement.click();
-        }
-        </script>
-      
+  var data = [
+
+  ];
+
+
+  function download_csv() {
+    var csv = 'customer_name,customer_phone,customer_email,narration,amount,quantity,post_date,due_date\n';
+    data.forEach(function (row) {
+      csv += row.join(',');
+      csv += "\n";
+    });
+
+    console.log(csv);
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'upload_bills_template.csv';
+    hiddenElement.click();
+  }
+</script>

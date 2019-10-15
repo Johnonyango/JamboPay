@@ -2,11 +2,7 @@
 {% load static%}
 <!DOCTYPE html>
 <html>
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-    name='viewport' />
 
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -32,9 +28,38 @@
         }
     </style>
     {% include "nav.html" %}
-
+    <div class="sidebar" data-color="#0074b6" data-background-color="white" data-image="../assets/img/sidebar-1.jpg" style="">
+        <!--
+          Tip 1: You can change the color of the sidebar using: data-color="#0074b6 | azure | green | orange | danger"
+  
+          Tip 2: you can also add an image using data-image tag
+      -->
+        <div class="logo">
+          <img width="60%" src="https://www.jambopay.com/img/logo.png " class="simple-text logo-normal">
+           
+          
+        </div>
+        <div class="sidebar-wrapper">
+          <ul class="nav">
+                <li class="nav-item">
+                        <a style="color: #000;" class="nav-link" href="/accounts/register/">Create Users</a>
+                      </li>
+            <li class="nav-item ">
+                    <a class="dropdown-item" href="{% url 'new-bill' %}">Generate Bill</a>
+            </li>
+            <li class="nav-item ">
+          <a class="dropdown-item" href="{% url 'bills_upload'%}">Upload Bill</a>
+            </li>
+            <li class="nav-item ">
+          <a class="dropdown-item" href="{% url 'merchantbills'%}">Bill Details</a>
+                    
+            </li>
+           
+          </ul>
+        </div>
+      </div>
     {% block content %}
-
+    
     {% endblock %}
 
     {% block scripts %}

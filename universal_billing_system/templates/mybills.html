@@ -1,4 +1,4 @@
-{%extends "registration/base.html"%}
+{%extends "base.html"%}
 {% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="en">
@@ -12,13 +12,12 @@
   <title>Document</title>
 </head>
 ​
-<body>
+<body class="container-fluid" >
 
   {% block content %}
-  {% include 'nav.html' %}
  
 
-  <div class="row">
+  <div class="row card-body card-fluid"  style="width:auto; padding-left:12em;">
   
   <div class="col-md-1"></div>
 ​
