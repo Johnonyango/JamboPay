@@ -27,8 +27,11 @@ class BillsForm(forms.ModelForm):
             'Revstreams': forms.CheckboxSelectMultiple(),
         }
         exclude = ['status']
-
+        
 class NoteForm(forms.ModelForm):
     class Meta:
         model = NewsLetterRecipients
         fields = '__all__'
+        # widgets = {
+        #     '__all__': forms.TextInput(attrs={'class': 'myfieldclass'}),
+        # }
