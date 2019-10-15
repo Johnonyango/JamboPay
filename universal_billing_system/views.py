@@ -275,7 +275,6 @@ def upload(request):
         return render(request, 'upload.html', {"excel_data": excel_data})
 
 
-
 def search(request):
     if 'name_search' in request.GET and request.GET["name_search"]:
         search_term = request.GET.get("name_search")

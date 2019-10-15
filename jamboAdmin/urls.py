@@ -11,8 +11,12 @@ urlpatterns=[
     url(r'^revenuestreams/$',views.revenueStreams,name='revenueStreams'),
     url(r'^payments/$',views.payments,name='payments'),
     url(r'^merchantbills/$',views.merchantBills,name='merchantBills'),
+        # path('addEmployee',views.addEmployee , name='addEmployee' ),
+    url(r'^addEmployee/$',views.addEmployee,name='addEmployee'),
+
 
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
