@@ -4,17 +4,17 @@ from django.contrib.auth.forms import UserCreationForm
 from universal_billing_system.models import Merchant
 
 class SignUpForm(UserCreationForm):
-    Email = forms.EmailField()
-    extra_field = forms.CharField(required=True)
-    Business_name = forms.CharField(max_length=20)
-    Business_owner = forms.CharField()
-    Phone_number = forms.CharField(max_length=60)
-    Physical_address = forms.CharField(max_length=60)
-    Post_code = forms.CharField(max_length=20)
-    Town = forms.CharField(max_length=20)
-    JP_paybill = forms.CharField(max_length=20)
-    Industry = forms.CharField()
-    Revstreams = forms.CharField()
+    # Email = forms.EmailField()
+    # extra_field = forms.CharField(required=True)
+    # Business_name = forms.CharField(max_length=20)
+    # Business_owner = forms.CharField()
+    # Phone_number = forms.CharField(max_length=60)
+    # Physical_address = forms.CharField(max_length=60)
+    # Post_code = forms.CharField(max_length=20)
+    # Town = forms.CharField(max_length=20)
+    # JP_paybill = forms.CharField(max_length=20)
+    # Industry = forms.CharField()
+    # Revstreams = forms.CharField()
 
 
     def __init__(self, *args, **kwargs):

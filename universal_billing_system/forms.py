@@ -38,7 +38,13 @@ class BillsForm(forms.ModelForm):
                 }
             ),
         }
-        exclude = ['status','generated_by']
+        exclude = ['status','generated_by','bill_id']
+# class MerchantForm(forms.ModelForm):
+#     class Meta:
+#         model = Merchant
+#         fields = '__all__'
+       
+        # exclude = ['Merchant_id']
 
 class NoteForm(forms.ModelForm):
     class Meta:

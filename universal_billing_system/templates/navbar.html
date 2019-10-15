@@ -29,11 +29,7 @@
       {% if user.is_authenticated %}
 
 
-      <form class="navbar-form" role="search" action="{% url 'search'%}">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search customer " name="customer_name">
-        </div>
-      </form>
+     
       <li>
           <p style="color: black;"class='nav-link' >Username :{{ user.username }}</p>
 
@@ -50,6 +46,11 @@
       <button onclick="download_csv()" class="btn btn-primary nav-link">Download CSV</button> 
     </ul>
 
+    <form class="navbar-form" role="search" action="{% url 'search'%}">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search customer " name="customer_name">
+      </div>
+    </form>
   </div>
 </nav>
 
@@ -61,22 +62,18 @@
     justify-content: space-between;
     list-style-type: none;
   }
-
   nav ul {
     padding: 0;
     display: flex;
     justify-content: space-between;
     list-style-type: none;
   }
-
   nav li a {
     font-family: cursive;
     color: #ff1e4b;
     font-size: 16px;
     text-decoration: none;
-
   }
-
   nav li a:hover {
     color: #dd5771;
   }
