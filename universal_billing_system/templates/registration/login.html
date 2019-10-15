@@ -6,7 +6,7 @@
 <br>
 <br>
 <br>
-<div class="card text-white" style="margin-left:20%;margin-right:20%; background-color: #0074b6;">
+<div class="card text-white" style="margin-left:20%;margin-right:20%; background-color: #0073b6e8;">
        
   <div class="row">
     <!-- Empty div -->
@@ -28,11 +28,11 @@
             {% bootstrap_form form %}
   
               <div class="form-group">
-                <input type="submit" style="color: #fff;" class="btn btn-primary btn-sm" value="Login"><br>
+                <input type="submit" style="color: #fff;" class="btn btn-danger btn-sm" value="Login"><br>
               </div>
                
-                <p>Did you forget password ? <a href="/accounts/password/change">Change Password</a> <br>
-                    <a href="{% url 'home' %}">Go to Homepage</a>
+                <p >Did you forget password ? <a style="color: black;" href="/accounts/password/change">Change Password</a> <br>
+                    <a style="color: black;" href="{% url 'home' %}">Go to Homepage</a>
               <input type="hidden" name="next" value="{{next}}">
   
             </form>
@@ -46,7 +46,7 @@
     </body>
       <style>
         body{
-          background-image: url('https://wallpapercave.com/wp/wp2164078.jpg');
+          background-image: url('http://staffingstream.wpengine.netdna-cdn.com/wp-content/uploads/2013/06/going-global.jpg');
         }
       </style>
       {% endblock %}

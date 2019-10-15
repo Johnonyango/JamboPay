@@ -7,7 +7,10 @@ from tinymce.models import HTMLField
 class Industry(models.Model):
     name = models.CharField( blank=False,max_length= 40,default=None)
     def __str__(self):
-        return self.name 
+        return self.name
+
+    def save_industry(self):
+        self.save()
                           
 class Revstreams(models.Model):
     name = models.CharField( blank=False,max_length= 40,default=None)
@@ -45,12 +48,29 @@ class Bills(models.Model):
     narration = models.CharField(max_length=255,blank=False)
     amount = models.FloatField(blank=False)
     quantity = models.FloatField(blank=True)
-    post_date = models.DateTimeField(auto_now_add=True)
-    status = models.IntegerField(choices=Status,default=0)
+    post_date = models.DateField(auto_now_add=True)
+    due_date = models.DateField(null=True)
+    status = models.CharField(choices=Status,default='Unpaid',max_length=10)
+    generated_by=models.CharField(max_length=255,blank=False)
     
+    
+    @classmethod
+    def search_by_name(cls,search_term):
+        names = cls.objects.filter(customer_name__icontains=search_term)
+        return names
+    
+    @classmethod
+    def get_merchant_bills(cls,generated_by):
+        merchants_bills=cls.objects.filter(generated_by=generated_by).all()
+        return merchants_bills
+
+    
+
 class NewsLetterRecipients(models.Model):
-    name = models.CharField(max_length = 30)
-    email = models.EmailField()
+    name = models.CharField(max_length = 30, blank=False, null=False)
+    email = models.EmailField(blank=False, null=False)
+    amount = models.FloatField(blank=False, default=None)
+    quantity = models.FloatField(blank=False, default=None)
 
 class Payments(models.Model):
     bill_number = models.ForeignKey(Bills,on_delete=models.CASCADE,default=None)
@@ -62,5 +82,8 @@ class Payments(models.Model):
 
     def save_bill(self):
         self.save()
- 
- 
+
+
+class NewsLetterRecipientss(models.Model):
+    name = models.CharField(max_length = 30, blank=False, null=False)
+    email = models.EmailField(blank=False, null=False)

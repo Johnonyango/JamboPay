@@ -69,9 +69,9 @@ LOGOUT_URL = 'logout'
 
 INSTALLED_APPS = [
     'universal_billing_system',
+    'bootstrap_datepicker_plus',
     'bootstrap4',
     'tinymce',
-    'widget_tweaks',
     'registration',
     'rest_framework',
     'authtools',
@@ -201,5 +201,18 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/'
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
+
+
+# Email configurations remember to install python-decouple
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
 
 django_heroku.settings(locals())
