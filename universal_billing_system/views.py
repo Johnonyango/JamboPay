@@ -374,7 +374,7 @@ def addEmployee(request):
 
         form=AddEmployeeForm()
 
-    return render(request, 'admin/add_employee.html', {'form': form})
+    return render(request, 'admins/add_employee.html', {'form': form})
 
 
 

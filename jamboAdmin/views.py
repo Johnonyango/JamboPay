@@ -81,7 +81,7 @@ def indexone(request):
 @login_required(login_url='/accounts/login/')
 def merchants(request):
     url = ('http://127.0.0.1:8000/api/GetMerchants')
-    headers = {'Authorization': 'Token d510090df96b2b48c9ed719312737250d0b4a618'}
+    headers = {'Authorization': 'Token 47a67011ccd1c32843a27c07929c1e4e5f4ac4c7'}
     response = requests.get(url, headers=headers)
     details = response.json()
     for detail in details:
@@ -167,4 +167,4 @@ def addEmployee(request):
 
         form=AddEmployeeForm()
 
-    return render(request, 'admin/add_employee.html', {'form': form})
+    return render(request, 'admins/add_employee.html', {'form': form})
