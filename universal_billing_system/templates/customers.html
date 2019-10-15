@@ -1,63 +1,106 @@
 {%extends "base.html"%}
 {% load bootstrap4 %}
+<<<<<<< HEAD
 
 <body>
+=======
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+>>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe
+
+<body>
+    
   {% block content %}
   <br>
+<<<<<<< HEAD
 ​
-  <h2 style="font-family: sans-serif;">BILL DETAILS</h2>
+  <h2 style="font-family: 'Bree Serif', serif;
+  ">BILL DETAILS</h2>
+=======
+
+>>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe
   
   <div class="row">
   
   <div class="col-md-1"></div>
-​
-<div class="col-md-10">
- 
-<div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Simple Table</h4>
-                  <p class="card-category"> Here is a subtitle for this table</p>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead class=" text-primary">
-                          <tr >
-                              <th>Bill Number</th> 
-                              <th>Customer Name</th> 
-                              <th>Customer Phone</th> 
-                              <th>Customer Email</th>
-                              <th>Narration</th>
-                              <th>Amount</th>
-                              <th>Quantity</th>
-                              <th>Bill Date</th>
-                              <th>Bill status</th>
-                            </tr>
-                            {% for detail in details%}
-                      </thead>
-                      <tbody>
-                          <tr>
-                              <td>{{detail.id}}</td>
-                              <td>{{detail.customer_name}}</td>
-                              <td>{{detail.customer_phone}}</td>
-                              <td>{{detail.customer_email}}</td>
-                              <td>{{detail.narration}}</td>
-                              <td>{{detail.amount}}</td>
-                              <td>{{detail.quantity}}</td>
-                              <td>{{detail.post_date}}</td>
-                              <td>{{detail.status}}</td>
-                            </tr>
-                            {% endfor %}
-                        ​
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
 
+<div class="col-md-10">
+<<<<<<< HEAD
+  <table class="table table-bordered table-striped " id="tblCustomers" cellspacing="0" cellpadding="0">
+    <tr style="background-color:#9CC4DD;">
+=======
+<table class="table table-striped table-primary">
+  <thead>
+    <tr>
+>>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe
+      <th>Bill Number</th> 
+      <th>Customer Name</th> 
+      <th>Customer Phone</th> 
+      <th>Customer Email</th>
+      <!-- <th>Revenue Streams</th> -->
+      <th>Narration</th>
+      <th>Amount</th>
+      <th>Quantity</th>
+      <th>Bill Date</th>
+      <th>Bill status</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for detail in details%}
+
+    <tr>
+      <td>{{detail.id}}</td>
+      <td>{{detail.customer_name}}</td>
+      <td>{{detail.customer_phone}}</td>
+      <td>{{detail.customer_email}}</td>
+      <!-- <td>{{detail.Revstreams}}</td> -->
+      <td>{{detail.narration}}</td>
+      <td>{{detail.amount}}</td>
+      <td>{{detail.quantity}}</td>
+      <td>{{detail.post_date}}</td>
+      <td>{{detail.status}}</td>
+
+    </tr>
+<<<<<<< HEAD
+    {% endfor %} -->
+
+    <!-- On rows -->
+<tr class="table-active">Bill Number</tr>
+
+<tr class="table-primary">Customer Name</tr>
+<tr class="table-secondary">Customer Phone</tr>
+<tr class="table-success">Customer Email</tr>
+<tr class="table-danger">Narration</tr>
+<tr class="table-warning">Amount</tr>
+<tr class="table-info">Quantity</tr>
+<tr class="table-light">Bill Date</tr>
+<tr class="table-dark">Bill status</tr>
+
+<!-- On cells (`td` or `th`) -->
+<tr>
+  <td class="table-active">...</td>
+  
+  <td class="table-primary">...</td>
+  <td class="table-secondary">...</td>
+  <td class="table-success">...</td>
+  <td class="table-danger">...</td>
+  <td class="table-warning">...</td>
+  <td class="table-info">...</td>
+  <td class="table-light">...</td>
+  <td class="table-dark">...</td>
+</tr>
+​
+</table>
 <br/>
-<input style="background-color:#9CC4DD; color:#000;" class="btn btn-lg" type="button" id="btnExport" value="Download pdf" />
+<input style="background-color:#9CC4DD;" class="btn btn-lg" type="button" id="btnExport" value="Download pdf" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
@@ -77,19 +120,41 @@
         });
     });
 </script>
+=======
+  {% endfor %}
+  </tbody>
+</table>
+>>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe
 <div class="col-md-1"></div>
 </div>
 </div>
-​
+
 <style>
   h2{
     text-align: center;
   }
+<<<<<<< HEAD
+
+=======
+    body{
+      background-image: url('https://wallpapercave.com/wp/wp2164078.jpg');
+      
+      overflow-x: hidden;
+    }
+>>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe
     .container {
-      background-color: #0073b659;
+      background-color: #0e108559;
     }
   </style>
   {% endblock %}
-​
+
   
+<<<<<<< HEAD
   </body>
+=======
+</body>
+
+
+
+</html>
+>>>>>>> 1e5ce565282a1028239852fe4a39d350d6bf21fe

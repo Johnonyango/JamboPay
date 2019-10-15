@@ -1,4 +1,0 @@
- id | customer_name | customer_phone | customer_email | narration | amount | quantity | post_date | due_date | status | generated_by 
-----+---------------+----------------+----------------+-----------+--------+----------+-----------+----------+--------+--------------
-(0 rows)
-
