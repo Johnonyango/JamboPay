@@ -29,7 +29,7 @@
       {% if user.is_authenticated %}
 
 
-      
+     
       <li>
           <p style="color: black;"class='nav-link' >Username :{{ user.username }}</p>
 
@@ -43,13 +43,14 @@
         <a style="color: #000;" class='nav-link' href="/accounts/login">Login</a>
       </p>
       {% endif %}
+      <button onclick="download_csv()" class="btn btn-primary nav-link">Download CSV</button> 
     </ul>
+
     <form class="navbar-form" role="search" action="{% url 'search'%}">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search Customer " name="customer_name">
+        <input type="text" class="form-control" placeholder="Search customer " name="customer_name">
       </div>
     </form>
-
   </div>
 </nav>
 
@@ -61,23 +62,41 @@
     justify-content: space-between;
     list-style-type: none;
   }
-
   nav ul {
     padding: 0;
     display: flex;
     justify-content: space-between;
     list-style-type: none;
   }
-
   nav li a {
     font-family: cursive;
     color: #ff1e4b;
     font-size: 16px;
     text-decoration: none;
-
   }
-
   nav li a:hover {
     color: #dd5771;
   }
 </style>
+
+<script>
+  var data = [
+     
+  ];
+   
+   
+  function download_csv() {
+      var csv = 'customer_name,customer_phone,customer_email,narration,amount,quantity,post_date,due_date\n';
+      data.forEach(function(row) {
+              csv += row.join(',');
+              csv += "\n";
+      });
+   
+      console.log(csv);
+      var hiddenElement = document.createElement('a');
+      hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+      hiddenElement.target = '_blank';
+      hiddenElement.download = 'upload_bills_template.csv';
+      hiddenElement.click();
+  }
+  </script>
