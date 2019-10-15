@@ -19,7 +19,7 @@ class Revstreams(models.Model):
     def __str__(self):
         return self.name
 class Merchant(models.Model):
-    Merchant_id = models.CharField(max_length=12,blank=False)
+    # Merchant_id = models.CharField(max_length=12,blank=False)
     Business_name = models.CharField(max_length=20,blank=False)
     Business_owner = models.ForeignKey(User,on_delete=models.CASCADE,default=None)
     Email = models.EmailField()
@@ -32,15 +32,14 @@ class Merchant(models.Model):
     Revstreams = models.ManyToManyField(Revstreams)
     join_date=models.DateTimeField(auto_now_add=True)
     
-    exclude = ('Merchant_id',)
+  
 
 
     
     def __str__(self):
         
         return self.Business_name
-    def __str__(self):
-        return self.Merchant_id    
+  
 
 class Bills(models.Model):
     Status=(
