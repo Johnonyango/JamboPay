@@ -81,7 +81,7 @@ def indexone(request):
 @login_required(login_url='/accounts/login/')
 def merchants(request):
     url = ('http://127.0.0.1:8000/api/GetMerchants')
-    headers = {'Authorization': 'Token 47a67011ccd1c32843a27c07929c1e4e5f4ac4c7'}
+    headers = {'Authorization': 'Token 491090983dff467844b8c7584d3ff9d615dbec8c'}
     response = requests.get(url, headers=headers)
     details = response.json()
     for detail in details:
@@ -99,7 +99,7 @@ def merchants(request):
 @login_required(login_url='/accounts/login/')
 def revenueStreams(request):
     url = ('http://127.0.0.1:8000/api/GetRevenueStreams')
-    headers = {'Authorization': 'Token 47a67011ccd1c32843a27c07929c1e4e5f4ac4c7'}
+    headers = {'Authorization': 'Token 491090983dff467844b8c7584d3ff9d615dbec8c'}
     response = requests.get(url, headers=headers)
     details = response.json()
     for detail in details:
@@ -110,7 +110,7 @@ def revenueStreams(request):
 
 def payments(request):
     url = ('http://127.0.0.1:8000/api/GetPayments/')
-    headers = {'Authorization': 'Token 47a67011ccd1c32843a27c07929c1e4e5f4ac4c7'}
+    headers = {'Authorization': 'Token 491090983dff467844b8c7584d3ff9d615dbec8c'}
     response = requests.get(url,headers=headers)
     details = response.json()
     for detail in details:
@@ -127,7 +127,7 @@ def payments(request):
 
 def merchantBills(request):
     url = ('http://127.0.0.1:8000/api/BillsDetails/')
-    headers = {'Authorization': 'Token 47a67011ccd1c32843a27c07929c1e4e5f4ac4c7'}
+    headers = {'Authorization': 'Token 491090983dff467844b8c7584d3ff9d615dbec8c'}
     response = requests.get(url,headers=headers)
     details = response.json()
     for detail in details:
@@ -142,6 +142,7 @@ def merchantBills(request):
         due_date = detail.get('due_date')
         generated_by = detail.get('generated_by')
         status = detail.get('status')
+        bill_id = detail.get('bill_id')
     return render(request, 'merchant_bills.html', {'details': details})
 
 

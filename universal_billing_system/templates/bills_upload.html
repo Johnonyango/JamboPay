@@ -1,4 +1,3 @@
-{%extends "registration/base.html"%}
 {% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="en">
@@ -12,17 +11,19 @@
     <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
     <title>Upload Bills</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.1.135/jspdf.min.js"></script>
-<script type="text/javascript" src="http://cdn.uriit.ru/jsPDF/libs/adler32cs.js/adler32cs.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.1.135/jspdf.min.js"></script>
+    <script type="text/javascript" src="http://cdn.uriit.ru/jsPDF/libs/adler32cs.js/adler32cs.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js
 "></script>
-<script type="text/javascript" src="libs/Blob.js/BlobBuilder.js"></script>
-<script type="text/javascript" src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.addimage.js"></script>
-<script type="text/javascript" src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.standard_fonts_metrics.js"></script>
-<script type="text/javascript" src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.split_text_to_size.js"></script>
-<script type="text/javascript" src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.from_html.js"></script>
-<script type="text/javascript" src="js/basic.js"></script>
+    <script type="text/javascript" src="libs/Blob.js/BlobBuilder.js"></script>
+    <script type="text/javascript" src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.addimage.js"></script>
+    <script type="text/javascript"
+        src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.standard_fonts_metrics.js"></script>
+    <script type="text/javascript"
+        src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.split_text_to_size.js"></script>
+    <script type="text/javascript" src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.from_html.js"></script>
+    <script type="text/javascript" src="js/basic.js"></script>
 </head>
 
 <body>
@@ -42,29 +43,29 @@
                 <div>
                     <strong>{{message|safe}}</strong>
                 </div>
-                
+
                 {% endfor %}
                 {% else %}
-                
+
                 <p>Only accepts CSV files</p>
 
                 {{order}}
-                <input style="background-color:#9CC4DD;" class="btn" type="button" id="btnExport" value="Download csv file template" />
+                <button onclick="download_csv()" class="btn btn-primary nav-link">Download CSV</button>
 
-                <a href="universal_billing_system/templates/bills.csv" download>Download Template</a>
+
 
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-<br>
+                    <br>
                     <label for="">Upload a File</label>
                     <br>
                     <input type="file" name="file" id="">
 
-                    
-                    <button  style="background-color:#9CC4DD;" class="btn" type="submit">Upload</button>
+
+                    <button style="background-color:#9CC4DD;" class="btn" type="submit">Upload</button>
                 </form>
                 {% endif %}
-                
+
                 <hr>
             </div>
         </div>
@@ -83,7 +84,8 @@
         }
     </style>
     {% endblock %}
-    <script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <!-- js -->
     <!-- start-smooth-scrolling -->
     <script type="text/javascript" src="js/move-top.js"></script>
@@ -93,10 +95,10 @@
         var $ = jQuery.noConflict();
         $(function () {
             $('#activator').click(function () {
-                $('#box').animate({'top': '0px'}, 900);
+                $('#box').animate({ 'top': '0px' }, 900);
             });
             $('#boxclose').click(function () {
-                $('#box').animate({'top': '-1000px'}, 900);
+                $('#box').animate({ 'top': '-1000px' }, 900);
             });
         });
         $(document).ready(function () {
@@ -109,6 +111,7 @@
             });
         });
     </script>
+
 </body>
 
 </html>
