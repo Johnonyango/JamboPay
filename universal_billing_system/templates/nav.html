@@ -34,20 +34,7 @@
       <li class="nav-item active">
         <a style="color: #000;" class="nav-link " href="{% url 'Index'%}">Home<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a style="color: #000;" class="nav-link" href="/accounts/register/">Create Users</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a style="color: #000;" class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Bills
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{% url 'new-bill' %}">Generate Bill</a>
-          <a class="dropdown-item" href="{% url 'bills_upload'%}">Upload Bill</a>
-          <a class="dropdown-item" href="{% url 'merchantbills'%}">Bill Details</a>
-        </div>
-      </li>
+      
       {% if user.is_authenticated %}
 
 
