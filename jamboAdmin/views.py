@@ -73,7 +73,7 @@ def signup(request):
     else:
         form = merchantUSers()
 
-    return render(request, 'registration/registration_form.html', {'form': form})
+#     return render(request, 'registration/registration_form.html', {'form': form})
 
 def indexone(request):
     return render(request, 'indexone.html')
