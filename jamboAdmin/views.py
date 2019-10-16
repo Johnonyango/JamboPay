@@ -69,14 +69,14 @@ def signup(request):
             # recipient = NewsLetterRecipients(name=name, email=email,amount=amount,quantity=quantity)
             # recipient.save()
             send_message(name, email)
-            return redirect('indexone')
+            return redirect('home')
     else:
         form = merchantUSers()
 
 #     return render(request, 'registration/registration_form.html', {'form': form})
 
-def indexone(request):
-    return render(request, 'indexone.html')
+def home(request):
+    return render(request, 'home.html')
 
 @login_required(login_url='/accounts/login/')
 def merchants(request):
@@ -168,4 +168,4 @@ def addEmployee(request):
 
         form=AddEmployeeForm()
 
-    return render(request, 'admins/add_employee.html', {'form': form})
+    return render(request, 'add_employee.html', {'form': form})

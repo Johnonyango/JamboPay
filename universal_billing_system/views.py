@@ -65,7 +65,7 @@ def index(request):
 
         print(current_user.is_superuser,"Admiiiiin")
 
-        return redirect(jamboAdmin_views.indexone)
+        return redirect(jamboAdmin_views.home)
     else:
 
         return render(request, 'index.html')
