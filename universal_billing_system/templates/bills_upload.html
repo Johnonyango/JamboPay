@@ -1,6 +1,5 @@
-
-    {% extends 'base.html' %}
-    {% load bootstrap4 %}
+{% extends 'base.html' %}
+{% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,8 +49,8 @@
 
                 <p>Only accepts CSV files</p>
 
-                {{order}}
-                <button onclick="download_csv()" class="btn btn-primary nav-link">Download CSV</button>
+              
+                <button style="color:#000; text-transform: capitalize" onclick="download_csv()" class="btn btn-primary nav-link">Download CSV Template</button>
 
 
 
@@ -63,7 +62,7 @@
                     <input type="file" name="file" id="">
 
 
-                    <button style="background-color:#9CC4DD;" class="btn" type="submit">Upload</button>
+                    <button style="background-color:#9CC4DD; color:#000;" class="btn" type="submit">Upload</button>
                 </form>
                 {% endif %}
 

@@ -16,16 +16,15 @@
 <body>
     {% block content %}
     <br>
-    <h2>BILL DETAILS</h2>
+    <h2 style="text-align: center;">BILL DETAILS</h2>
     <br>
-    <div class="row card-body card-fluid"  style="width:auto; padding-left:12em;">
-
+    <div class="row card-body card-fluid"  style="width:auto; padding-left:11em;">
         <div class="col-md-1"></div>
 
-        <div class="col-md-10">
-            <table class="table table-bordered table-primary">
+        <div class="col-md-11">
+            <table class=" table table-bordered table-striped">
                 <thead>
-                    <tr>
+                    <tr style="background-color:#9CC4DD;">
                         <th>Merchant Number</th>
                         <th>Customer Name</th>
                         <th>Customer Phone</th>
@@ -60,7 +59,6 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <div class="col-md-1"></div>
         </div>
     </div>
 

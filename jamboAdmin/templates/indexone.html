@@ -28,7 +28,6 @@
             color: #000;
         }
     </style>
-    {% include "admins/navbar.html" %}
     <div class="sidebar" data-color="#0074b6" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
         <!--
           Tip 1: You can change the color of the sidebar using: data-color="#0074b6 | azure | green | orange | danger"
@@ -36,7 +35,7 @@
           Tip 2: you can also add an image using data-image tag
       -->
         <div class="logo">
-            <img width="60%" src="https://www.jambopay.com/img/logo.png " class="simple-text logo-normal">
+            <img  width="60%" src="https://www.jambopay.com/img/logo.png " class="simple-text logo-normal">
 
 
         </div>
@@ -46,17 +45,17 @@
                     <a style="color: #000;" class="nav-link " href="{% url 'Index'%}">Home<span class="sr-only">(current)</span></a>
                   </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'merchants'%}">All Merchants</a>
+                    <a class="nav-link" href="{% url 'merchants'%}">Merchants</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'revenueStreams'%}">All Revenue Streams</a>
+                    <a class="nav-link" href="{% url 'revenueStreams'%}">Revenue Streams</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'payments'%}">See All Payments</a>
+                    <a class="nav-link" href="{% url 'payments'%}">Payments</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'merchantBills'%}">See All Bills</a>
+                    <a class="nav-link" href="{% url 'merchantBills'%}">Bills</a>
                 </li>
                 <li class="nav-item">
                     <a class='nav-link' href="{% url 'addEmployee' %}">Create Merchant Owner</a>
@@ -64,7 +63,20 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/universal_billing_system/merchant/add/">Register New
                         merchants</a>
+                </li> {% if user.is_authenticated %}
+
+                <li>
+                <li><a style="color: #000;" class='nav-link' href="/logout">Logout</a>
+          
                 </li>
+                </li>
+          
+                {% else %}
+                <li>
+                  <a style="color: #000;" class='nav-link' href="/accounts/login">Login</a>
+                </li>
+                {% endif %}
+
 
             </ul>
         </div>

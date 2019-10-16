@@ -1,26 +1,30 @@
-{% extends "registration/base.html" %}
+{% extends "base.html" %}
 {% load bootstrap4 %}
 {% load static %}
 {% block content %}
-
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div style="background-color:rgba(255, 255, 255, 0.726);" class="col-md-4 form-section">
+<style>
+</style>
+<div class="container" >
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-4">
+      <div class=" card"
+        style="width: 800px;border-radius: 10px; box-shadow: 0 40px 15px 0 rgba(0, 0, 0, 0.2);  font-weight: 600;  height: 600px;">
+        <div class="content-section">
+          <div class="card-body" style="text-align: center;">
                 {% if form.errors %}
                 <p>Some information might be incorrect</p>
                 {% endif %}
-                <div class="signup-fields">
+                <div class="signup-fields" style="color: #000;">
                     <div class="section">
                         <div class="mylogo">
                         </div>
-                        <div class="form-section" id="register">
-                            <form method="post">
+                        <div class="form-section" id="register" style="color: #000;">
+                            <form  method="post" style="text-align: left; color: #000;" >
                                 {% csrf_token %}
                                 {% bootstrap_form form %}
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-primary btn-sm" value="Sign up">
+                                    <input style="color: #000;" type="submit" class="btn btn-primary btn-sm" value="Sign up">
                                 </div>
                             </form>
                         </div>
@@ -29,21 +33,12 @@
                         <p class="log forgot">Have an account? <a href="/accounts/login/">Log in</a></p>
                     </div>
                 </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-body text-center">
-                        <p>Have an account? <span><a class="" href="/accounts/login">Login</a></span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4"></div>
+                
+          </div>
         </div>
-        <style>
-                body{
-                    background-image: url('https://wallpapercave.com/wp/wp2164091.jpg');
-                    overflow-x: hidden;
-                }
-            </style>
-        {% endblock %}
-</body>
-
+      </div>
+    </div>
+    <div class="col-4"></div>
+  </div>
+</div>
+{% endblock%}

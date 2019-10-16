@@ -20,33 +20,7 @@ class SignUpForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
         self.fields.pop('username')
-    # def __init__(self, *args, **kwargs):
-    #     super(SignUpForm, self).__init__(*args, **kwargs)
-    #     self.fields.pop('password1')  
-    # def __init__(self, *args, **kwargs):
-    #     super(SignUpForm, self).__init__(*args, **kwargs)
-    #     self.fields.pop('password2')         
-
-
-
-    # class Meta:
-    #     model = Merchant
-    #     fields = ("Email", "Phone_number")
-    #     exclude = ['username']
-
-    # def save(self, commit=True):
-    #     user = super(SignUpForm, self).save(commit=False)
-    #     user.extra_field = self.cleaned_data["city"]
-    #     if commit:
-    #         user.save()
-    #     return user
-        
-# class merchantUSers(UserCreationForm):
-#     # email=forms.EmailField()
-#     class Meta:
-#         model=User
-#         fields='__all__'
-
+   
 class AddEmployeeForm(UserCreationForm):
 	email = forms.EmailField()
 

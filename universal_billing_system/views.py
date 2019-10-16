@@ -224,7 +224,7 @@ def new_bill(request):
     else:
         form = BillsForm()
 
-    return render(request, 'bills/new-bill.html', {"form": form})
+    return render(request, 'new-bill.html', {"form": form})
 
 
 def notification(request):

@@ -17,21 +17,22 @@
   {% block content %}
  
 
-  <div class="row card-body card-fluid"  style="width:auto; padding-left:12em;">
+  <div class="row card-body card-fluid"  style="width:auto; padding-left:13em;">
   
   <div class="col-md-1"></div>
-​
-<div class="col-md-10">
-    <div class="card">
-        <div style="background-color: #9CC4DD;" class="card-header ">
-          <h4 style="color: #000;"  class="card-title ">BILL DETAILS</h4>
-          <p style="color: #000;" class="card-category">{{message}}</p>
-        </div>
+  <div class=" ">
+      <h4 style="color: #000;"  class="card-title ">BILL DETAILS</h4>
+      <p style="color: #000;" class="card-category">{{message}}</p>
+    </div>
+
+<div style="width:auto; padding-left:5em;" class="col-md-11">
+    <div  class="">
+      
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table">
+            <table id="tblCustomers" class="table table-bordered table-striped">
               <thead class=" text-primary">
-                  <tr style="color: #000;" >
+                  <tr style="color: #000; background-color:#9CC4DD;" >
                       <th>Bill Number</th> 
                       <th>Customer Name</th> 
                       <th>Customer Phone</th> 
@@ -63,6 +64,7 @@
           </div>
         </div>
       </div>
+      
 
 <br/>
 <input style="background-color:#9CC4DD; color:#000;" class="btn btn-lg" type="button" id="btnExport" value="Download pdf" />
@@ -85,7 +87,6 @@
         });
     });
 </script>
-<div class="col-md-1"></div>
 </div>
 </div>
 ​

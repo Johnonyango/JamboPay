@@ -162,7 +162,7 @@ def addEmployee(request):
             welcome_email(name,email, password)
 
             messages.success(request,'Employee added succesfully')
-            return redirect('managersite')
+            return redirect('Index')
 
     else:
 

@@ -11,6 +11,7 @@ Django==1.11.25
 django-authtools==1.7.0
 django-bootstrap-datepicker-plus==3.0.5
 django-bootstrap4==1.0.1
+django-crispy-forms==1.7.2
 django-heroku==0.3.1
 django-import-export==1.2.0
 django-postgres-copy==2.4.2
