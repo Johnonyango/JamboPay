@@ -1,0 +1,102 @@
+<nav class="navbar bg-light navbar-expand-lg navbar-light border-top border-warning shadow-sm">
+  <img width="15%" class="navbar-brand" src="https://www.jambopay.com/img/logo.png  ">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a style="color: #000;" class="nav-link " href="{% url 'Index'%}">Home<span
+            class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a style="color: #000;" class="nav-link " href="{% url 'addEmployee' %}">Create Users</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a style="color: #000;" class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Bills
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'new-bill' %}">Generate Bill</a>
+          <a class="dropdown-item" href="{% url 'bills_upload'%}">Upload Bill</a>
+          <a class="dropdown-item" href="{% url 'merchantbills'%}">Bill Details</a>
+        </div>
+        </li>
+
+      {% if user.is_authenticated %}
+
+
+     
+      <li>
+          <p style="color: black;"class='nav-link' >Username :{{ user.username }}</p>
+
+      <li><a style="color: #000;" class='nav-link' href="/logout">Logout</a>
+
+      </li>
+      </li>
+
+      {% else %}
+      <p>
+        <a style="color: #000;" class='nav-link' href="/accounts/login">Login</a>
+      </p>
+      {% endif %}
+      <button onclick="download_csv()" class="btn btn-primary nav-link">Download CSV</button> 
+    </ul>
+
+    <form class="navbar-form" role="search" action="{% url 'search'%}">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search customer " name="customer_name">
+      </div>
+    </form>
+  </div>
+</nav>
+
+
+<style>
+  ul {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+  }
+  nav ul {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+  }
+  nav li a {
+    font-family: cursive;
+    color: #ff1e4b;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  nav li a:hover {
+    color: #dd5771;
+  }
+</style>
+
+<script>
+  var data = [
+     
+  ];
+   
+   
+  function download_csv() {
+      var csv = 'customer_name,customer_phone,customer_email,narration,amount,quantity,post_date,due_date\n';
+      data.forEach(function(row) {
+              csv += row.join(',');
+              csv += "\n";
+      });
+   
+      console.log(csv);
+      var hiddenElement = document.createElement('a');
+      hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+      hiddenElement.target = '_blank';
+      hiddenElement.download = 'upload_bills_template.csv';
+      hiddenElement.click();
+  }
+  </script>

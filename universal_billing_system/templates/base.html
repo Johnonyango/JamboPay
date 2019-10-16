@@ -3,20 +3,67 @@
 <!DOCTYPE html>
 <html>
 
+
 <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{%static 'assets/css/material-dashboard.css?v=2.1.1'%}">
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<!-- 
+    <link href="{% static 'assets/demo/demo.css'%}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'assets/css/material-dashboard.css?v=2.1.1' %}"> -->
 </head>
 
 <body>
     <style>
-        body{
+        body {
             overflow-x: hidden;
+            font-family: sans-serif;
+        }
+        .btn {
+            color: #000;
         }
     </style>
     {% include "nav.html" %}
-    {% block content %} <h1 class='text-center'>News for {{date|date:"l d-F Y"}}</h1> {%endblock%}
+    <div class="sidebar" data-color="#0074b6" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+        <!--
+          Tip 1: You can change the color of the sidebar using: data-color="#0074b6 | azure | green | orange | danger"
+  
+          Tip 2: you can also add an image using data-image tag
+      -->
+        <div class="logo">
+          <img width="60%" src="https://www.jambopay.com/img/logo.png " class="simple-text logo-normal">
+           
+          
+        </div>
+        <div class="sidebar-wrapper">
+          <ul class="nav">
+                <li class="nav-item">
+                        <a style="color: #000;" class="nav-link" href="/accounts/register/">Create Users</a>
+                      </li>
+            <li class="nav-item ">
+                    <a class="dropdown-item" href="{% url 'new-bill' %}">Generate Bill</a>
+            </li>
+            <li class="nav-item ">
+          <a class="dropdown-item" href="{% url 'bills_upload'%}">Upload Bill</a>
+            </li>
+            <li class="nav-item ">
+          <a class="dropdown-item" href="{% url 'merchantbills'%}">Bill Details</a>
+                    
+            </li>
+           
+          </ul>
+        </div>
+      </div>
+    {% block content %}
+    
+    {% endblock %}
+
     {% block scripts %}
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

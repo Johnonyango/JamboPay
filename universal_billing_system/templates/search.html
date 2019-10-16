@@ -12,59 +12,61 @@
     {%extends "base.html"%}
   {% block content %}
   <br>
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
-  <div class=" container row text-center">
-    {% if names %}
-    <h2 style="font-family: 'Bree Serif', serif;"> Found {{names|length}} bills with the search name {{message}}.</h2>
-    {% else %}
-    <h2 style="font-family: 'Bree Serif', serif;"> Found 0 names for the search term</h2>
-    {% endif %}
+  <div class="row "  style="width:auto; padding-left:13em;">
+      <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-11">
+        <div class=" container row text-center">
+          {% if names %}
+          <h2 style="font-family: 'Bree Serif', serif;"> Found {{names|length}} bills with the search name {{message}}.</h2>
+          {% else %}
+          <h2 style="font-family: 'Bree Serif', serif;"> Found 0 names for the search term</h2>
+          {% endif %}
+        </div>
+      
+      <br>
+      
+        <table id="bill" class=" table table-bordered table-striped">
+          <thead>
+            <tr style="background-color:#9CC4DD;">
+              <th>Bill Number</th>
+              <th>Customer Name</th>
+              <th>Customer Phone</th>
+              <th>Customer Email</th>
+              <th>Narration</th>
+              <th>Amount</th>
+              <th>Quantity</th>
+              <th>Bill Date</th>
+              <th>Bill status</th>
+      
+            </tr>
+          </thead>
+          <tbody>
+            {% for name in names%}
+      
+            <tr>
+              <td>{{name.id}}</td>
+              <td>{{name.customer_name}}</td>
+              <td>{{name.customer_phone}}</td>
+              <td>{{name.customer_email}}</td>
+              <!-- <td>{{detail.Revstreams}}</td> -->
+              <td>{{name.narration}}</td>
+              <td>{{name.amount}}</td>
+              <td>{{name.quantity}}</td>
+              <td>{{name.post_date}}</td>
+              <td>{{name.status}}</td>
+      
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      
+      <input style="background-color:#9CC4DD; color:#000;" class="btn btn-lg" type="button" id="btnExport" value="Download pdf" />
+        
+      
+      </div>
   </div>
-
-<br>
-  <table id="bill" class=" table table-bordered table-striped">
-    <thead>
-      <tr style="background-color:#9CC4DD;">
-        <th>Bill Number</th>
-        <th>Customer Name</th>
-        <th>Customer Phone</th>
-        <th>Customer Email</th>
-        <th>Narration</th>
-        <th>Amount</th>
-        <th>Quantity</th>
-        <th>Bill Date</th>
-        <th>Bill status</th>
-
-      </tr>
-    </thead>
-    <tbody>
-      {% for name in names%}
-
-      <tr>
-        <td>{{name.id}}</td>
-        <td>{{name.customer_name}}</td>
-        <td>{{name.customer_phone}}</td>
-        <td>{{name.customer_email}}</td>
-        <!-- <td>{{detail.Revstreams}}</td> -->
-        <td>{{name.narration}}</td>
-        <td>{{name.amount}}</td>
-        <td>{{name.quantity}}</td>
-        <td>{{name.post_date}}</td>
-        <td>{{name.status}}</td>
-
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-<input style="background-color:#9CC4DD;" class="btn btn-lg" type="button" id="btnExport" value="Download pdf" />
   
-</div>
-<div class="col-md-1"></div>
-
-</div>
   
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>

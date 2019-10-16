@@ -1,149 +1,218 @@
+{% load bootstrap4 %}
+{% load static%}
 <!DOCTYPE html>
 <html>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+    name='viewport' />
 
 <head>
-    <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{%static 'assets/css/material-dashboard.css?v=2.1.1'%}">
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+    <link href="{% static 'assets/demo/demo.css'%}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'assets/css/material-dashboard.css?v=2.1.1' %}">
 </head>
 
-<body>
 
-    <style>
-        body {
-            overflow-x: hidden;
+<nav class="navbar bg-light navbar-expand-lg navbar-light  shadow-sm">
+    <img width="10%" class="navbar-brand" src="https://www.jambopay.com/img/logo.png  ">
 
-        }
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a style="color: #000;" class="nav-link " href="{% url 'Index'%}">Home<span
+                        class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                    <a style="color: #000;" class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Bills
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="{% url 'new-bill' %}">Generate Bill</a>
+                      <a class="dropdown-item" href="{% url 'bills_upload'%}">Upload Bill</a>
+                      <a class="dropdown-item" href="{% url 'merchantbills'%}">Bill Details</a>
+                    </div>
+                  </li>
+            
+            {% if user.is_authenticated %}
 
-        /* 
-The container box is relative so we can position stuff inside of it 
-*/
-        .image-box {
-            position: relative;
-        }
+            <li>
+            <li><a style="color: #000;" class='nav-link' href="/logout">Logout</a>
 
+            </li>
+            </li>
 
-        .image-box__background,
-        .image-box__overlay {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-        }
-
-        /* 
-The background image div sizes and positions the background itself.
-It's also at the bottom-most position in our "div stack" (z-index 1)
-
-We set the image url via a CSS custom property, that's set via the style attribute in our HTML
-*/
-        .image-box__background {
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-image: var(--image-url);
-
-            z-index: 1
-        }
-
-        /* 
-The overlay div is just a colored element with some opacity.
-It's above the background image in our stack, so it appears to 
-darken the image 
-*/
-        .image-box__overlay {
-            background: rgba(0, 0, 0, 0.7);
-
-            z-index: 2;
-        }
-
-        /* 
-The content div is at the top of our stack. 
-We'd probably add some padding or flexbox properties here as well, 
-to place the content appropriately
-*/
-        .image-box__content {
-            position: relative;
-
-            z-index: 3;
-
-            color: white;
-            min-height: 44vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* just for the demo */
-        html,
-        body {
-            font-family: sans-serif;
-        }
-
-        h3 {
-            font-size: 1.5em;
-            font-family: 'Bree Serif', serif;
-        }
-
-        .image-box__content ul {
-            list-style-type: none;
-            overflow: hidden;
-
-        }
-
-        .image-box__content li a {
-            color: white;
-            text-align:left;
-            margin: 10%;
-            padding: 5px;
-            padding-right:5px;
-            text-decoration: none;
-            float: left;
-        }
-
-        .btn {
-            font-weight: bold;
-        }
-    </style>
-    
-    {%include 'nav.html'%}
-
-    <div class="image-box">
-        <div class="image-box__background" style="--image-url: url(http://staffingstream.wpengine.netdna-cdn.com/wp-content/uploads/2013/06/going-global.jpg)"></div>
-        <div class="image-box__overlay"></div>
-        <div class="image-box__content row">
-            <div class="col-md-1"></div>
-            <div class="col-md-5"><br><br><br><br><br>  
-                <h3>Register with us to manage your customers' bills effectively. <br> See all the bills you billed your
-                    customer on each transaction and track payments. </h3>
+            {% else %}
+            <li>
+                <a style="color: #000;" class='nav-link' href="/accounts/login">Login</a>
+            </li>
+            {% endif %}
+        </ul>
+        <form class="navbar-form" role="search" action="{% url 'search'%}">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Customer " name="customer_name">
             </div>
-            <div class="col-md-6"></div>
-        </div>
+        </form>
 
-        <div class="image-box__content buttons">
-            <ul>
-                <li><a style="background-color:#0074b6;" class="btn btn-primary nav-link" href="{% url 'new-bill' %}">Generate
-                        Bill</a></li>
-                <li><a style="background-color:#0074b6;" class="btn btn-primary nav-link" href="{% url 'bills_upload'%}">Upload
-                        Bill</a></li>
-                <li><a style="background-color:#0074b6;" class="btn btn-primary nav-link" href="{% url 'customers'%}">Customer Bills</a></li>
-            </ul>
+    </div>
+</nav>
+
+<style>
+    body {
+        overflow-x: hidden;
+    }
+
+
+    .image-box {
+        position: relative;
+    }
+
+
+    .image-box__background,
+    .image-box__overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .image-box__background {
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-image: var(--image-url);
+
+        z-index: 1
+    }
+
+    .image-box__overlay {
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 2;
+    }
+
+
+    .image-box__content {
+        position: relative;
+        z-index: 3;
+        color: white;
+        min-height: 44vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    html,
+    body {
+        font-family: sans-serif;
+    }
+
+    h3 {
+        font-size: 1.5em;
+        font-family: 'Bree Serif', serif;
+    }
+
+    .image-box__content ul {
+        list-style-type: none;
+        overflow: hidden;
+
+    }
+
+    .image-box__content li a {
+        color: white;
+        text-align: left;
+        margin: 10%;
+        padding: 5px;
+        padding-right: 5px;
+        text-decoration: none;
+        float: left;
+    }
+
+    .btn {
+        font-weight: bold;
+    }
+</style>
+
+<div class="image-box">
+    <div class="image-box__background"
+        style="--image-url: url(http://staffingstream.wpengine.netdna-cdn.com/wp-content/uploads/2013/06/going-global.jpg)">
+    </div>
+    <div class="image-box__overlay"></div>
+    <div class="image-box__content row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5"><br><br><br><br><br>
+            <h3>Register with us to manage your customers' bills effectively. <br> See all the bills you billed your
+                customer on each transaction and track payments. </h3>
         </div>
+        <div class="col-md-6"></div>
     </div>
 
+    <div class="image-box__content buttons row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <ul>
+                <li><a style="background-color:#0074b6;" class="btn btn-primary btn-lg nav-link"
+                        href="{% url 'new-bill' %}">Generate
+                        Bill</a></li>
+                <li><a style="background-color:#0074b6;" class="btn btn-primary btn-lg nav-link"
+                        href="{% url 'bills_upload'%}">Upload
+                        Bill</a></li>
+                <li><a style="background-color:#0074b6;" class="btn btn-primary btn-lg nav-link"
+                        href="{% url 'merchantbills'%}">View Bills</a></li>
+            </ul>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+</div>
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 </body>
 
-</html>
+
+<style>
+    ul {
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        list-style-type: none;
+    }
+
+    nav ul {
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        list-style-type: none;
+    }
+
+    nav li a {
+        text-transform: capitalize;
+        font-family: cursive;
+        font-size: 16px;
+        text-decoration: none;
+    }
+</style>
+
+<body>

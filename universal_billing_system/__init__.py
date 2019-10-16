@@ -1,0 +1,1 @@
+default_app_config =  'universal_billing_system.apps.UniversalBillingSystemConfig'

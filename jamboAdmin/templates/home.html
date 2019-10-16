@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg "  style="width: auto; background-color: transparent;">
+    <img width="15%" class="navbar-brand" src="https://www.jambopay.com/img/logo.png  ">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'Index'%}">Home <span class="sr-only"></span></a>
+        </li>
+
+        <li class="nav-item">
+            <a style='color: #000;' class="nav-link" href="{% url 'merchants'%}">Admin</a>
+        </li>
+            {% if user.is_authenticated %}
+
+
+        <li>
+        <li><a style='color: #000;' class='nav-link' href="/logout">Logout</a>
+
+        </li>
+        </li>
+
+        {% else %}
+        <p>
+          <a style='color: #000;' class='nav-link' href="/accounts/login">Login</a>
+        </p>
+        {% endif %}
+      </ul>
+
+    </div>
+  </nav>
+
+
+  <style>
+    body {
+      overflow-x: hidden;
+
+    }
+
+   .nav-link {
+      color: #000;
+    }
+
+    /* 
+The container box is relative so we can position stuff inside of it 
+*/
+    .image-box {
+      position: relative;
+    }
+
+
+    .image-box__background,
+    .image-box__overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    /* 
+The background image div sizes and positions the background itself.
+It's also at the bottom-most position in our "div stack" (z-index 1)
+
+We set the image url via a CSS custom property, that's set via the style attribute in our HTML
+*/
+    .image-box__background {
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-image: var(--image-url);
+
+      z-index: 1
+    }
+
+    /* 
+The overlay div is just a colored element with some opacity.
+It's above the background image in our stack, so it appears to 
+darken the image 
+*/
+    .image-box__overlay {
+      background: rgba(0, 0, 0, 0.7);
+
+      z-index: 2;
+    }
+
+    /* 
+The content div is at the top of our stack. 
+We'd probably add some padding or flexbox properties here as well, 
+to place the content appropriately
+*/
+    .image-box__content {
+      position: relative;
+
+      z-index: 3;
+
+      color: white;
+      min-height: 44vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* just for the demo */
+    html,
+    body {
+      font-family: sans-serif;
+    }
+
+    h3 {
+      padding-top: 4em;  
+      font-size: 1.5em;
+      font-family: sans-serif;
+      line-height: 1.5;
+    }
+
+    .image-box__content ul {
+      list-style-type: none;
+      overflow: hidden;
+
+    }
+
+    .image-box__content li a {
+      color: white;
+      text-align: left;
+      margin: 10%;
+      padding: 5px;
+      padding-right: 5px;
+      text-decoration: none;
+      float: left;
+    }
+
+    .btn {
+      font-weight: bold;
+    }
+  </style>
+
+  <div style="height: 34.4em;" class="image-box">
+    <div class="image-box__background"
+      style="--image-url: url(http://staffingstream.wpengine.netdna-cdn.com/wp-content/uploads/2013/06/going-global.jpg)">
+    </div>
+    <div class="image-box__overlay"></div>
+    <div class="image-box__content row">
+      <div class="col-md-1"></div>
+      <div class="col-md-5"><br><br><br><br><br>
+        <h3>Register with us to manage your customers' bills effectively. <br> See all the bills you billed your
+          customer on each transaction and track payments. </h3>
+      </div>
+      <div class="col-md-6"></div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+
+  </div>
+</body>
+</html>

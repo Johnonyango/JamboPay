@@ -1,4 +1,6 @@
+{% extends 'indexone.html'%}
 {% load bootstrap4 %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,74 +15,47 @@
 
 <body>
   {% block content %}
-  {% include 'indexone.html' %}
   <br>
   <h2 style="text-align: center;">MERCHANT DETAILS</h2>
   <br>
-  <div class="row">
+  <div class="row card-body card-fluid"  style="width:auto; padding-left:12em;">
 
     <div class="col-md-1"></div>
 
-    <div class="col-md-10">
-      <table id="bills" class="table table-bordered">
-        <thead>
-          <tr style="background-color:#9CC4DD;">
-            <th>Business Name</th>
-            <th>Business Owner</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>Revenue Streams</th>
-            <th>Physical address</th>
-            <th>Town</th>
-            <th>Industry</th>
-            <th>Revenue Streams</th>
-            <th>Join Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for detail in details%}
+        <div class="col-md-10">
+            <table class=" table table-bordered table-striped">
+                <thead>
+                    <tr style="background-color:#9CC4DD;">
+                        <th>Merchant Number</th>
+                        <th>Business Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Revenue Streams</th>
+                        <th>Industry</th>
+                        <th>Physical_address</th>
+                        <th>Town</th>
+                        <th>Join Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for detail in details%}
 
-          <tr>
-            <td>{{detail.id}}</td>
-            <td>{{detail.Business_name}}</td>
-            <td>{{detail.Business_owner}}</td>
-            <td>{{detail.Email}}</td>
-            <td>{{detail.Phone_number}}</td>
-            <td>{{detail.Physical_address}}</td>
-            <td>{{detail.Town}}</td>
-            <td>{{detail.Industry}}</td>
-            <td>{{detail.Revstreams}}</td>
-            <td>{{detail.join_date}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      <br>
-      <div class="col-md-1"></div>
-      <input style="background-color:#9CC4DD;" class="btn btn-lg" type="button" id="btnExport" value="Download pdf" />
-
-      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-      <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
-      <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-      <script type="text/javascript">
-        $("body").on("click", "#btnExport", function () {
-          html2canvas($('#bills')[0], {
-            onrendered: function (canvas) {
-              var data = canvas.toDataURL();
-              var docDefinition = {
-                content: [{
-                  image: data,
-                  width: 500
-                }]
-              };
-              pdfMake.createPdf(docDefinition).download("Table.pdf");
-            }
-          });
-        });
-      </script>
-
+                    <tr>
+                        <td>{{detail.id}}</td>
+                        <td>{{detail.Business_name}}</td>
+                        <td>{{detail.Email}}</td>
+                        <td>{{detail.Phone_number}}</td>
+                        <td>{{detail.Industry}}</td>
+                        <td>{{detail.Revstreams}}</td>
+                        <td>{{detail.Physical_address}}</td>
+                        <td>{{detail.Town}}</td>
+                        <td>{{detail.join_date}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="col-md-1"></div>
+        </div>
     </div>
   </div>
 
@@ -107,5 +82,7 @@
     }
   </style>
 </body>
+
+
 
 </html>

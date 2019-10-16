@@ -1,6 +1,5 @@
-import csv
-import io
-from django.shortcuts import render
+import csv,io
+from django.shortcuts import render,redirect
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth.decorators import login_required
@@ -9,13 +8,16 @@ from .serializer import *
 from .permissions import IsAdminOrReadOnly
 from rest_framework import status
 import requests
-from .forms import *
-from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .email import *
+# from .forms import *
+from django.http import HttpResponse,Http404,HttpResponseRedirect
+# from .emails import *
 import openpyxl
-from rest_framework.permissions import IsAuthenticated  # <-- Here
-
-
+from rest_framework.permissions import IsAuthenticated  
+from django.core.mail import EmailMessage
+from django.contrib import messages
+from jamboAdmin import views as jamboAdmin_views
+from universal_billing_system.emails import *
+from universal_billing_system.forms import *
 # login
 def login(request):
     if request.method == 'POST':
@@ -48,8 +50,25 @@ def profile(request):
     return render(request, 'timeline/profile.html', context)
 
 
+# Create your views here.
+# def index(request):
+#     url = ('jpaye.herokuap.com/api/GetMerchants/')
+#     response = requests.get(url)
+#     print(response)
+   
+# def index(request):
+#     return render(request, 'index.html')
+
 def index(request):
-    return render(request, 'index.html')
+    current_user=request.user
+    if current_user.is_superuser==True:
+
+        print(current_user.is_superuser,"Admiiiiin")
+
+        return redirect(jamboAdmin_views.home)
+    else:
+
+        return render(request, 'index.html')
 
 
 @login_required
@@ -77,7 +96,6 @@ class MerchantList(APIView):
         serializers = MerchantSerializer(all_merchants, many=True)
         return Response(serializers.data)
 
-
 class RevenueStreamsList(APIView):
     permission_classes = (IsAuthenticated,)            # <-- And here
 
@@ -95,6 +113,7 @@ class GenerateBill(APIView):
     #     all_bills = Bills.objects.all()
     #     serializers = GenerateBillSerializer(all_bills, many=True)
     #     return Response(serializers.data)
+    
     def post(self, request, format=None):
         serializers = BillSerializer(data=request.data)
         if serializers.is_valid():
@@ -158,8 +177,8 @@ class GetPayments(APIView):
 @login_required(login_url='/accounts/login/')
 def customers(request):
     url = ('http://127.0.0.1:8000/api/BillsDetails')
-    headers = {'Authorization': 'Token a6d89c3ca9efcb0042ac543d5d90bc44f4cbb34a'}
-    response = requests.get(url, headers=headers)
+    headers = {'Authorization': 'Token b76be7fe9c4ecd62b0e003661426ccbe6cd01d05'}
+    response = requests.get(url,headers=headers)
     details = response.json()
     for detail in details:
         Business_name = detail.get('Business_name')
@@ -180,18 +199,85 @@ def new_bill(request):
         form = BillsForm(request.POST, request.FILES)
         if form.is_valid():
             bill = form.save(commit=False)
+            bill.generated_by=current_user
             bill.save()
+
+        # if request.method=="POST":
+        # form =BillsForm(request.POST)
+        # if form.is_valid():
+            name = form.cleaned_data.get('customer_name')
+            email = form.cleaned_data.get('customer_email')
+            amount = form.cleaned_data.get('amount')
+            quantity = form.cleaned_data.get('quantity')
+
+        #     name = request.POST.get('customer_name')
+        #     email = request.POST.get('customer_email')
+            recipient = NewsLetterRecipients(name=name, email=email,amount=amount,quantity=quantity)
+            recipient.save()
+            send_notification(name, email,amount=amount,quantity=quantity)
+            # recipient = NewsLetterRecipients(name = name,email =email)
+            # send_notification(name = name, email = email)
+
 
         return HttpResponseRedirect('/index')
 
     else:
         form = BillsForm()
 
-    return render(request, 'bills/new-bill.html', {"form": form})
+    return render(request, 'new-bill.html', {"form": form})
+
+
+def notification(request):
+    if request.method == 'POST':
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            recipient = NewsLetterRecipients(name = name,email =email)
+            recipient.save()
+            send_notification(name = name, email = email)
+
+
+def upload(request):
+    if "GET" == request.method:
+        return render(request, 'upload.html', {})
+    else:
+        excel_file = request.FILES["excel_file"]
+
+        # you may put validations here to check extension or file size
+
+        wb = openpyxl.load_workbook(excel_file)
+
+        # getting all sheets
+        sheets = wb.sheetnames
+        # print(sheets)
+
+        # getting a particular sheet
+        worksheet = wb["Sheet1"]
+        # print(worksheet)
+
+        # getting active sheet
+        active_sheet = wb.active
+        # print(active_sheet)
+
+        # reading a cell
+        print(worksheet["A1"].value)
+
+        excel_data = list()
+        # iterating over the rows and
+        # getting value from each cell in row
+        for row in worksheet.iter_rows():
+            row_data = list()
+            for cell in row:
+                row_data.append(str(cell.value))
+                print(cell.value)
+            excel_data.append(row_data)
+
+        return render(request, 'upload.html', {"excel_data": excel_data})
 
 
 
-@login_required
+
 def notification(request):
     if request.method == 'POST':
         form = NoteForm(request.POST)
@@ -207,13 +293,17 @@ def notification(request):
 
 @login_required(login_url='/accounts/login/')
 def uploadCSV(request):
+    current_user = request.user
     template = "bills_upload.html"
-    prompt = {"order": "Download template and upload file in csv format:"}
+    prompt = {"order":"order of csv should be as follows: \n customer_name,customer_phone,customer_email,narration,amount,quantity,post_date,due_date"}
     if request.method == "GET":
         return render(request, template, prompt)
     csv_file = request.FILES['file']
     if not csv_file.name.endswith('.csv'):
-        message.error(request, "this is not a csv file")
+        message.error(request,"this is not a csv file")
+    else:
+        messages.success(request,'Upload successfull')
+
     data_set = csv_file.read().decode('UTF-8')
     io_string = io.StringIO(data_set)
     next(io_string)
@@ -226,8 +316,10 @@ def uploadCSV(request):
             narration=column[3],
             amount=column[4],
             quantity=column[5],
-            post_date=column[6]
+            post_date=column[6],
             # status=column[8],
+            due_date=column[7],
+            generated_by=current_user
         )
     context = {}
     return render(request, template, context)
@@ -238,16 +330,54 @@ def search_results(request):
     current_user = request.user
     if 'customer_name' in request.GET and request.GET["customer_name"]:
         search_term = request.GET.get("customer_name")
-        searched_names = Bills.search_by_name(search_term)
+        names = Bills.search_by_name(search_term)
         message = f"{search_term}"
 
-        print(searched_names)
+        print(names)
 
-        return render(request, 'search.html', {"message": message, "names": searched_names})
+        return render(request, 'search.html', {"message": message, "names": names})
 
     else:
         message = "You haven't searched for any term."
         return render(request, 'search.html', {"message": message})
-    
 
+
+
+@login_required(login_url='/accounts/login/')
+def merchant_bills(request):
+    details = Bills.get_merchant_bills(request.user)
+
+    message = f"The Following  bills were generated by : {request.user}"
+
+
+    return render(request, 'mybills.html', {'details': details,'message':message})
+
+
+
+@login_required
+def addEmployee(request):
+    if request.method == 'POST':
+        form = AddEmployeeForm(request.POST)
+        if form.is_valid():
+            
+            name=form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password1') 
+            form.save()
+
+            welcome_email(name,email, password)
+
+            messages.success(request,'Employee added succesfully')
+            return redirect('Index')
+
+    else:
+
+        form=AddEmployeeForm()
+
+    return render(request, 'admins/add_employee.html', {'form': form})
+
+
+
+#template
+import mimetypes
 

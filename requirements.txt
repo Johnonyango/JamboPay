@@ -7,9 +7,11 @@ confusable-homoglyphs==3.2.0
 defusedxml==0.6.0
 diff-match-patch==20181111
 dj-database-url==0.5.0
-Django==2.0.3
+Django==1.11.25
 django-authtools==1.7.0
+django-bootstrap-datepicker-plus==3.0.5
 django-bootstrap4==1.0.1
+django-crispy-forms==1.7.2
 django-heroku==0.3.1
 django-import-export==1.2.0
 django-postgres-copy==2.4.2

@@ -5,9 +5,15 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns=[
-    url(r'^$',views.merchants,name='indexone'),
-    url(r'^signup/$', views.signup, name='signup'),
+    url(r'^$',views.home,name='home'),
+    # url(r'^signup/$', views.signup, name='signup'),
     url(r'^merchants/$',views.merchants,name='merchants'),
+    url(r'^revenuestreams/$',views.revenueStreams,name='revenueStreams'),
+    url(r'^payments/$',views.payments,name='payments'),
+    url(r'^merchantbills/$',views.merchantBills,name='merchantBills'),
+    url(r'^addEmployee/$',views.addEmployee,name='addEmployee'),
+
+
 ]
 
 

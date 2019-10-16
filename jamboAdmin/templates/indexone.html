@@ -1,85 +1,105 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% load bootstrap4 %}
+{% load static%}
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{%static 'assets/css/material-dashboard.css?v=2.1.1'%}">
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- 
+    <link href="{% static 'assets/demo/demo.css'%}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'assets/css/material-dashboard.css?v=2.1.1' %}"> -->
+</head>
 
 <body>
     <style>
-        ul {
-          padding: 0;
-          display: flex;
-          justify-content: space-between;
-          list-style-type: none;
+        body {
+            overflow-x: hidden;
+            font-family: sans-serif;
         }
-      
-        nav ul {
-          padding: 0;
-          display: flex;
-          justify-content: space-between;
-          list-style-type: none;
+
+        .btn {
+            color: #000;
         }
-      
-        nav li a {
-          font-family: cursive;
-          color: #ff1e4b;
-          font-size: 16px;
-          text-decoration: none;
-      
-        }
-      
-        nav li a:hover {
-          color: #dd5771;
-        }
-        
-      </style>
+    </style>
+    <div class="sidebar" data-color="#0074b6" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+        <!--
+          Tip 1: You can change the color of the sidebar using: data-color="#0074b6 | azure | green | orange | danger"
+  
+          Tip 2: you can also add an image using data-image tag
+      -->
+        <div class="logo">
+            <img  width="60%" src="https://www.jambopay.com/img/logo.png " class="simple-text logo-normal">
 
 
-  <nav class="navbar bg-light navbar-expand-lg navbar-light border-top border-warning shadow-sm">
-    <img width="15%" class="navbar-brand" src="https://www.jambopay.com/img/logo.png  ">
+        </div>
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li class="nav-item active">
+                    <a style="color: #000;" class="nav-link " href="{% url 'Index'%}">Home<span class="sr-only">(current)</span></a>
+                  </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'merchants'%}">Merchants</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'revenueStreams'%}">Revenue Streams</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'payments'%}">Payments</a>
+                </li>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url 'Index'%}">Home <span class="sr-only"></span></a>
-        </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'merchantBills'%}">Bills</a>
+                </li>
+                <li class="nav-item">
+                    <a class='nav-link' href="{% url 'addEmployee' %}">Create Merchant Owner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/universal_billing_system/merchant/add/">Register New
+                        merchants</a>
+                </li> {% if user.is_authenticated %}
 
-        <li class="nav-item">
-          <a style="color: #000;" class="nav-link" href="{% url 'merchants'%}">All Merchants</a>
-        </li>
+                <li>
+                <li><a style="color: #000;" class='nav-link' href="/logout">Logout</a>
+          
+                </li>
+                </li>
+          
+                {% else %}
+                <li>
+                  <a style="color: #000;" class='nav-link' href="/accounts/login">Login</a>
+                </li>
+                {% endif %}
 
-        <li class="nav-item">
-          <a style="color: #000;" class="nav-link"
-            href="/admin/universal_billing_system/merchant/add/">Register New Merchants</a>
-        </li>
-        {% if user.is_authenticated %}
 
-
-        <li>
-        <li><a style="color: #000;" class='nav-link' href="/logout">Logout</a>
-
-        </li>
-        </li>
-
-        {% else %}
-        <p>
-          <a style="color: #000;" class='nav-link' href="/accounts/login">Login</a>
-        </p>
-        {% endif %}
-      </ul>
-
+            </ul>
+        </div>
     </div>
-  </nav>
+    {% block content %}
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+    {% endblock %}
 
+    {% block scripts %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    {% bootstrap_javascript %}
+    {% endblock %}
 </body>
+
+</html>
