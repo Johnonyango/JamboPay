@@ -61,7 +61,7 @@ class Bills(models.Model):
     due_date = models.DateField(null=True)
     status = models.CharField(choices=Status,default='Unpaid',max_length=10)
     generated_by=models.CharField(max_length=255,blank=False)
-
+    bill_id = models.CharField(max_length=120,default=None)
     status = models.CharField(choices=Status,default='Unpaid',max_length=10)
     generated_by=models.CharField(max_length=255,blank=False)
     

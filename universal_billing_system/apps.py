@@ -7,11 +7,3 @@ class UniversalBillingSystemConfig(AppConfig):
         print ('signal inawork')
         import universal_billing_system.signals
 
-
-
-
-
-
-
-
-    9
