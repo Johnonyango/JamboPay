@@ -1,6 +1,6 @@
 # JamboPay
 
-### By Emmanuel Muchiri
+### By Emmanuel Muchiri, John Onyango, SArah Munini, Wilson Owino
 
 ### Description
 This is an application that allows users in an area to interact with other people who also live in the same area. Users an create posts that details what is going on within the neighbourhood and also create posts that detail businesses located in that area. Users can also find the contacts for the local police authorities and health centres.
