@@ -14,7 +14,7 @@ django-bootstrap4==1.0.1
 django-heroku==0.3.1
 django-import-export==1.2.0
 django-postgres-copy==2.4.2
-django-registration==2.4.1
+django-registration==3.1.2
 django-tinymce==2.8.0
 djangorestframework==3.10.3
 et-xmlfile==1.0.1
